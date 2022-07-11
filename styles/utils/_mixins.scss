@@ -1,0 +1,48 @@
+/* mixin for create custom query */
+@mixin create-query($from) {
+	@media only screen and (min-width: $from) {
+		@content;
+	}
+}
+
+/* mixin for make media query 576px */
+@mixin screen-xs {
+	@media only screen and (min-width: $mobile) {
+		@content;
+	}
+}
+
+/* mixin for make media query 768px */
+@mixin screen-sm {
+	@media only screen and (min-width: $tablet) {
+		@content;
+	}
+}
+
+/* mixin for make media query 992px */
+@mixin screen-md {
+	@media only screen and (min-width: $laptop) {
+		@content;
+	}
+}
+
+/* mixin for make media query 1200px */
+@mixin screen-lg {
+	@media only screen and (min-width: $desktop) {
+		@content;
+	}
+}
+
+/* enable hover only for device that allow */
+@mixin hover-supported {
+	@media not all and (pointer: coarse) {
+		@content;
+	}
+}
+
+/* mixin for touch device that does not support hover event */
+@mixin is-touch-device {
+	@media (any-hover: none) {
+		@content;
+	}
+}

@@ -1,0 +1,27 @@
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: url('../../public/fonts/HelveticaRegular.eot');
+	src: local('☺'), url('../../public/fonts/HelveticaRegular.woff') format('woff'), url('../../public/fonts/HelveticaRegular.ttf') format('truetype'), url('../../public/fonts/HelveticaRegular.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: url('../../public/fonts/helveticaneuecyr-light.eot');
+	src: local('☺'), url('../../public/fonts/helveticaneuecyr-light.woff') format('woff'), url('../../public/fonts/helveticaneuecyr-light.ttf') format('truetype'), url('../../public/fonts/helveticaneuecyr-light.svg') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'HelveticaNeueCyr';
+	src: url('../../public/fonts/helveticaneuecyr-ultralight.eot');
+	src: local('☺'), url('../../public/fonts/helveticaneuecyr-ultralight.woff') format('woff'), url('../../public/fonts/helveticaneuecyr-ultralight.ttf') format('truetype'), url('../../public/fonts/helveticaneuecyr-ultralight.svg') format('svg');
+	font-weight: 100;
+	font-style: normal;
+}
+
+body {
+	font-family: 'HelveticaNeueCyr', sans-serif;
+}

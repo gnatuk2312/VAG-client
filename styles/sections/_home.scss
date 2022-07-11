@@ -1,0 +1,22 @@
+body {
+	background-color: $background-dark;
+}
+
+div {
+	color: $text-green;
+}
+
+.normal{
+	font-size: 40px;
+	font-weight: 400;
+}
+
+.light{
+	font-size: 40px;
+	font-weight: 300;
+}
+
+.ultra{
+	font-size: 40px;
+	font-weight: 100;
+}

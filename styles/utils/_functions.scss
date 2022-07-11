@@ -1,0 +1,20 @@
+// stylelint-disable function-no-unknown
+@use "sass:math";
+
+@function prc($pxValue, $pxRelative) {
+	$result: math.div($pxValue, $pxRelative) * 100%;
+
+	@return $result;
+}
+
+@function rem($px) {
+	$result: math.div($px, 16) + rem;
+
+	@return $result;
+}
+
+@function em($pxValue, $pxRelative) {
+	$result: math.div($pxValue, $pxRelative) + em;
+
+	@return $result;
+}
