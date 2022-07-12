@@ -1,0 +1,173 @@
+.navigation {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 32px 0;
+	backdrop-filter: blur(4px);
+	z-index: 100;
+	transform: translateY(-100%);
+	transition: transform 0.2s ease;
+
+	@include screen-md {
+		padding: 58px 0;
+	}
+
+	@include screen-lg {
+		padding: 94px 0;
+	}
+
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__logo {
+		position: relative;
+		cursor: pointer;
+
+		div {
+			position: absolute;
+			top: 0;
+			opacity: 1;
+			visibility: visible;
+			pointer-events: all;
+			transition: opacity 0.2s ease;
+		}
+
+		p {
+			position: absolute;
+			top: -6px;
+			opacity: 0;
+			color: $text-light;
+			font-size: rem(10);
+			font-weight: 400;
+			line-height: 1em;
+			text-transform: uppercase;
+			transition: opacity 0.2s ease;
+
+			span {
+				color: $text-green;
+			}
+		}
+	}
+
+	&__links {
+		display: none;
+
+		@include screen-sm {
+			display: flex;
+		}
+	}
+	&__item {
+		position: relative;
+		overflow: hidden;
+
+		a {
+			color: $text-light;
+			font-size: rem(16);
+			font-weight: 100;
+			line-height: 1em;
+
+			@include screen-lg {
+				font-size: rem(26);
+			}
+		}
+
+		&:not(:last-child) {
+			margin-right: 23px;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 1px;
+			width: 100%;
+			transform: translateX(-102%);
+			background-color: $white;
+			transition: all 0.2s ease;
+		}
+
+		@include hover-supported {
+			&:hover {
+				&:after {
+					transform: translateX(0);
+				}
+			}
+		}
+		
+		@include screen-lg {
+			margin-right: 36px;
+		}
+	}
+	
+	&__burger-menu {
+		position: absolute;
+		right: 16px;
+		display: block;
+		width: 20px;
+		height: 7px;
+		background-color: transparent;
+		cursor: pointer;
+
+		&::before,
+		&::after	{
+			position: absolute;
+			left: 0;
+			width: 20px;
+			height: 1px;
+			background-color: #fff;
+			transition: all 0.2s ease 0s;
+		}
+
+		&::before,
+		&::after {
+			content: "";
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+		}
+
+		@include screen-sm {
+			display: none;
+		}
+	}
+
+	&_is-drawer-open {
+		.navigation__burger-menu {
+			&::before {
+				top: 50%;
+				transform: rotate(-45deg) translate(0, -50%);
+			}
+	
+			&::after {
+				bottom: 48%;
+				transform: rotate(45deg) translate(0, 50%);
+			}
+		}
+
+		.navigation__logo {
+			div {
+				opacity: 0;
+				visibility: hidden;
+				pointer-events: none;
+			}
+
+			p {
+				opacity: 1;
+			}
+		}
+	}
+
+	&_is-visible {
+		transform: translateY(0);
+	}
+}
