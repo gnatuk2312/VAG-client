@@ -1,0 +1,13 @@
+.container {
+	margin: 0 auto;
+	padding: 0 16px;
+
+	@include screen-md {
+		padding: 0 37px;
+	}
+
+	@include screen-lg {
+		max-width: calc(1547px + 120px);
+		padding: 0 60px;
+	}
+}

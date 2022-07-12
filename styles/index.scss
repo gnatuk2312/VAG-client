@@ -9,6 +9,8 @@
 @import "./utils/mixins";
 
 /* components */
+@import "./components/container";
+@import "./components/button";
 
 /* sections */
-@import "./sections/home";
+@import "./sections/header";

@@ -1,0 +1,26 @@
+.button {
+	padding: 5px 10px;
+	color: $text-light;
+	background-color: $background-green;
+	text-align: center;
+	font-size: rem(11);
+	font-weight: 100;
+	line-height: em(11, 11);
+	text-transform: uppercase;
+	border-radius: 23px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	@include hover-supported {
+		&:hover {
+			box-shadow: 2px 3px 10px $shadow-green;
+		}
+	}
+
+	@include is-touch-device {
+		&:active {
+			box-shadow: 2px 2px 8px $shadow-green;
+		}
+	}
+	
+}
