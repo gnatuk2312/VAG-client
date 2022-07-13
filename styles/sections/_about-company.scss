@@ -1,6 +1,7 @@
 .about-company {
 	padding: 38px 0 18px;
 	background-color: $background-light;
+	overflow-x: hidden;
 
 	@include screen-xs {
 		padding: 62px 0 18px;

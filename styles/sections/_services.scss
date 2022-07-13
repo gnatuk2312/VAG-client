@@ -1,0 +1,193 @@
+.services {
+	position: relative;
+	padding: 20px 0 56px;
+	background-color: $background-light;
+
+	@include screen-sm {
+		padding: 26px 0 76px;
+	}
+
+	@include screen-lg {
+		padding: 42px 0 122px;
+	}
+
+	&__header {
+		margin-bottom: 14px;
+
+		@include screen-sm {
+			margin-bottom: 46px;
+		}
+
+		@include screen-lg {
+			margin-bottom: 76px;
+		}
+	}
+
+	&__slider {
+		position: relative;
+		pointer-events: all;
+
+		@include screen-lg {
+			pointer-events: none;
+		}
+	}
+
+	&__title {
+		position: absolute;
+		top: 0px;
+		left: 0;
+		font-size: rem(19);
+		font-weight: 300;
+		line-height: 1.1em;
+		text-transform: uppercase;
+
+		@include screen-sm {
+			font-size: rem(34);
+		}
+
+		@include screen-lg {
+			font-size: rem(56);
+			pointer-events: all;
+		}
+	}
+
+	&__image-wrapper{
+		position: relative;
+		max-width: 288px;
+		margin: 68px auto 0;
+		cursor: pointer;
+
+		@include screen-xs {
+			padding-right: 12px;
+		}
+
+		@include screen-sm {
+			margin: 100px auto 0;
+		}
+
+		@include screen-lg {
+			max-width: 358px;
+			margin: 136px auto 0;
+		}
+	}
+
+	&__image-text{
+		position: relative;
+		margin-top: 12px;
+		padding-top: 12px;
+		color: $text-dark;
+		font-size: rem(16);
+		font-weight: 300;
+		line-height: 1em;
+		text-transform: uppercase;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 50%;
+			height: 1px;
+			width: 100%;
+			transform: translateX(-50%);
+			background-color: $dark;
+		}
+
+		@include screen-sm {
+			margin-top: 18px;
+			padding-top: 8px;
+		}
+
+		@include screen-lg {
+			margin-top: 28px;
+			padding-top: 14px;
+			font-size: rem(19);
+		}
+	}
+
+	&__image-number{
+		position: absolute;
+		top: -12px;
+		right: 0;
+		color: $text-dark;
+		font-size: rem(11);
+		font-weight: 300;
+		line-height: 1em;
+
+		@include screen-xs {
+			top: 6px;
+			right: -4px;
+			transform: rotate(-90deg);
+		}
+
+		@include screen-lg {
+			top: 6px;
+			right: -6px;
+			transform: rotate(-90deg);
+		}
+	}
+
+	.swiper-button-next {
+		top: 18px;
+		right: 4px;
+		width: 22px;
+		height: 26px;
+		background-image: url("../../public/images/arrow-right.svg");
+		background-size: contain;
+		background-repeat: repeat-x;
+		background-position: center;
+
+		@include screen-sm {
+			top: 22px;
+			width: 28px;
+			height: 36px;
+		}
+
+		@include screen-lg {
+			display: none;
+		}
+	}
+
+	.swiper-button-next,
+	.swiper-button-prev {
+		&:after {
+			content: "";
+		}
+	}
+
+	.swiper-pagination {
+		top: 30px;
+
+		@include screen-sm {
+			top: 60px;
+		}
+
+		@include screen-lg {
+			display: none;
+		}
+	}
+
+	.swiper-pagination-bullets {
+		width: 36px !important;
+
+		@include screen-sm {
+			width: 58px !important;
+		}
+	}
+
+	.swiper-pagination-bullet {
+		width: 5px;
+		height: 5px;
+		margin-right: 0px !important;
+		padding: 0;
+
+		@include screen-sm {
+			width: 8px;
+			height: 8px;
+			margin-right: 2px !important;
+		}
+	}
+
+	.swiper-pagination-bullet-active {
+		background-color: $green;
+	}
+}
