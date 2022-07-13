@@ -1,0 +1,202 @@
+.about-company {
+	padding: 38px 0 18px;
+	background-color: $background-light;
+
+	@include screen-xs {
+		padding: 62px 0 18px;
+	}
+
+	@include screen-lg {
+		padding: 104px 0 28px;
+	}
+
+	&__header {
+		position: relative;
+		
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			height: 1px;
+			width: 100vw;
+			transform: translateX(-50%);
+			background-color: $dark;
+		}
+	}
+
+	&__title {
+		margin-top: 12px;
+		padding-bottom: 30px;
+		font-size: rem(19);
+		font-weight: 300;
+		line-height: 1.1em;
+		text-transform: uppercase;
+
+		@include screen-xs {
+			max-width: 540px;
+		}
+
+		@include screen-sm {
+			max-width: 700px;
+			margin-top: 50px;
+			padding-bottom: 32px;
+			font-size: rem(34);
+		}
+
+		@include screen-lg {
+			min-width: 1180px;
+			margin-top: 78px;
+			padding-bottom: 54px;
+			font-size: rem(56);
+		}
+	}
+
+	&__text_green {
+		color: $text-green;
+	}
+
+	&__body {
+		position: relative;
+		margin-top: 22px;
+
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			height: 1px;
+			width: 100vw;
+			transform: translateX(-50%);
+			background-color: $dark;
+		}
+
+		@include screen-sm {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		@include screen-sm {
+			margin-top: 66px;
+			padding-bottom: 64px;
+		}
+
+		@include screen-lg {
+			margin-top: 106px;
+			padding-bottom: 122px;
+		}
+	}
+
+	&__subtitle {
+		margin-bottom: 30px;
+		color: $text-dark;
+		font-size: rem(12);
+		font-weight: 300;
+		line-height: 1em;
+
+		@include screen-sm {
+			margin-bottom: 0;
+		}
+
+		@include screen-lg {
+			font-size: rem(19);
+		}
+	}
+
+	&__text-wrapper {
+		@include screen-sm {
+			margin-left: 138px;
+		}
+
+		@include screen-lg {
+			margin-left: 230px;
+		}
+	}
+
+	&__text {
+		margin-bottom: 30px;
+		max-width: 230px;
+		color: $text-dark;
+		font-size: rem(13);
+		font-weight: 300;
+		line-height: em(15, 13);
+
+		@include screen-sm {
+			margin-bottom: 16px;
+			font-size: rem(12);
+		}
+
+		@include screen-lg {
+			max-width: 330px;
+			font-size: rem(19);
+		}
+	}
+
+	&__social {
+		padding-bottom: 26px;
+
+		span {
+			color: $text-dark;
+			font-size: rem(13);
+			font-weight: 300;
+			line-height: 1.16em;
+
+			@include screen-lg {
+				font-size: rem(19);
+			}
+		}
+
+		@include screen-sm {
+			margin-top: 22px;
+			padding-bottom: 0;
+		}
+
+		@include screen-lg {
+			margin-top: 66px;
+		}
+	}
+	
+	&__social-item {
+		position: relative;
+		overflow: hidden;
+		font-size: rem(13);
+		font-weight: 300;
+		line-height: 1.16em;
+
+		&:first-child {
+			margin-top: 20px;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 4px;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 1px;
+			width: 100%;
+			transform: translateX(-102%);
+			background-color: $dark;
+			transition: all 0.2s ease;
+		}
+
+		@include hover-supported {
+			&:hover {
+				&:after {
+					transform: translateX(0);
+				}
+			}
+		}
+
+		a {
+			color: $text-dark;
+		}
+
+		@include screen-lg {
+			font-size: rem(19);
+		}
+	}
+}

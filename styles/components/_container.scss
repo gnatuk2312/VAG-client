@@ -3,11 +3,12 @@
 	padding: 0 16px;
 
 	@include screen-md {
-		padding: 0 37px;
+		max-width: 1024px;
+		padding: 0 38px;
 	}
 
 	@include screen-lg {
-		max-width: calc(1547px + 120px);
+		max-width: 1668px;
 		padding: 0 60px;
 	}
 }
