@@ -1,0 +1,121 @@
+.car-carousel {
+	background-color: $background-green;
+	overflow: hidden;
+
+	&__container {
+		display: flex;
+	}
+
+	&__list {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		animation: car-carousel-animation-mobile 10s linear infinite;
+
+		@include create-query(450px) {
+			left: -100px;
+			animation: car-carousel-animation-laptop 10s linear infinite;
+		}
+
+		@include screen-lg {
+			left: -300px;
+			animation: car-carousel-animation-desktop 10s linear infinite;
+		}
+	}
+
+	&__item {
+		padding: 13px 0;
+
+		&:not(:last-child) {
+			margin-right: 24px;
+		}
+
+		@include create-query(450px) {
+			&:not(:last-child) {
+				margin-right: 72px;
+			}
+		}
+
+		@include screen-lg {
+			&:not(:last-child) {
+				margin-right: 130px;
+			}
+		}
+	}
+
+	&__audi {
+		width: 81px;
+
+		@include create-query(450px) {
+			width: 154px;
+		}
+
+		@include screen-lg {
+			width: 252px;
+		}
+	}
+
+	&__skoda {
+		width: 146px;
+
+		@include create-query(450px) {
+			width: 280px;
+		}
+
+		@include screen-lg {
+			width: 456px;
+		}
+	}
+
+	&__vw {
+		width: 48px;
+
+		@include create-query(450px) {
+			width: 115px;
+		}
+
+		@include screen-lg {
+			width: 188px;
+		}
+	}
+
+	&__seat {
+		width: 48px;
+
+		@include create-query(450px) {
+			width: 116px;
+		}
+
+		@include screen-lg {
+			width: 190px;
+		}
+	}
+}
+
+@keyframes car-carousel-animation-mobile {
+	0% {
+		left: 0;
+	}
+	100% {
+		left: -838px;
+	}
+}
+
+@keyframes car-carousel-animation-laptop {
+	0% {
+		left: -100px;
+	}
+	100% {
+		left: -1053px;
+	}
+}
+
+@keyframes car-carousel-animation-desktop {
+	0% {
+		left: -300px;
+	}
+	100% {
+		left: -1906px;
+	}
+}
