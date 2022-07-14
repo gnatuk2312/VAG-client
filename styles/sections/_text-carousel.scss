@@ -1,0 +1,79 @@
+.text-carousel {
+	padding: 10px 0;
+	background-color: $background-light;
+	overflow: hidden;
+
+	@include screen-sm {
+		padding: 30px 0;
+	}
+
+	@include screen-lg {
+		padding: 52px 0;
+	}
+
+	&__container {
+		position: relative;
+		left: -16px;
+		display: flex;
+		animation: text-carousel-animation-mobile 12s linear infinite;
+
+		@include screen-sm {
+			left: -246px;
+			animation: text-carousel-animation-laptop 12s linear infinite;
+		}
+
+		@include screen-lg {
+			left: -466px;
+			animation: text-carousel-animation-desktop 12s linear infinite;
+		}
+	}
+
+	&__text {
+		margin-right: 2px;
+		color: $text-dark;
+		font-size: rem(10);
+		font-weight: 400;
+		line-height: 1em;
+		white-space: nowrap;
+		text-transform: uppercase;
+
+		@include screen-sm {
+			font-size: rem(25);
+		}
+
+		@include screen-lg {
+			font-size: rem(41);
+		}
+
+		&_green {
+			color: $text-green;
+		}
+	}
+}
+
+@keyframes text-carousel-animation-mobile {
+	0% {
+		left: -16px;
+	}
+	100% {
+		left: -418px;
+	}
+}
+
+@keyframes text-carousel-animation-laptop {
+	0% {
+		left: -246px;
+	}
+	100% {
+		left: -1246px;
+	}
+}
+
+@keyframes text-carousel-animation-desktop {
+	0% {
+		left: -466px;
+	}
+	100% {
+		left: -2108px;
+	}
+}
