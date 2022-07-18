@@ -1,0 +1,325 @@
+.calendar {
+	@include screen-sm {
+		flex: 1;
+	}
+
+	&__hint {
+		padding: 6px 0;
+		color: $text-light;
+		font-weight: 100;
+		font-size: rem(8);
+		line-height: 1.1em;
+		text-align: center;
+		border: 1px solid $white;
+		border-bottom: none;
+
+		@include screen-sm {
+			position: relative;
+			border: none;
+			border-right: 1px solid $white;
+			font-size: rem(12);
+			letter-spacing: 1px;
+
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				height: 1px;
+				width: 200vw;
+				transform: translateX(-50%);
+				background-color: $white;
+			}
+		}
+
+		@include screen-lg {
+			font-size: rem(15);
+		}
+	}
+
+	&__wrapper {
+		padding-bottom: 38px;
+		border: 1px solid $white;
+
+		@include screen-sm {
+			display: flex;
+			justify-content: space-around;
+			border: none;
+			border-right: 1px solid $white;
+		}
+
+		@include screen-md {
+			justify-content: space-between;
+			min-height: 324px;
+		}
+
+		@include screen-lg {
+			min-height: 507px;
+		}
+
+		.react-datepicker {
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+			font-family: 'HelveticaNeueCyr', sans-serif;
+			background-color: transparent;
+			border: none;
+		}
+
+		.react-datepicker__header {
+			margin: 32px 0 12px;
+			padding: 0;
+			background-color: transparent;
+			border: none;
+
+			@include screen-lg {
+				margin: 70px 0 12px;
+			}
+		}
+
+		.react-datepicker__navigation {
+			top: 26px;
+
+			@include screen-lg {
+				top: 66px;
+			}
+		}
+
+		.react-datepicker__navigation--next {
+			right: 20px;
+		}
+
+		.react-datepicker__navigation--previous {
+			left: 20px;
+		}
+
+		.react-datepicker__navigation-icon {
+			&::before {
+				border-width: 2px 2px 0 0;
+				width: 4px;
+				height: 4px;
+			}
+
+			@include screen-lg {
+				&::before {
+					width: 6px;
+					height: 6px;
+				}
+			}
+		}
+
+		.react-datepicker__current-month {
+			margin-bottom: 10px;
+			color: $text-light;
+			font-size: rem(13);
+			font-weight: 400;
+			line-height: 1.1em;
+
+			@include screen-lg {
+				font-size: rem(19);
+			}
+		}
+
+		.react-datepicker__day-names {
+			font-size: rem(7);
+			font-weight: 300;
+			line-height: 1.1em;
+
+			@include screen-lg {
+				font-size: rem(10);
+			}
+		}
+
+		.react-datepicker__day-name {
+			width: 30px;
+			height: 30px;
+			margin: 3px;
+			color: $text-light;
+
+			@include screen-lg {
+				width: 41px;
+				margin: 5px;
+			}
+		}
+
+		.react-datepicker__day {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 30px;
+			height: 30px;
+			margin: 3px;
+			color: $text-light;
+			font-size: rem(13);
+			font-weight: 300;
+			line-height: 1.1em;
+			border-radius: 50%;
+			border: 1px solid $white;
+			transition: background-color 0.2s ease;
+
+			@include screen-lg {
+				width: 41px;
+				height: 41px;
+				margin: 5px;
+				font-size: rem(19);
+			}
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.1);
+				border-radius: 50%;
+			}
+		}
+
+		.react-datepicker__day--today,
+		.react-datepicker__day--keyboard-selected {
+			border-radius: 50%;
+			border: 1px solid $white;
+			background-color: transparent;
+		}
+
+		.react-datepicker__day--selected {
+			background-color: $background-green !important;
+			border-radius: 50% !important;
+		}
+
+		.react-datepicker__day--disabled {
+			background-color: transparent !important;
+			color: rgba(255,255,255, 0.4);
+			border-radius: 50% !important;
+			border: 1px solid rgba(255,255,255, 0.4);
+		}
+	
+		.react-datepicker__day--outside-month {
+			color: transparent;
+			pointer-events: none;
+			border: none;
+		}
+	}
+
+	&__hours-list {
+		position: relative;
+		display: grid;
+		grid-template-columns: 76px 76px 76px;
+		justify-content: center;
+		gap: 2px 6px;
+		margin-top: 30px;
+
+		@include screen-sm {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 50px 4px 0 0;
+		}
+
+		@include screen-md {
+			margin: 50px 64px 0 0;
+		}
+
+		@include screen-lg {
+			margin: 80px 64px 0 0;
+		}
+	}
+
+	&__hours-item {
+		@include screen-sm {
+			&:not(:last-child) {
+				margin-bottom: 5px;
+			}
+		}
+
+		@include screen-lg {
+			&:not(:last-child) {
+				margin-bottom: 8px;
+			}
+		}
+	}
+
+	&__hour {
+		width: 76px;
+		height: 16px;
+		padding: 2px 0 3px;
+		background-color: transparent;
+		color: $text-light;
+		font-size: rem(10);
+		font-weight: 300;
+		line-height: 1.1em;
+		border: 1px solid $light;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+
+		&_selected {
+			background-color: $green;
+
+			&:hover {
+			background-color: $green;
+			}
+		}
+
+		&_error {
+			border: 1px solid $red;
+		}
+
+		@include screen-sm {
+			width: 97px;
+			height: 22px;
+			font-size: rem(13);
+		}
+
+		@include screen-lg {
+			width: 158px;
+			height: 32px;
+			font-size: rem(21);
+		}
+	}
+
+	&__error {
+		width: 200px;
+		margin-top: 2px;
+		color: $red;
+		font-size: rem(8);
+		font-weight: 300;
+		line-height: 1.15em;
+		text-transform: uppercase;
+
+		@include screen-sm {
+			width: unset;
+			margin: 2px 0 0 4px;
+		}
+
+		@include screen-md {
+			font-size: rem(11);
+			text-align: center;
+		}
+
+		@include screen-lg {
+			font-size: rem(14);
+		}
+	}
+
+	&__no-hours {
+		width: 270px;
+		color: $text-light;
+		font-size: rem(10);
+		font-weight: 300;
+		line-height: 1.15em;
+		text-transform: uppercase;
+
+		@include screen-sm {
+			width: unset;
+			margin: 0 6px;
+		}
+
+		@include screen-md {
+			margin-left: 6px;
+			font-size: rem(14);
+		}
+
+		@include screen-lg {
+			font-size: rem(16);
+		}
+	}
+}

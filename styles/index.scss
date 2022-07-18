@@ -14,10 +14,14 @@
 @import "./components/navigation";
 @import "./components/logo";
 @import "./components/drawer";
+@import "./components/calendar";
+@import "./components/form";
+@import "./components/toaster";
 
 /* sections */
 @import "./sections/header";
 @import "./sections/about-company";
 @import "./sections/services";
 @import "./sections/car-carousel";
+@import "./sections/book-appointment";
 @import "./sections/text-carousel";

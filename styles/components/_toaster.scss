@@ -1,0 +1,15 @@
+.toaster {
+	@include screen-sm {
+		font-size: rem(18) !important;
+	}
+
+	@include screen-md {
+		max-width: unset !important;
+		font-size: rem(20) !important;
+	}
+
+	@include screen-lg {
+		max-width: unset !important;
+		font-size: rem(24) !important;
+	}
+}

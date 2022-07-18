@@ -1,0 +1,74 @@
+.book-appointment {
+	padding: 38px 0 26px;
+	background-color: $background-dark;
+	overflow: hidden;
+
+	@include screen-sm {
+		padding: 40px 0 112px;
+	}
+
+	@include screen-lg {
+		padding: 62px 0 180px;
+	}
+
+	&__header {
+		margin-bottom: 28px;
+
+		@include screen-lg {
+			margin-bottom: 58px;
+		}
+	}
+
+	&__title {
+		margin-top: 14px;
+		color: $text-light;
+		font-size: rem(19);
+		font-weight: 300;
+		line-height: 1.1em;
+		text-transform: uppercase;
+
+		@include screen-md {
+			margin-top: 46px;
+			font-size: rem(34);
+		}
+
+		@include screen-lg {
+			margin-top: 78px;
+			font-size: rem(56);
+		}
+	}
+
+	&__form-wrapper {
+		max-width: 360px;
+		margin: 0 auto;
+
+		@include screen-sm {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			max-width: unset;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 50%;
+				height: 1px;
+				width: 100vw;
+				transform: translateX(-50%);
+				background-color: $white;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				height: 1px;
+				width: 100vw;
+				transform: translateX(-50%);
+				background-color: $white;
+			}
+		}
+	}
+}

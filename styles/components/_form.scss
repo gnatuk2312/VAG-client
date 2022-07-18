@@ -1,0 +1,259 @@
+.form {
+	@include screen-sm {
+		flex: 1;
+	}
+
+	&__hint {
+		margin: 6px 0;
+		color: $text-light;
+		font-weight: 100;
+		font-size: rem(8);
+		line-height: 1.1em;
+		text-align: center;
+
+		@include screen-sm {
+			font-size: rem(12);
+			letter-spacing: 1px;
+		}
+
+		@include screen-md {
+			padding-left: 36px;
+		}
+
+		@include screen-lg {
+			font-size: rem(15);
+		}
+	}
+
+	&__inputs-wrapper {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 34px;
+		padding: 30px 24px 32px;
+		border: 1px solid $white;
+	
+		@include screen-sm {
+			border: none;
+			margin-bottom: 0;
+			padding: 76px 24px 32px;
+		}
+	
+		@include screen-md {
+			padding: 84px 0 70px 32px;
+		}
+	
+		@include screen-lg {
+			padding: 132px 0 118px 54px;
+		}
+	}
+	
+	&__form-label {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	
+		&:not(:last-child) {
+			margin-bottom: 22px;
+		}
+	
+		&_centered {
+			display: flex;
+		}
+	
+		@include screen-sm {
+			&:not(:last-child) {
+				margin-bottom: 58px;
+			}
+		}
+	
+		@include screen-lg {
+			&:not(:last-child) {
+				margin-bottom: 96px;
+			}
+		}
+	}
+	
+	&__form-label-text {
+		max-width: 46px;
+		margin-top: 6px;
+		color: $text-light;
+		font-size: rem(8);
+		font-weight: 300;
+		line-height: 1.1em;
+		text-transform: uppercase;
+	
+		@include screen-sm {
+			max-width: unset;
+			margin-top: 0;
+			font-size: rem(12);
+		}
+	
+		@include screen-lg {
+			max-width: unset;
+			margin-top: 0;
+			font-size: rem(20);
+		}
+	}
+	
+	&__input-wrapper {
+		position: relative;
+		flex: 1;
+		max-width: 160px;
+		padding: 0 0 2px 2px;
+		
+	
+		@include create-query(360px) {
+			max-width: 200px;
+		}
+	
+		@include screen-sm {
+			margin-left: 10px;
+		}
+	
+		@include screen-md {
+			max-width: 292px;
+		}
+	
+		@include screen-lg {
+			max-width: 474px;
+			margin-left: 20px;
+		}
+	}
+
+	&__input {
+		width: 100%;
+		color: $text-light;
+		font-size: rem(10);
+		font-weight: 300;
+		line-height: 1.1em;
+		letter-spacing: 0.5px;
+		background-color: transparent;
+		border-bottom: 1px solid $white;
+
+		@include screen-sm {
+			font-size: rem(12);
+		}
+	
+		@include screen-md {
+			font-size: rem(14);
+		}
+	
+		@include screen-lg {
+			font-size: rem(18);
+		}
+
+		&_error {
+			border-bottom: 1px solid $red;
+		}
+	}
+
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover, 
+	input:-webkit-autofill:focus, 
+	input:-webkit-autofill:active	{
+    box-shadow: 0 0 0 30px $background-dark inset !important;
+	}
+
+	input:-webkit-autofill {
+    -webkit-text-fill-color: $text-light !important;
+	}
+
+	&__error {
+		position: absolute;
+		left: 2px;
+		top: 22px;
+		color: $red;
+		font-size: rem(6);
+		font-weight: 300;
+		line-height: 1.15em;
+		text-transform: uppercase;
+
+		span {
+			font-size: rem(7);
+			text-transform: lowercase;
+		}
+
+		@include screen-sm {
+			font-size: rem(8);
+
+			span {
+				font-size: rem(8);
+			}
+		}
+
+		@include screen-md {
+			top: 24px;
+			font-size: rem(11);
+
+			span {
+				font-size: rem(12);
+			}
+		}
+
+		@include screen-lg {
+			top: 26px;
+			font-size: rem(14);
+
+			span {
+				font-size: rem(16);
+			}
+		}
+	}
+	
+	&__submit {
+		width: 100%;
+		padding: 8px 16px;
+		color: $text-light;
+		font-size: rem(11);
+		font-weight: 400;
+		line-height: 1em;
+		text-transform: uppercase;
+		border-radius: 14px;
+		background-color: $background-green;
+		transition: background-color 0.2s ease;
+		cursor: pointer;
+	
+		@include hover-supported {
+			&:hover {
+				box-shadow: 2px 3px 10px $shadow-green;
+			}
+		}
+	
+		@include is-touch-device {
+			&:active {
+				box-shadow: 2px 2px 8px $shadow-green;
+			}
+		}
+	
+		&:focus {
+			box-shadow: 2px 2px 8px $shadow-green;
+		}
+
+		&:disabled {
+			cursor: default;
+			box-shadow: none;
+			background-color: $grey;
+		}
+	
+		@include screen-sm {
+			position: absolute;
+			bottom: -80px;
+			left: 50%;
+			width: 476px;
+			padding: 12px 16px;
+			transform: translateX(-50%);
+			font-size: rem(19);
+			border-radius: 24px;
+		}
+	
+		@include screen-lg {
+			bottom: -130px;
+			width: 774px;
+			padding: 20px 16px;
+			font-size: rem(30);
+			border-radius: 40px;
+		}
+	}
+}
