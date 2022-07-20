@@ -1,11 +1,11 @@
 import { useState } from "react";
 import cn from "classnames";
-import Link from "next/link";
+import { Link } from "react-scroll";
 
 import Container from "./container";
 import Logo from "./logo";
-import useVerticalScrollProps from "../hooks/useVerticalScrollProps";
 import Drawer from "./drawer";
+import useVerticalScrollProps from "../hooks/useVerticalScrollProps";
 
 const Navigation = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -26,32 +26,38 @@ const Navigation = () => {
         )}
       >
         <Container className="navigation__container">
-          <div className="navigation__logo">
+          <Link
+            onClick={handleDrawerClose}
+            to="header"
+            smooth
+            duration={500}
+            className="navigation__logo"
+          >
             <Logo />
             <p>
               автоелектрик <br />
               <span>vag group</span>
             </p>
-          </div>
+          </Link>
           <ul className="navigation__links">
             <li className="navigation__item">
-              <Link href="/" passHref>
-                <a href="replace">Про нас</a>
+              <Link to="about-company" smooth duration={500}>
+                Про нас
               </Link>
             </li>
             <li className="navigation__item">
-              <Link href="/" passHref>
-                <a href="replace">Послуги</a>
+              <Link to="services" smooth duration={500}>
+                Послуги
               </Link>
             </li>
             <li className="navigation__item">
-              <Link href="/" passHref>
-                <a href="replace">Записатись</a>
+              <Link to="book-appointment" smooth duration={500}>
+                Записатись
               </Link>
             </li>
             <li className="navigation__item">
-              <Link href="/" passHref>
-                <a href="replace">Контакти</a>
+              <Link to="contacts" smooth duration={500}>
+                Контакти
               </Link>
             </li>
           </ul>

@@ -1,11 +1,18 @@
+import { Link } from "react-scroll";
 import cn from "classnames";
 
 const Button = (props) => {
   const { children, className, onClick = null } = props;
   return (
-    <button onClick={onClick} type="button" className={cn("button", className)}>
+    <Link
+      onClick={onClick}
+      className={cn("button", className)}
+      to="book-appointment"
+      smooth
+      duration={500}
+    >
       {children}
-    </button>
+    </Link>
   );
 };
 

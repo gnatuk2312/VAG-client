@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-scroll";
 import cn from "classnames";
 
 import Container from "./container";
@@ -10,24 +10,24 @@ const Drawer = (props) => {
     <div className={cn("drawer", { "drawer_is-open": isOpen })}>
       <Container className="drawer__container">
         <ul className="drawer__links">
-          <li onClick={onClose} className="drawer__link-item">
-            <Link href="/" passHref>
-              <a href="replace">Про нас</a>
+          <li className="drawer__link-item">
+            <Link onClick={onClose} to="about-company" smooth duration={500}>
+              Про нас
             </Link>
           </li>
-          <li onClick={onClose} className="drawer__link-item">
-            <Link href="/" passHref>
-              <a href="replace">Послуги</a>
+          <li className="drawer__link-item">
+            <Link onClick={onClose} to="services" smooth duration={500}>
+              Послуги
             </Link>
           </li>
-          <li onClick={onClose} className="drawer__link-item">
-            <Link href="/" passHref>
-              <a href="replace">Записатись</a>
+          <li className="drawer__link-item">
+            <Link onClick={onClose} to="book-appointment" smooth duration={500}>
+              Записатись
             </Link>
           </li>
-          <li onClick={onClose} className="drawer__link-item">
-            <Link href="/" passHref>
-              <a href="replace">Контакти</a>
+          <li className="drawer__link-item">
+            <Link onClick={onClose} to="contacts" smooth duration={500}>
+              Контакти
             </Link>
           </li>
         </ul>

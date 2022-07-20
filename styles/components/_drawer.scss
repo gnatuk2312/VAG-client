@@ -1,5 +1,5 @@
 .drawer {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -51,6 +51,7 @@
 		a {
 			position: relative;
 			color: $text-light;
+			cursor: pointer;
 
 			&:after {
 				content: "";
@@ -111,12 +112,20 @@
 			margin-bottom: 4px;
 		}
 
+		&:hover {
+			text-decoration: underline;
+		}
+
 		a {
 			color: $text-light;
 		}
 	}
 
 	&__contacts-item {
+		&:hover {
+			text-decoration: underline;
+		}
+		
 		a {
 			color: $text-light;
 			font-size: rem(13);
