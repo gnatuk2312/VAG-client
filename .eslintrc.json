@@ -40,6 +40,9 @@
 		"guard-for-in": "off",
 		"no-unused-expressions": "off",
 		"no-case-declarations": "off",
-		"consistent-return": "off"
+		"consistent-return": "off",
+		"no-shadow": "off",
+		"global-require": "off",
+		"import/no-mutable-exports": "off"
 	}
 }

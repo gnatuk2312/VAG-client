@@ -1,10 +1,11 @@
 import Container from "../components/container";
 import Logo from "../components/logo";
 import Button from "../components/button";
-import InstagramIcon from "../public/images/instagram-icon.svg";
-import FacebookIcon from "../public/images/facebook-icon.svg";
-import YouTubeIcon from "../public/images/youtube-icon.svg";
-import TikTokIcon from "../public/images/tiktok-icon.svg";
+import TomtomMap from "../components/tomtom-map";
+import FacebookIcon from "../public/icons/facebook-icon.svg";
+import InstagramIcon from "../public/icons/instagram-icon.svg";
+import YouTubeIcon from "../public/icons/youtube-icon.svg";
+import TikTokIcon from "../public/icons/tiktok-icon.svg";
 
 const Contacts = () => (
   <section className="contacts">
@@ -78,7 +79,7 @@ const Contacts = () => (
             <div className="contacts__main-green-logo" />
           </div>
         </div>
-        <div className="contacts__google-maps-container" />
+        <TomtomMap className="contacts__google-maps-container" />
       </div>
     </Container>
   </section>

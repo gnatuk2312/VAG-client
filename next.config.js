@@ -1,15 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	reactStrictMode: true,
 	swcMinify: true,
-	webpack(config) {
-		config.module.rules.push({
-			test: /\.svg$/,
-			use: ["@svgr/webpack"],
-			exclude: [/\\public\\fonts\\.*\.(svg)(\?.*)?$/],
-		});
-
-		return config;
+	env: {
+		TOMTOM_API_KEY: process.env.TOMTOM_API_KEY,
 	},
 };
 
