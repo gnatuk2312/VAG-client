@@ -8,6 +8,7 @@ import CarCarousel from "../sections/car-carousel";
 import BookAppointment from "../sections/book-appointment";
 import TextCarousel from "../sections/text-carousel";
 import Contacts from "../sections/contacts";
+import Footer from "../sections/footer";
 
 const Home = () => (
 	<>
@@ -20,6 +21,7 @@ const Home = () => (
 		<TextCarousel />
 		<Contacts />
 		<Toaster position="bottom-center" toastOptions={{ duration: 5000, className: "toaster" }} />
+		<Footer />
 		<div className="normal">Славчик - Маркетолог</div>
 		<div className="light">Проект = Автоелектрик</div>
 		<div className="ultra">Гнатик - Програміст</div>

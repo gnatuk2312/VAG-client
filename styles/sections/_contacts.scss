@@ -224,6 +224,21 @@
 		@include screen-xs {
 			display: none;
 		}
+
+		@include screen-sm {
+			display: flex;
+			bottom: -78px;
+			z-index: 10;
+		}
+
+		@include screen-md {
+			bottom: -82px;
+			left: 0;
+		}
+
+		@include screen-lg {
+			bottom: -122px;
+		}
 	}
 
 	&__social-list-item {
@@ -233,6 +248,17 @@
 
 		svg {
 			color: $white;
+		}
+
+		@include screen-md {
+			&:not(:last-child) {
+				margin-right: 6px;
+			}
+
+			svg {
+				width: 24px;
+				height: 24px;
+			}
 		}
 	}
 
