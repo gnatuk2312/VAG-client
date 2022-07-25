@@ -6,12 +6,16 @@
 	&__hint {
 		padding: 6px 0;
 		color: $text-light;
-		font-weight: 100;
+		font-weight: 300;
 		font-size: rem(8);
 		line-height: 1.1em;
 		text-align: center;
 		border: 1px solid $white;
 		border-bottom: none;
+
+		@include create-query(390px) {
+			font-size: rem(10);
+		}
 
 		@include screen-sm {
 			position: relative;
@@ -125,8 +129,12 @@
 			font-weight: 300;
 			line-height: 1.1em;
 
-			@include screen-lg {
+			@include create-query(390px) {
 				font-size: rem(10);
+			}
+
+			@include screen-lg {
+				font-size: rem(14);
 			}
 		}
 
@@ -136,8 +144,13 @@
 			margin: 3px;
 			color: $text-light;
 
+			@include create-query(390px) {
+				width: 36px;
+				margin: 5px;
+			}
+
 			@include screen-lg {
-				width: 41px;
+				width: 46px;
 				margin: 5px;
 			}
 		}
@@ -157,11 +170,18 @@
 			border: 1px solid $white;
 			transition: background-color 0.2s ease;
 
-			@include screen-lg {
-				width: 41px;
-				height: 41px;
+			@include create-query(390px) {
+				width: 36px;
+				height: 36px;
 				margin: 5px;
-				font-size: rem(19);
+				font-size: rem(18);
+			}
+
+			@include screen-lg {
+				width: 46px;
+				height: 46px;
+				margin: 5px;
+				font-size: rem(20);
 			}
 
 			&:hover {
@@ -204,19 +224,25 @@
 		gap: 2px 6px;
 		margin-top: 30px;
 
+		@include create-query(390px) {
+			grid-template-columns: 96px 96px 96px;
+			gap: 8px 10px;
+		}
+
 		@include screen-sm {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			margin: 50px 4px 0 0;
+			margin: 91px 4px 0 0;
+			gap: 4px 0;
 		}
 
 		@include screen-md {
-			margin: 50px 64px 0 0;
+			margin: 90px 34px 0 30px;
 		}
 
 		@include screen-lg {
-			margin: 80px 64px 0 0;
+			margin: 106px 64px 0 0;
 		}
 	}
 
@@ -263,15 +289,21 @@
 			border: 1px solid $red;
 		}
 
+		@include create-query(390px) {
+			width: 96px;
+			height: 24px;
+			font-size: rem(12);
+			padding: 2px 0;
+		}
+
 		@include screen-sm {
-			width: 97px;
-			height: 22px;
-			font-size: rem(13);
+			height: 28px;
+			font-size: rem(14);
 		}
 
 		@include screen-lg {
 			width: 158px;
-			height: 32px;
+			height: 34px;
 			font-size: rem(21);
 		}
 	}

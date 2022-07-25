@@ -43,6 +43,7 @@
 		"consistent-return": "off",
 		"no-shadow": "off",
 		"global-require": "off",
-		"import/no-mutable-exports": "off"
+		"import/no-mutable-exports": "off",
+		"prefer-rest-params": "off"
 	}
 }

@@ -2,8 +2,8 @@ import Button from "../components/button";
 import Container from "../components/container";
 
 const Header = () => (
-  <header className="header">
-    <Container>
+  <header className="header" id="header">
+    <Container className="header__container">
       <div className="header__top">
         <h1 className="header__title">
           автоелектрик <br />
@@ -18,10 +18,12 @@ const Header = () => (
         </div>
       </div>
       <div className="header__bottom">
-        <a href="tel:+380679992655" className="header__phone">
-          +38 067 999 26 55
-        </a>
-        <address className="header__address">м. Тернопіль | Бродівська 59</address>
+        <div className="header__bottom-contacts">
+          <a href="tel:+380679992655" className="header__phone">
+            +38 067 999 26 55
+          </a>
+          <address className="header__address">м. Тернопіль | Бродівська 59</address>
+        </div>
         <Button className="header__button-bottom">записатись на діагностику</Button>
       </div>
     </Container>

@@ -9,8 +9,6 @@ registerLocale("uk", uk);
 
 const Calendar = (props) => {
   const { date, setDate, selectedHour, setSelectedHour } = props;
-  const dateNow = new Date();
-  const twoMonthsFromNow = dateNow.setMonth(dateNow.getMonth() + 2);
 
   return (
     <div className="calendar">
@@ -22,7 +20,7 @@ const Calendar = (props) => {
           inline
           locale="uk"
           minDate={new Date()}
-          maxDate={twoMonthsFromNow}
+          // maxDate={new Date().setMonth(new Date().getMonth() + 2)}
           filterDate={isWeekday}
         />
         <ul className="calendar__hours-list">

@@ -17,7 +17,7 @@ const CarCarousel = () => (
           <Image src={SkodaLogo} alt="skoda logo" />
         </li>
         <li className="car-carousel__item car-carousel__vw">
-          <Image src={VWLogo} alt="vw logo" />
+          <Image src={VWLogo} alt="wolksvagen logo" />
         </li>
         <li className="car-carousel__item car-carousel__seat">
           <Image src={SeatLogo} alt="seat logo" />
@@ -29,7 +29,7 @@ const CarCarousel = () => (
           <Image src={SkodaLogo} alt="skoda logo" />
         </li>
         <li className="car-carousel__item car-carousel__vw">
-          <Image src={VWLogo} alt="vw logo" />
+          <Image src={VWLogo} alt="wolksvagen logo" />
         </li>
         <li className="car-carousel__item car-carousel__seat">
           <Image src={SeatLogo} alt="seat logo" />
@@ -41,7 +41,7 @@ const CarCarousel = () => (
           <Image src={SkodaLogo} alt="skoda logo" />
         </li>
         <li className="car-carousel__item car-carousel__vw">
-          <Image src={VWLogo} alt="vw logo" />
+          <Image src={VWLogo} alt="wolksvagen logo" />
         </li>
         <li className="car-carousel__item car-carousel__seat">
           <Image src={SeatLogo} alt="seat logo" />

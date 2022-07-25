@@ -35,7 +35,7 @@ const Services = () => {
     },
   };
   return (
-    <section className="services">
+    <section className="services" id="services">
       <Container>
         <div className="services__header">
           <Logo />
@@ -53,31 +53,41 @@ const Services = () => {
             modules={[Pagination, Navigation]}
             className="services__slider"
           >
-            <h4 className="services__title">Як ми проводимо час</h4>
+            <h4 className="services__title">Послуги</h4>
             <SwiperSlide>
               <div className="services__image-wrapper">
-                <Image src={Slider1} alt="Діагностика" quality={100} />
+                <Image src={Slider1} alt="Діагностика" quality={100} placeholder="blur" />
                 <span className="services__image-number">00-1</span>
                 <p className="services__image-text">Комп&apos;ютерна діагностика</p>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="services__image-wrapper">
-                <Image src={Slider2} alt="Ремонт несправностей електричної системи" quality={100} />
+                <Image
+                  src={Slider2}
+                  alt="Ремонт несправностей електричної системи"
+                  quality={100}
+                  placeholder="blur"
+                />
                 <span className="services__image-number">00-2</span>
                 <p className="services__image-text">Ремонт несправностей електричної системи</p>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="services__image-wrapper">
-                <Image src={Slider3} alt="Ремонт електроелементів автомобіля" quality={100} />
+                <Image
+                  src={Slider3}
+                  alt="Ремонт електроелементів автомобіля"
+                  quality={100}
+                  placeholder="blur"
+                />
                 <span className="services__image-number">00-3</span>
                 <p className="services__image-text">Ремонт електроелементів автомобіля</p>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className="services__image-wrapper">
-                <Image src={Slider4} alt="Виїзд до клієнта" quality={100} />
+                <Image src={Slider4} alt="Виїзд до клієнта" quality={100} placeholder="blur" />
                 <span className="services__image-number">00-4</span>
                 <p className="services__image-text">Виїзд до клієнта</p>
               </div>

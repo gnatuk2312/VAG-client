@@ -42,12 +42,10 @@ const Form = (props) => {
               onBlur={(event) => phoneValidation.onBlur(event)}
               value={phoneValidation.value}
             />
-            {(phoneValidation.isDirty && phoneValidation.isEmpty && (
-              <p className="form__error">*введіть номер телефону</p>
-            )) ||
-              (phoneValidation.isDirty && phoneValidation.isPhoneError && (
-                <p className="form__error">*введіть номер телефону такого формату: +380123456789</p>
-              ))}
+            {phoneValidation.isDirty &&
+              (phoneValidation.isEmpty || phoneValidation.isPhoneError) && (
+                <p className="form__error">*введіть номер телефону</p>
+              )}
           </div>
         </label>
         <label htmlFor="form__input-email" className="form__form-label">
@@ -57,26 +55,30 @@ const Form = (props) => {
               type="text"
               id="form__input-email"
               className={cn("form__input", {
-                form__input_error: emailValidation.inputValid === false && emailValidation.isDirty,
+                form__input_error:
+                  emailValidation.inputValid === false &&
+                  emailValidation.isDirty &&
+                  emailValidation.value !== "",
               })}
               onChange={(event) => emailValidation.onChange(event)}
               onBlur={(event) => emailValidation.onBlur(event)}
               value={emailValidation.value}
             />
-            {(emailValidation.isDirty && emailValidation.isEmpty && (
-              <p className="form__error">*введіть електронну пошту</p>
-            )) ||
-              (emailValidation.isDirty && emailValidation.isEmailError && (
+            {emailValidation.isDirty &&
+              emailValidation.isEmailError &&
+              emailValidation.value !== "" && (
                 <p className="form__error">
                   *введіть електронну пошту такого формату: <span>test@gmail.com</span>
                 </p>
-              ))}
+              )}
           </div>
         </label>
       </div>
       <button
         disabled={
-          !nameValidation.inputValid || !phoneValidation.inputValid || !emailValidation.inputValid
+          !nameValidation.inputValid ||
+          !phoneValidation.inputValid ||
+          (!emailValidation.inputValid && emailValidation.value !== "")
         }
         onClick={onSubmit}
         type="submit"

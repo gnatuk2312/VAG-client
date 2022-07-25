@@ -5,6 +5,7 @@
 	width: 100%;
 	padding: 27px 0;
 	backdrop-filter: blur(4px);
+	background-color: rgba(40, 40, 40, 0.4);
 	z-index: 100;
 	transform: translateY(-100%);
 	transition: transform 0.2s ease, padding 0.2s ease;
@@ -22,12 +23,8 @@
 		transform: translateX(-50%);
 	}
 
-	@include screen-md {
-		padding: 58px 0;
-	}
-
 	@include screen-lg {
-		padding: 94px 0;
+		padding: 42px 0;
 	}
 
 	&__container {
@@ -64,6 +61,22 @@
 				color: $text-green;
 			}
 		}
+
+		@include screen-sm {
+			div {
+				opacity: 0;
+			}
+
+			p {
+				opacity: 1;
+			}
+		}
+
+		@include screen-lg {
+			p {
+				font-size: rem(14);
+			}
+		}
 	}
 
 	&__links {
@@ -82,7 +95,7 @@
 		a {
 			color: $text-light;
 			font-size: rem(16);
-			font-weight: 100;
+			font-weight: 300;
 			line-height: 1em;
 
 			@include screen-lg {

@@ -15,7 +15,7 @@ export const useValidation = (value, validations) => {
 					break;
 
 				case "isPhoneError":
-					const num = /^\+380\d{3}\d{2}\d{2}\d{2}$/;
+					const num = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
 					num.test(value) ? setPhoneError(false) : setPhoneError(true);
 					break;
 

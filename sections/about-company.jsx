@@ -2,12 +2,12 @@ import Container from "../components/container";
 import Logo from "../components/logo";
 
 const AboutCompany = () => (
-  <section className="about-company">
+  <section className="about-company" id="about-company">
     <Container>
       <div className="about-company__header">
         <Logo />
         <h3 className="about-company__title">
-          комп&apos;ютерна діагностика та ремонт автоелектрики легкових автомобілів <br />
+          комп&apos;ютерна діагностика та ремонт автоелектрики легкових автомобілів
           <span className="about-company__text_green"> у тернополі</span>
         </h3>
       </div>
@@ -15,9 +15,9 @@ const AboutCompany = () => (
         <p className="about-company__subtitle">Що ви можете очікувати?</p>
         <div className="about-company__text-wrapper">
           <p className="about-company__text">
-            ПРИВІТ, ми маленька СТО, яка займається ремонтом автоелекрики у авто VAG групи.
-          </p>
-          <p className="about-company__text">
+            ПРИВІТ, ми маленька СТО, яка займається ремонтом автоелекрики у авто VAG групи
+            (Volkswagen, Škoda, Audi, SEAT..)
+            <br /> <br />
             Ми знаємо, що на твоїй машині давненько горить
             <span className="about-company__text_green"> Check</span>, тому ми з радістю проведемо
             комп&apos;ютерну діагностику та відремонтуємо всі несправності, які пов&apos;язані з

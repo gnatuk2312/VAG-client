@@ -22,9 +22,6 @@ const Home = () => (
 		<Contacts />
 		<Toaster position="bottom-center" toastOptions={{ duration: 5000, className: "toaster" }} />
 		<Footer />
-		<div className="normal">Славчик - Маркетолог</div>
-		<div className="light">Проект = Автоелектрик</div>
-		<div className="ultra">Гнатик - Програміст</div>
 	</>
 );
 

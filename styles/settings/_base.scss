@@ -14,14 +14,20 @@
 	font-style: normal;
 }
 
-@font-face {
-	font-family: 'HelveticaNeueCyr';
-	src: url('../../public/fonts/helveticaneuecyr-ultralight.eot');
-	src: local('☺'), url('../../public/fonts/helveticaneuecyr-ultralight.woff') format('woff'), url('../../public/fonts/helveticaneuecyr-ultralight.ttf') format('truetype'), url('../../public/fonts/helveticaneuecyr-ultralight.svg') format('svg');
-	font-weight: 100;
-	font-style: normal;
-}
-
 body {
 	font-family: 'HelveticaNeueCyr', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br {
+	&::-moz-selection {
+		color: $text-light;
+		background-color: $background-green;
+	}
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br {
+	&::selection {
+		color: $text-light;
+		background-color: $background-green;
+	}
 }

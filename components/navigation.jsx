@@ -28,6 +28,7 @@ const Navigation = () => {
         <Container className="navigation__container">
           <Link
             onClick={handleDrawerClose}
+            href="#header"
             to="header"
             smooth
             duration={500}
@@ -41,22 +42,22 @@ const Navigation = () => {
           </Link>
           <ul className="navigation__links">
             <li className="navigation__item">
-              <Link to="about-company" smooth duration={500}>
+              <Link href="#about-company" to="about-company" smooth duration={500}>
                 Про нас
               </Link>
             </li>
             <li className="navigation__item">
-              <Link to="services" smooth duration={500}>
+              <Link href="#services" to="services" smooth duration={500}>
                 Послуги
               </Link>
             </li>
             <li className="navigation__item">
-              <Link to="book-appointment" smooth duration={500}>
+              <Link href="#book-appointment" to="book-appointment" smooth duration={500}>
                 Записатись
               </Link>
             </li>
             <li className="navigation__item">
-              <Link to="contacts" smooth duration={500}>
+              <Link href="#contacts" to="contacts" smooth duration={500}>
                 Контакти
               </Link>
             </li>

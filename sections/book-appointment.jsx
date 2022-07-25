@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import Container from "../components/container";
@@ -12,7 +12,11 @@ const BookAppointment = () => {
   const [selectedHour, setSelectedHour] = useState("");
   const name = useInput("", { isEmpty: true });
   const phone = useInput("+380", { isEmpty: true, isPhoneError: true });
-  const email = useInput("", { isEmpty: true, isEmailError: true });
+  const email = useInput("", { isEmailError: true });
+
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,11 +36,11 @@ const BookAppointment = () => {
   };
 
   return (
-    <section className="book-appointment">
+    <section className="book-appointment" id="book-appointment">
       <Container>
         <div className="book-appointment__header">
           <Logo />
-          <h4 className="book-appointment__title">Запис на діагностику онлайн</h4>
+          <h5 className="book-appointment__title">Запис на діагностику онлайн</h5>
         </div>
         <div className="book-appointment__form-wrapper">
           <Calendar

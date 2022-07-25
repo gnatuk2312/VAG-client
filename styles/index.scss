@@ -1,12 +1,12 @@
-/* settings */
-@import "./settings/nomalize";
-@import "./settings/base";
-
 /* utils */
 @import "./utils/breakpoints";
 @import "./utils/colors";
 @import "./utils/functions";
 @import "./utils/mixins";
+
+/* settings */
+@import "./settings/nomalize";
+@import "./settings/base";
 
 /* components */
 @import "./components/container";

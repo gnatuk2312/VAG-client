@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
-import { ssrSafeTomtom as tt } from "../ssr-tomtom-safe-import";
+import { ssrSafeTomtom as tt } from "../helpers/ssr-tomtom-safe-import";
 
 const TomtomMap = (props) => {
   const { className } = props;

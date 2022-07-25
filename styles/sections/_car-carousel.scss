@@ -11,16 +11,16 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		animation: car-carousel-animation-mobile 10s linear infinite;
+		animation: car-carousel-animation-mobile 18s linear infinite;
 
 		@include create-query(450px) {
 			left: -100px;
-			animation: car-carousel-animation-laptop 10s linear infinite;
+			animation: car-carousel-animation-laptop 18s linear infinite;
 		}
 
 		@include screen-lg {
 			left: -300px;
-			animation: car-carousel-animation-desktop 10s linear infinite;
+			animation: car-carousel-animation-desktop 18s linear infinite;
 		}
 	}
 

@@ -11,22 +11,28 @@ const Drawer = (props) => {
       <Container className="drawer__container">
         <ul className="drawer__links">
           <li className="drawer__link-item">
-            <Link onClick={onClose} to="about-company" smooth duration={500}>
+            <Link onClick={onClose} href="#about-company" to="about-company" smooth duration={500}>
               Про нас
             </Link>
           </li>
           <li className="drawer__link-item">
-            <Link onClick={onClose} to="services" smooth duration={500}>
+            <Link onClick={onClose} href="#services" to="services" smooth duration={500}>
               Послуги
             </Link>
           </li>
           <li className="drawer__link-item">
-            <Link onClick={onClose} to="book-appointment" smooth duration={500}>
+            <Link
+              onClick={onClose}
+              href="#book-appointment"
+              to="book-appointment"
+              smooth
+              duration={500}
+            >
               Записатись
             </Link>
           </li>
           <li className="drawer__link-item">
-            <Link onClick={onClose} to="contacts" smooth duration={500}>
+            <Link onClick={onClose} href="#contacts" to="contacts" smooth duration={500}>
               Контакти
             </Link>
           </li>

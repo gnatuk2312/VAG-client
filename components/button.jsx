@@ -7,6 +7,7 @@ const Button = (props) => {
     <Link
       onClick={onClick}
       className={cn("button", className)}
+      href="#book-appointment"
       to="book-appointment"
       smooth
       duration={500}

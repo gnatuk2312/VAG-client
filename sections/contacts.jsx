@@ -8,7 +8,7 @@ import YouTubeIcon from "../public/icons/youtube-icon.svg";
 import TikTokIcon from "../public/icons/tiktok-icon.svg";
 
 const Contacts = () => (
-  <section className="contacts">
+  <section className="contacts" id="contacts">
     <Container>
       <div className="contacts__header">
         <Logo />

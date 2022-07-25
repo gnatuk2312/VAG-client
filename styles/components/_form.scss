@@ -6,10 +6,14 @@
 	&__hint {
 		margin: 6px 0;
 		color: $text-light;
-		font-weight: 100;
+		font-weight: 300;
 		font-size: rem(8);
 		line-height: 1.1em;
 		text-align: center;
+
+		@include create-query(390px) {
+			font-size: rem(10);
+		}
 
 		@include screen-sm {
 			font-size: rem(12);
@@ -83,11 +87,14 @@
 		font-weight: 300;
 		line-height: 1.1em;
 		text-transform: uppercase;
+
+		@include create-query(390px) {
+			font-size: rem(12);
+		}
 	
 		@include screen-sm {
 			max-width: unset;
 			margin-top: 0;
-			font-size: rem(12);
 		}
 	
 		@include screen-lg {
@@ -102,6 +109,7 @@
 		flex: 1;
 		max-width: 160px;
 		padding: 0 0 2px 2px;
+		background-color: $background-dark;
 		
 	
 		@include create-query(360px) {
@@ -129,10 +137,10 @@
 		font-weight: 300;
 		line-height: 1.1em;
 		letter-spacing: 0.5px;
-		background-color: transparent;
+		background-color: $background-dark;
 		border-bottom: 1px solid $white;
 
-		@include screen-sm {
+		@include create-query(390px) {
 			font-size: rem(12);
 		}
 	
@@ -154,6 +162,7 @@
 	input:-webkit-autofill:focus, 
 	input:-webkit-autofill:active	{
     box-shadow: 0 0 0 30px $background-dark inset !important;
+		transition: background-color 5000s ease-in-out 0s;
 	}
 
 	input:-webkit-autofill {
