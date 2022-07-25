@@ -77,6 +77,12 @@
 				font-size: rem(14);
 			}
 		}
+
+		&_not-found {
+			p {
+				opacity: 1;
+			}
+		}
 	}
 
 	&__links {

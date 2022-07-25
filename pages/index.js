@@ -12,7 +12,7 @@ import Footer from "../sections/footer";
 
 const Home = () => (
 	<>
-		<Navigation />
+		<Navigation variant="home" />
 		<Header />
 		<AboutCompany />
 		<Services />

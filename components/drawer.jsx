@@ -1,42 +1,63 @@
-import { Link } from "react-scroll";
 import cn from "classnames";
+import { Link as ScrollLink } from "react-scroll";
+import Link from "next/link";
 
 import Container from "./container";
 
 const Drawer = (props) => {
-  const { isOpen, onClose } = props;
+  const { isOpen, variant, onClose } = props;
 
   return (
     <div className={cn("drawer", { "drawer_is-open": isOpen })}>
       <Container className="drawer__container">
-        <ul className="drawer__links">
-          <li className="drawer__link-item">
-            <Link onClick={onClose} href="#about-company" to="about-company" smooth duration={500}>
-              Про нас
-            </Link>
-          </li>
-          <li className="drawer__link-item">
-            <Link onClick={onClose} href="#services" to="services" smooth duration={500}>
-              Послуги
-            </Link>
-          </li>
-          <li className="drawer__link-item">
-            <Link
-              onClick={onClose}
-              href="#book-appointment"
-              to="book-appointment"
-              smooth
-              duration={500}
-            >
-              Записатись
-            </Link>
-          </li>
-          <li className="drawer__link-item">
-            <Link onClick={onClose} href="#contacts" to="contacts" smooth duration={500}>
-              Контакти
-            </Link>
-          </li>
-        </ul>
+        {variant === "home" && (
+          <ul className="drawer__links">
+            <li className="drawer__link-item">
+              <ScrollLink onClick={onClose} to="about-company" smooth duration={500}>
+                Про нас
+              </ScrollLink>
+            </li>
+            <li className="drawer__link-item">
+              <ScrollLink onClick={onClose} to="services" smooth duration={500}>
+                Послуги
+              </ScrollLink>
+            </li>
+            <li className="drawer__link-item">
+              <ScrollLink onClick={onClose} to="book-appointment" smooth duration={500}>
+                Записатись
+              </ScrollLink>
+            </li>
+            <li className="drawer__link-item">
+              <ScrollLink onClick={onClose} to="contacts" smooth duration={500}>
+                Контакти
+              </ScrollLink>
+            </li>
+          </ul>
+        )}
+        {variant === "404" && (
+          <ul className="drawer__links">
+            <li className="drawer__link-item">
+              <Link href="/" passHref>
+                <a href="replace">Про нас</a>
+              </Link>
+            </li>
+            <li className="drawer__link-item">
+              <Link href="/" passHref>
+                <a href="replace">Послуги</a>
+              </Link>
+            </li>
+            <li className="drawer__link-item">
+              <Link href="/" passHref>
+                <a href="replace">Записатись</a>
+              </Link>
+            </li>
+            <li className="drawer__link-item">
+              <Link href="/" passHref>
+                <a href="replace">Контакти</a>
+              </Link>
+            </li>
+          </ul>
+        )}
         <ul className="drawer__main-info">
           <li className="drawer__main-info-item">
             <span>S:</span>
