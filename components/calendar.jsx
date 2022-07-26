@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import cn from "classnames";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,8 +11,11 @@ registerLocale("uk", uk);
 const Calendar = (props) => {
   const { date, setDate, selectedHour, setSelectedHour } = props;
 
+  const [minDate, setMinDate] = useState(null);
+
   useEffect(() => {
     setDate(new Date());
+    setMinDate(new Date());
   }, []);
 
   return (
@@ -24,7 +27,7 @@ const Calendar = (props) => {
           onChange={(newDate) => setDate(newDate)}
           inline
           locale="uk"
-          minDate={new Date()}
+          minDate={minDate}
           maxDate={new Date().setMonth(new Date().getMonth() + 2)}
           filterDate={isWeekday}
         />
