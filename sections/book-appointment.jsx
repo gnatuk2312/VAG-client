@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 import Container from "../components/container";
@@ -8,15 +8,11 @@ import Form from "../components/form";
 import { useInput } from "../hooks/useInput";
 
 const BookAppointment = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState("");
   const name = useInput("", { isEmpty: true });
   const phone = useInput("+380", { isEmpty: true, isPhoneError: true });
   const email = useInput("", { isEmailError: true });
-
-  useEffect(() => {
-    setDate(new Date());
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();

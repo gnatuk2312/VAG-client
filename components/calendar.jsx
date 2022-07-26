@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import cn from "classnames";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,6 +11,10 @@ registerLocale("uk", uk);
 const Calendar = (props) => {
   const { date, setDate, selectedHour, setSelectedHour } = props;
 
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
+
   return (
     <div className="calendar">
       <p className="calendar__hint">1. Вибери зручну для тебе дату та годину</p>
@@ -20,7 +25,7 @@ const Calendar = (props) => {
           inline
           locale="uk"
           minDate={new Date()}
-          // maxDate={new Date().setMonth(new Date().getMonth() + 2)}
+          maxDate={new Date().setMonth(new Date().getMonth() + 2)}
           filterDate={isWeekday}
         />
         <ul className="calendar__hours-list">
