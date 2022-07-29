@@ -149,17 +149,13 @@
 
 		&::before,
 		&::after	{
+			content: "";
 			position: absolute;
 			left: 0;
 			width: 20px;
 			height: 1px;
 			background-color: #fff;
 			transition: all 0.2s ease 0s;
-		}
-
-		&::before,
-		&::after {
-			content: "";
 		}
 
 		&::before {

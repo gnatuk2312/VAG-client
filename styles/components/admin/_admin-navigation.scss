@@ -1,0 +1,240 @@
+.admin-navigation {
+	&__mobile {
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 18px 16px 12px;
+		background-color: $dark-green;
+
+		@include screen-sm {
+			display: none;
+		}
+	}
+
+	&__logo {
+		color: $text-light;
+		font-size: rem(12);
+		font-weight: 400;
+
+		&_green {
+			color: $text-green;
+		}
+
+		@include screen-lg {
+			font-size: rem(22);
+		}
+	}
+
+	&__burger-menu {
+		position: absolute;
+		right: 16px;
+		display: block;
+		width: 20px;
+		height: 7px;
+		background-color: transparent;
+		cursor: pointer;
+
+		&::before,
+		&::after	{
+			content: "";
+			position: absolute;
+			left: 0;
+			width: 20px;
+			height: 1px;
+			background-color: #fff;
+			transition: all 0.2s ease 0s;
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+		}
+
+		&_is-drawer-open {
+			&::before {
+				top: 50%;
+				transform: rotate(-45deg) translate(0, -50%);
+			}
+	
+			&::after {
+				bottom: 48%;
+				transform: rotate(45deg) translate(0, 50%);
+			}
+		}
+	}
+
+	&__sidebar {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 166px;
+		padding: 40px 22px 16px;
+		background-color: #082610;
+
+		@include screen-sm {
+			display: block;
+		}
+
+		@include screen-lg {
+			width: 254px;
+			padding: 66px 38px 26px;
+		}
+	}
+
+	&__sidebar-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+	}
+
+	&__link-item {
+		position: relative;
+		padding: 2px 0;
+		
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 2px;
+			left: -22px;
+			width: 4px;
+			height: 20px;
+			background-color: $green;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+		}
+
+		&:hover {
+			&::before {
+				opacity: 1;
+			}
+		}
+
+		&_active {
+			&::before {
+				opacity: 1;
+			}
+		}
+
+		@include screen-lg {
+			&:not(:last-child) {
+				margin-bottom: 42px;
+			}
+
+			&::before {
+				content: "";
+				top: -2px;
+				left: -38px;
+				width: 6px;
+				height: 32px;
+			}
+		}
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		color: $light;
+		font-size: rem(12);
+		font-weight: 400;
+		line-height: 1.16em;
+
+		svg {
+			width: 20px;
+			height: 20px;
+			margin: 0 16px 6px 0;
+		}
+
+		span {
+			position: absolute;
+			right: -6px;
+			padding: 3px 6px;
+			border-radius: 50%;
+			background-color: $background-green;
+			color: $text-light;
+			font-size: 10px;
+		}
+
+		@include screen-lg {
+			font-size: rem(16);
+
+			svg {
+				width: unset;
+				height: unset;
+				margin: 0 28px 6px 0;
+			}
+
+			span {
+				font-size: rem(14);
+				padding: 4px 8px;
+			}
+		}
+	}
+
+	&__exit {
+		position: relative;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		background-color: transparent;
+		color: $light;
+		font-size: rem(12);
+		font-weight: 400;
+		line-height: 1.16em;
+
+		svg {
+			width: 20px;
+			height: 20px;
+			margin: 0 24px 4px 0;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -22px;
+			width: 4px;
+			height: 20px;
+			background-color: $green;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+		}
+
+		&:hover {
+			&::before {
+				opacity: 1;
+			}
+		}
+
+		@include screen-lg {
+			font-size: rem(16);
+
+			svg {
+				width: unset;
+				height: unset;
+				margin: 0 38px 4px 0;
+			}
+
+			&::before {
+				content: "";
+				top: -4px;
+				left: -38px;
+				width: 6px;
+				height: 32px;
+			}
+		}
+	}
+}
