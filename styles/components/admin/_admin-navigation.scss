@@ -10,9 +10,15 @@
 		padding: 18px 16px 12px;
 		background-color: $dark-green;
 		z-index: 100;
+		transform: translateY(-102%);
+		transition: transform 0.3s ease;
 
 		@include screen-sm {
 			display: none;
+		}
+
+		&_is-visible {
+			transform: translateY(0);
 		}
 	}
 

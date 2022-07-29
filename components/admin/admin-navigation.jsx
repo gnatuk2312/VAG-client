@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import AdminDrawer from "./admin-drawer";
+import useVerticalScrollProps from "../../hooks/useVerticalScrollProps";
 import HomeIcon from "../../public/icons/home-icon.svg";
 import AddIcon from "../../public/icons/add-icon.svg";
 import ClientsIcon from "../../public/icons/clients-icon.svg";
@@ -11,6 +12,7 @@ import ExitIcon from "../../public/icons/exit-icon.svg";
 
 const AdminNavigation = () => {
   const { asPath } = useRouter();
+  const { isScrollUp, isScrolled } = useVerticalScrollProps();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -20,7 +22,11 @@ const AdminNavigation = () => {
   return (
     <>
       <nav className="admin-navigation">
-        <div className="admin-navigation__mobile">
+        <div
+          className={cn("admin-navigation__mobile", {
+            "admin-navigation__mobile_is-visible": isScrollUp || !isScrolled,
+          })}
+        >
           <Link href="/admin" passHref>
             <a onClick={handleDrawerClose} className="admin-navigation__logo" href="replace">
               АВТОЕЛЕКТРИК <br /> <span className="admin-navigation__logo_green">VAG GROUP</span>
