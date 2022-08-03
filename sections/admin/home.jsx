@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { isWeekday } from "../../constants/date-picker";
 import LocalDate from "../../components/admin/local-date";
 import Appointment from "../../components/admin/appointment";
-import Notes from "../../components/admin/notes";
+// import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
 
@@ -65,7 +65,7 @@ const AdminHome = () => {
                 filterDate={isWeekday}
               />
             </div>
-            <Notes className="admin-home__notes" />
+            {/* <Notes className="admin-home__notes" /> */}
           </div>
         </div>
       </div>
