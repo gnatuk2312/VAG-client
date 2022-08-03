@@ -1,0 +1,96 @@
+.appointment {
+	display: flex;
+	align-items: center;
+	padding: 10px 12px;
+	border-radius: 14px;
+
+	&:not(:last-child) {
+		margin-bottom: 6px;
+	}
+
+	@include screen-lg {
+		padding: 14px 20px;
+
+		&:not(:last-child) {
+			margin-bottom: 8px;
+		}
+	}
+
+	&_new {
+		background-color: #065d1e;
+	}
+
+	&_now {
+		background-color: #454946;
+	}
+
+	&_old {
+		background-color: transparent;
+		border-radius: unset;
+		border-bottom: 1px solid #d9d9d9;
+	}
+
+	&__avatar {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 8px;
+		width: 28px;
+		height: 28px;
+		border-radius: 50px;
+		background-color: #d9d9d9;
+		font-size: rem(18);
+		color: #082610;
+
+		@include screen-lg {
+			width: 44px;
+			height: 44px;
+			font-size: rem(28);
+		}
+	}
+
+	&__body {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		padding: 0 8px 0 18px;
+		color: $light;
+		line-height: 1.16em;
+	}
+	&__name {
+		margin-bottom: 4px;
+		font-size: rem(13);
+
+		@include screen-lg {
+			margin-bottom: 6px;
+			font-size: rem(20);
+		}
+	}
+	&__description {
+		margin-bottom: 4px;
+		font-size: rem(10);
+		line-height: 1.16em;
+
+		@include screen-lg {
+			margin-bottom: 6px;
+			font-size: rem(13);
+		}
+	}
+	&__phone {
+		font-size: rem(12);
+		font-weight: 300;
+
+		@include screen-lg {
+			font-size: rem(18);
+		}
+	}
+	&__time {
+		color: $light;
+		font-size: rem(12);
+		line-height: 1.16em;
+
+		@include screen-lg {
+			font-size: rem(18);
+		}
+	}
+}

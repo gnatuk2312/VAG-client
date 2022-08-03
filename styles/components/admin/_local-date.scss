@@ -1,0 +1,50 @@
+.local-date {
+	text-align: center;
+	color: $light;
+	line-height: 1.16em;
+
+	&__time {
+		margin-bottom: 6px;
+		font-size: rem(32);
+		line-height: 1.16em;
+
+		span {
+			animation: time-ticker 1s linear infinite;
+		}
+
+		@include screen-md {
+			margin-bottom: 12px;
+		}
+
+		@include screen-lg {
+			font-size: rem(48);
+		}
+	}
+
+	&__day {
+		font-size: rem(16);
+		line-height: 1.16em;
+		text-transform: capitalize;
+
+		@include screen-lg {
+			font-size: rem(23);
+		}
+	}
+}
+
+@keyframes time-ticker {
+	0% {
+		opacity: 0;
+	}
+
+	49% {
+		opacity: 0;
+	}
+	51% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}

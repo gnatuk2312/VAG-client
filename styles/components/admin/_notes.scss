@@ -1,0 +1,92 @@
+.notes {
+	position: relative;
+	width: 256px;
+	height: 306px;
+	margin: 0 auto;
+	padding: 32px 0 36px;
+	background-color: #1d211e;
+	border-radius: 14px;
+	border: 1px solid #d9d9d9;
+	overflow: hidden;
+
+	@include screen-lg {
+		width: 334px;
+		height: 418px;
+		padding: 42px 0 24px;
+	}
+
+	&__wrapper {
+		max-height: 246px;
+		padding: 14px 12px 24px;
+		overflow-y: auto;
+
+		@include screen-lg {
+			max-height: 336px;
+		}
+	}
+
+	&__title {
+		position: absolute;
+		top: 14px;
+		left: 50%;
+		transform: translateX(-50%);
+		color: $light;
+		font-size: rem(12);
+		line-height: 1.16em;
+		text-transform: uppercase;
+
+		@include screen-lg {
+			font-size: rem(20);
+		}
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__form {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+
+	&__input {
+		width: 100%;
+		padding: 4px 6px;
+		font-size: rem(12);
+		border-radius: 0 0 0 14px;
+		background-color: transparent;
+		color: $white;
+
+		&::placeholder {
+			font-size: rem(12);
+			color: $grey;
+		}
+
+		@include screen-lg {
+			padding: 10px 6px;
+			font-size: rem(14);
+
+			&::placeholder {
+				font-size: rem(14);
+			}
+		}
+	}
+
+	&__submit {
+		width: 20px;
+		padding: 4px 7px 4px 5px;
+		color: $white;
+		border-radius: 4px 0 14px 0;
+		background-color: $background-green;
+		cursor: pointer;
+
+		@include screen-lg  {
+			padding: 10px 9px 10px 7px;
+		}
+	}
+}

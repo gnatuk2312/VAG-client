@@ -1,0 +1,96 @@
+.note {
+	position: relative;
+	display: flex;
+	align-items: center;
+	max-width: 256px;
+
+	&:not(:last-child) {
+		margin-bottom: 5px;
+	}
+
+	@include screen-lg {
+		max-width: 308px;
+
+		&:not(:last-child) {
+			margin-bottom: 12px;
+		}
+	}
+
+	&__checkbox {
+		display: flex;
+		align-items: center;
+
+		span {
+			display: block;
+			width: 14px;
+			height: 14px;
+			padding: 6px;
+			border-radius: 50px;
+			border: 1px solid $light;
+			background-position: center;
+			background-repeat: no-repeat;
+			cursor: pointer;
+		}
+
+		input {
+			position: absolute;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+		}
+
+		input:checked ~ span {
+			background-image: url("../../../public/icons/done-icon.svg");
+		}
+
+		@include screen-lg {
+			span {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+
+	&__text {
+		margin: 0 16px 0 7px;
+		color: $light;
+		font-size: rem(14);
+
+		&_is-checked {
+			text-decoration: line-through;
+		}
+
+		@include screen-lg {
+			margin: 0 24px 0 10px;
+			font-size: rem(16);
+		}
+	}
+
+	&__delete {
+		position: absolute;
+		right: 0;
+		opacity: 0;
+		pointer-events: none;
+		background-color: transparent;
+		cursor: pointer;
+
+		@include is-touch-device {
+			opacity: 1;
+			pointer-events: all;
+		}
+
+		@include screen-lg {
+			svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+
+	@include hover-supported {
+		&:hover &__delete {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
+}

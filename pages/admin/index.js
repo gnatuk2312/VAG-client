@@ -1,9 +1,11 @@
 import AdminNavigation from "../../components/admin/admin-navigation";
+import AdminHome from "../../sections/admin/home";
 
 const Home = () => (
-	<div style={{ marginBottom: "1000px" }}>
+	<>
 		<AdminNavigation />
-	</div>
+		<AdminHome />
+	</>
 );
 
 export default Home;

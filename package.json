@@ -20,7 +20,8 @@
     "react-hot-toast": "^2.3.0",
     "react-scroll": "^1.8.7",
     "sass": "^1.53.0",
-    "swiper": "^8.3.1"
+    "swiper": "^8.3.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "babel-plugin-inline-react-svg": "^2.0.1",

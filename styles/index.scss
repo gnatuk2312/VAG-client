@@ -21,6 +21,12 @@
 @import "./components/success-booking-modal";
 @import "./components/admin/admin-navigation";
 @import "./components/admin/admin-drawer";
+@import "./components/admin/local-date";
+@import "./components/admin/admin-button";
+@import "./components/admin/appointment";
+@import "./components/admin/admin-calendar";
+@import "./components/admin/notes";
+@import "./components/admin/note";
 
 /* sections */
 @import "./sections/header";
@@ -32,3 +38,4 @@
 @import "./sections/contacts";
 @import "./sections/footer";
 @import "./sections/not-found";
+@import "./sections/admin/home";
