@@ -11,7 +11,8 @@ const Notes = (props) => {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    setNotes(JSON.parse(localStorage.getItem("notes")));
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    setNotes(notes);
   }, []);
 
   const addNote = (event, value, id) => {

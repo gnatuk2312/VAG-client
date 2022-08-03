@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import uk from "date-fns/locale/uk";
 
 import { isWeekday } from "../../constants/date-picker";
 import LocalDate from "../../components/admin/local-date";
 import Appointment from "../../components/admin/appointment";
-// import Notes from "../../components/admin/notes";
+import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
+
+registerLocale("uk", uk);
 
 const AdminHome = () => {
   const [datePickerDate, setDatePickerDate] = useState(new Date());
@@ -62,10 +65,11 @@ const AdminHome = () => {
                 selected={datePickerDate}
                 onChange={(newDate) => setDatePickerDate(newDate)}
                 inline
+                locale="uk"
                 filterDate={isWeekday}
               />
             </div>
-            {/* <Notes className="admin-home__notes" /> */}
+            <Notes className="admin-home__notes" />
           </div>
         </div>
       </div>
