@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import DatePicker, { registerLocale } from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import uk from "date-fns/locale/uk";
 
 import { isWeekday } from "../../constants/date-picker";
 import LocalDate from "../../components/admin/local-date";
@@ -11,10 +10,8 @@ import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
 
-registerLocale("uk", uk);
-
 const AdminHome = () => {
-  const [datePickerDate, setDatePickerDate] = useState(null);
+  const [datePickerDate, setDatePickerDate] = useState(new Date());
 
   useEffect(() => {
     setDatePickerDate(new Date());
