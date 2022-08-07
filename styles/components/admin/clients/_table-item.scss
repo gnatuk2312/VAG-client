@@ -1,0 +1,68 @@
+.table-item {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 40px;
+	width: 100%;
+	color: $light;
+	font-size: rem(10);
+	font-weight: 400;
+	line-height: 1.16em;
+	overflow-x: hidden;
+
+	&:after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 100vw;
+		height: 1px;
+		background-color: $shadow-light;
+		transform: translateX(-50%);
+	}
+
+	&__client {
+		position: absolute;
+		left: 24px;
+		display: flex;
+	}
+
+	&__avatar {
+		position: absolute;
+		padding: 6px;
+		border-radius: 50px;
+		background-color: $background-green;
+		font-size: rem(17);
+	}
+	&__name {
+		max-width: 100px;
+		margin-left: 36px;
+	}
+	&__phone-number {
+		position: absolute;
+		left: prc(184, 856);
+		color: $light;
+	}
+	&__car {
+		position: absolute;
+		left: prc(356, 856);
+	}
+	&__license-plate {
+		position: absolute;
+		left: prc(510, 856);
+	}
+	&__email {
+		position: absolute;
+		left: prc(640, 856);
+		color: $light;
+	}
+	&__action {
+		position: absolute;
+		right: 22px;
+	}
+	&__edit {
+		margin-right: 34px;
+		cursor: pointer;
+	}
+}

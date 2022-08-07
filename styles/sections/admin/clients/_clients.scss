@@ -1,0 +1,158 @@
+.admin-clients {
+	height: 100vh;
+	margin-left: 166px;
+	padding-top: 56px;
+	background-color: $background-dark;
+	overflow-x: hidden;
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 50px;
+		padding: 0 22px 0 16px;
+	}
+
+	&__add-new-client {
+		margin: 0;
+	}
+
+	&__form {
+		position: relative;
+		display: inline-block;
+		margin: 0 0 14px 16px;
+	}
+
+	&__search {
+		width: 230px;
+		height: 24px;
+		padding: 2px 26px;
+		background-color: rgba(69, 73, 70, 0.8);
+		color: $text-light;
+		border-radius: 14px;
+	}
+
+	&__submit {
+		position: absolute;
+		top: 4px;
+		left: 6px;
+		background-color: transparent;
+		cursor: pointer;
+	}
+
+	&__open-search-dropdown {
+		position: absolute;
+		top: 6px;
+		right: 10px;
+		background-color: transparent;
+		cursor: pointer;
+
+		div {
+			box-sizing: border-box;
+			height: 8px;
+			width: 8px;
+			border-style: solid;
+			border-color: $light;
+			border-width: 0px 2px 2px 0px;
+			transform-origin: 60% 60%;
+			transform: rotate(45deg);
+			transition: transform 0.2s ease;
+		}
+
+		&_is-dropdown-open {
+			div {
+				transform: rotate(-135deg);
+			}
+		}
+	}
+
+	&__dropdown {
+		position: absolute;
+		right: 0;
+		padding: 8px 12px 10px;
+		z-index: 10;
+		border-radius: 14px;
+		background-color: #d9d9d9;
+		text-align: end;
+		transform: translateY(-20px);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: all 0.2s ease;
+
+		&_is-open {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+			pointer-events: all;
+		}
+	}
+
+	&__dropdown-item {
+		background-color: transparent;
+		text-transform: uppercase;
+		color: $text-dark;
+		font-weight: 400;
+		font-size: rem(8);
+		line-height: 1.48em;
+		cursor: pointer;
+
+		&:hover {
+			color: $text-green;
+		}
+
+		&_active {
+			color: $text-green;
+		}
+	}
+
+	&__sort-by-date {
+		position: absolute;
+		right: -20px;
+		top: 4px;
+		background-color: transparent;
+		cursor: pointer;
+	}
+}
+
+.clients-table {
+	&__header {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		padding: 18px 70px 18px;
+
+		p {
+			color: $text-light;
+			font-size: rem(10);
+			font-weight: 400;
+			line-height: 1.16em;
+		}
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 100vw;
+			height: 1px;
+			background-color: $white;
+			transform: translateX(-50%);
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			width: 100vw;
+			height: 1px;
+			background-color: $white;
+			transform: translateX(-50%);
+		}
+	}
+
+	&__wrapper {
+		max-height: calc(100vh - 236px);
+		overflow-y: auto;
+	}
+}

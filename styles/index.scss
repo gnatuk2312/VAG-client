@@ -28,6 +28,7 @@
 @import "./components/admin/notes";
 @import "./components/admin/note";
 @import "./components/admin/admin-title";
+@import "./components/admin/clients/table-item";
 
 /* sections */
 @import "./sections/header";
@@ -41,3 +42,4 @@
 @import "./sections/not-found";
 @import "./sections/admin/home";
 @import "./sections/admin/book-appointment";
+@import "./sections/admin/clients/clients";
