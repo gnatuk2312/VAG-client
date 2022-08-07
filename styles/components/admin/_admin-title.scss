@@ -1,0 +1,40 @@
+.admin-title {
+	position: relative;
+	padding-left: 16px;
+	color: $text-light;
+	font-size: rem(19);
+	font-weight: 300;
+	line-height: 1.1em;
+	text-transform: uppercase;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		width: 4px;
+		height: 32px;
+		background-color: $green;
+	}
+
+	@include screen-md {
+		padding-left: 28px;
+		font-size: rem(34);
+
+		&::before {
+			width: 6px;
+			height: 56px;
+		}
+	}
+
+	@include screen-lg {
+		padding-left: 46px;
+		font-size: rem(56);
+
+		&::before {
+			width: 10px;
+			height: 92px;
+		}
+	}
+}

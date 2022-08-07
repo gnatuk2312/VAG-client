@@ -18,14 +18,16 @@ const BookAppointment = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (selectedHour === "" || selectedHour === null) {
+      setSelectedHour(null);
+      return;
+    }
     setSuccessModalOpen(true);
   };
 
   const handleSuccessModalClose = () => {
     setSuccessModalOpen(false);
-    if (selectedHour === "" || selectedHour === null) {
-      setSelectedHour(null);
-    }
+    setSelectedHour("");
     setDate(new Date());
     setSelectedHour("");
     name.setValue("");

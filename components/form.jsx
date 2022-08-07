@@ -1,10 +1,17 @@
 import cn from "classnames";
 
 const Form = (props) => {
-  const { nameValidation, phoneValidation, emailValidation, onSubmit } = props;
+  const {
+    className,
+    nameValidation,
+    phoneValidation,
+    emailValidation,
+    onSubmit,
+    submitText = "Записатись",
+  } = props;
 
   return (
-    <form className="form">
+    <form className={cn("form", className)}>
       <p className="form__hint">2. Заповни особисту інформацію про себе</p>
       <div className="form__inputs-wrapper">
         <label htmlFor="form__input-name" className="form__form-label">
@@ -84,7 +91,7 @@ const Form = (props) => {
         type="submit"
         className="form__submit"
       >
-        Записатись
+        {submitText}
       </button>
     </form>
   );

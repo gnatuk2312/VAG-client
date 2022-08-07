@@ -1,0 +1,191 @@
+.admin-book-appointment {
+	min-height: 100vh;
+	padding: 90px 16px 34px;
+	background-color: $background-dark;
+	overflow-x: hidden;
+
+	@include screen-sm {
+		margin-left: 166px;
+		padding: 58px 16px 100px;
+	}
+
+	&__container {
+		@include screen-md {
+			max-width: 868px;
+			margin: 0 auto;
+		}
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 42px;
+
+		@include screen-md {
+			margin-bottom: 58px;
+		}
+	}
+
+	&__local-date {
+		display: none;
+
+		@include screen-md {
+			display: block;
+			margin-right: 24px;
+		}
+	}
+
+	&__body {
+		margin: 0 auto;
+		max-width: 320px;
+
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 100vw;
+			height: 1px;
+			background-color: $white;
+			transform: translateX(-50%);
+			opacity: 0;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			width: 100vw;
+			height: 1px;
+			background-color: $white;
+			transform: translateX(-50%);
+			opacity: 0;
+		}
+
+		@include screen-md {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			max-width: unset;
+			padding: 40px 0;
+
+			&:before,
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+
+	&__calendar-wrapper {
+		margin-bottom: 28px;
+
+		@include screen-md {
+			margin-bottom: 0;
+		}
+	}
+
+	&__available-hours {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px 18px;
+		width: 100%;
+		margin-bottom: 40px;
+
+		@include screen-md {
+			grid-template-columns: 96px 96px;
+			width: unset;
+			height: fit-content;
+			margin: 48px 0 0;
+			gap: 5px 14px;
+		}
+	}
+	
+	&__hour {
+		width: 100%;
+		padding: 4px 6px;
+		background-color: transparent;
+		color: $text-light;
+		font-size: rem(17);
+		font-weight: 300;
+		line-height: 1.1em;
+		border: 1px solid $white;
+
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+
+		&_selected {
+			background-color: $green;
+
+			&:hover {
+				background-color: $green;
+			}
+		}
+
+		@include screen-md {
+			width: 96px;
+			font-size: rem(12);
+		}
+	}
+
+	&__no-hours {
+		text-align: center;
+		color: $text-light;
+		font-size: rem(17);
+		font-weight: 300;
+		line-height: 1.1em;
+	}
+
+	&__hours-error {
+		font-size: rem(12);
+		color: $red;
+	}
+
+	&__form {
+		.form__hint {
+			display: none;
+		}
+
+		.form__inputs-wrapper {
+			padding: 0;
+			border: none;
+		}
+
+		.form__form-label-text {
+			@include screen-md {
+				max-width: 70px;
+			}
+		}
+
+		.form__submit {
+			@include screen-sm {
+				position: relative;
+				bottom: 0;
+				width: 100%;
+				margin-top: 44px;
+				padding: 8px 14px;
+				font-size: rem(12);
+			}
+
+			@include screen-md {
+				position: absolute;
+				bottom: -78px;
+				width: 476px;
+				padding: 12px 14px;
+				font-size: rem(18);
+			}
+		}
+	}
+
+	&__form-wrapper {
+		@include screen-md {
+			margin-top: 48px;
+		}
+	}
+}

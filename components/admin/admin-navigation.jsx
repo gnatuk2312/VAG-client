@@ -64,10 +64,10 @@ const AdminNavigation = () => {
               </li>
               <li
                 className={cn("admin-navigation__link-item", {
-                  "admin-navigation__link-item_active": asPath === "/admin",
+                  "admin-navigation__link-item_active": asPath === "/admin/book-appointment",
                 })}
               >
-                <Link href="/admin" passHref>
+                <Link href="/admin/book-appointment" passHref>
                   <a className="admin-navigation__link" href="replace">
                     <AddIcon />
                     Записати
@@ -77,10 +77,10 @@ const AdminNavigation = () => {
               </li>
               <li
                 className={cn("admin-navigation__link-item", {
-                  "admin-navigation__link-item_active": asPath === "/admin",
+                  "admin-navigation__link-item_active": asPath === "/admin/clients",
                 })}
               >
-                <Link href="/admin" passHref>
+                <Link href="/admin/clients" passHref>
                   <a className="admin-navigation__link" href="replace">
                     <ClientsIcon />
                     Клієнти
