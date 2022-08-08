@@ -22,7 +22,7 @@ const AdminClients = () => {
       <div>
         <div className="admin-clients__header">
           <AdminTitle title="Клієнти" />
-          <Link href="/admin/new-client" passHref>
+          <Link href="/admin/clients/new-client" passHref>
             <a className="admin-button admin-clients__add-new-client" href="replace">
               <AddBigIcon />
               Додати нового клієнта

@@ -22,7 +22,7 @@ const AdminDrawer = (props) => {
             </Link>
           </li>
           <li className="admin-drawer__link-item">
-            <Link href="/admin" passHref>
+            <Link href="/admin/book-appointment" passHref>
               <a onClick={onClose} className="admin-drawer__link" href="replace">
                 <AddIcon />
                 Записати
@@ -30,7 +30,7 @@ const AdminDrawer = (props) => {
             </Link>
           </li>
           <li className="admin-drawer__link-item">
-            <Link href="/admin" passHref>
+            <Link href="/admin/clients" passHref>
               <a onClick={onClose} className="admin-drawer__link" href="replace">
                 <ClientsIcon />
                 Клієнти

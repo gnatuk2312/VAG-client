@@ -29,6 +29,7 @@
 @import "./components/admin/note";
 @import "./components/admin/admin-title";
 @import "./components/admin/clients/table-item";
+@import "./components/admin/admin-input";
 
 /* sections */
 @import "./sections/header";
@@ -43,3 +44,4 @@
 @import "./sections/admin/home";
 @import "./sections/admin/book-appointment";
 @import "./sections/admin/clients/clients";
+@import "./sections/admin/clients/new-client";
