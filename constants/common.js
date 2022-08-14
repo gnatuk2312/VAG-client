@@ -26,7 +26,7 @@ export const searchClientsDropDownConfig = [
 export const clients = [
 	{
 		_id: "1",
-		name: "Вячеслав Грабовський Грабовський",
+		name: "Вячеслав Грабовський",
 		phone: "+38 097 157 50 12",
 		email: "Vjcic 2000@gmail.com",
 		carBrand: "Audi",

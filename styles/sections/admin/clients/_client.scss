@@ -1,0 +1,264 @@
+.admin-client {
+	height: 100vh;
+	margin-left: 166px;
+	padding-top: 56px;
+	background-color: $background-dark;
+	overflow-y: hidden;
+
+	&__container {
+		padding: 0 22px 0 16px;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 46px;
+	}
+
+	&__header-buttons {
+		display: flex;
+	}
+
+	&__book-appointment {
+		background-color: $background-dark;
+		color: #d9d9d9;
+
+		svg {
+			margin-right: 16px;
+		}
+
+		&:hover {
+			box-shadow: none;
+		}
+	}
+
+	&__add-new-visit {
+		cursor: pointer;
+	}
+
+	&__form {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 36px;
+	}
+
+	&__client-name-wrapper {
+		position: relative;
+		padding-left: 40px;
+	}
+
+	&__avatar {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		width: 26px;
+		height: 26px;
+		padding: 6px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50px;
+		background-color: $background-green;
+		color: #D9D9D9;
+		font-size: rem(17);
+	}
+
+	&__car-wrapper {
+		display: flex;
+	}
+
+	&__input {
+		padding: 6px 0;
+		background-color: rgba(0,0,0,0.05);
+		color: $text-light;
+		font-size: rem(10);
+		font-weight: 400;
+		line-height: 1.16em;
+
+		&:disabled {
+			background-color: transparent;
+		}
+
+		&_name {
+			overflow: hidden;
+			width: 92px;
+			resize: horizontal;
+		}
+
+		&_phone {
+			width: 88px;
+		}
+
+		&_carBrand {
+			width: 70px;
+		}
+
+		&_carModel {
+			width: 70px;
+		}
+
+		&_license-plate {
+			width: 70px;
+		}
+
+		&_email {
+			width: 104px;
+		}
+	}
+
+	&__actions {
+		display: flex;
+	}
+
+	&__edit-client-wrapper {
+		position: relative;
+		width: 12px;
+		height: 12px;
+		margin-right: 36px;
+
+		button {
+			position: absolute;
+			top: 0;
+			left: 0;
+			cursor: pointer;
+		}
+	}
+
+	&__edit-client {
+		background-color: transparent;
+	}
+
+	&__submit {
+		background-color: $light;
+		width: 13px;
+		height: 13px;
+		border-radius: 50px;
+	}
+
+	&__favorite {
+		cursor: pointer;
+
+		&_is-disabled {
+			cursor: default;
+		}
+
+		input {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    span {
+      display: block;
+      width: 15px;
+      height: 15px;
+      background-image: url(../../../../public/icons/star-icon-empty.svg);
+      background-repeat: no-repeat;
+    }
+
+    input:checked ~ span {
+      background-image: url(../../../../public/icons/star-icon-filled.svg);
+    }
+	}
+
+	.client-visits {
+		&__header {
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 70px 10px 20px;
+			background-color: rgba(69, 73, 70, 0.8);
+			border-radius: 17px;
+		}
+
+		&__header-label {
+			text-align: center;
+			color: $text-light;
+			font-size: rem(10);
+			font-weight: 400;
+			line-height: 1.16em;
+
+			&_date {
+				width: 86px;
+			}
+
+			&_type {
+				width: 150px;
+			}
+
+			&_description {
+				width: 282px;
+			}
+
+			&_price {
+				width: 50px;
+			}
+			
+			&_status {
+				width: 104px;
+			}
+		}
+
+		&__container {
+			max-height: calc(100vh - 252px);
+			overflow-y: auto;
+		}
+
+		&__table-item {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			padding: 24px 70px 24px 20px;
+			overflow-x: hidden;
+
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100vw;
+				height: 1px;
+				background-color: $light;
+			}
+		}
+		
+		&__text {
+			text-align: center;
+			color: $text-light;
+			font-size: rem(10);
+			font-weight: 400;
+			line-height: 1.16em;
+
+			&_date {
+				width: 86px;
+			}
+
+			&_type {
+				width: 150px;
+			}
+
+			&_description {
+				width: 282px;
+				text-align: start;
+			}
+
+			&_price {
+				width: 50px;
+			}
+			
+			&_status {
+				width: 104px;
+			}
+		}
+
+		&__edit-visit {
+			position: absolute;
+			right: 36px;
+			top: 24px;
+			background-color: transparent;
+			cursor: pointer;
+		}
+	}
+}

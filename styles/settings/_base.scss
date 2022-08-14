@@ -18,14 +18,14 @@ body {
 	font-family: 'HelveticaNeueCyr', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br {
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br, textarea {
 	&::-moz-selection {
 		color: $text-light;
 		background-color: $background-green;
 	}
 }
 
-h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br {
+h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br, textarea {
 	&::selection {
 		color: $text-light;
 		background-color: $background-green;
