@@ -5,12 +5,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import Slider1 from "../public/images/slider-1.png";
-import Slider2 from "../public/images/slider-2.png";
-import Slider3 from "../public/images/slider-3.png";
-import Slider4 from "../public/images/slider-4.png";
-import Container from "../components/container";
-import Logo from "../components/logo";
+import Slider1 from "../../public/images/slider-1.png";
+import Slider2 from "../../public/images/slider-2.png";
+import Slider3 from "../../public/images/slider-3.png";
+import Slider4 from "../../public/images/slider-4.png";
+import Container from "../../components/container";
+import Logo from "../../components/home/logo";
 
 const Services = () => {
   const breakpoints = {

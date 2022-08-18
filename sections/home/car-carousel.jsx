@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import AudiLogo from "../public/images/audi-logo.png";
-import SkodaLogo from "../public/images/skoda-logo.png";
-import VWLogo from "../public/images/vw-logo.png";
-import SeatLogo from "../public/images/seat-logo.png";
-import Container from "../components/container";
+import AudiLogo from "../../public/images/audi-logo.png";
+import SkodaLogo from "../../public/images/skoda-logo.png";
+import VWLogo from "../../public/images/vw-logo.png";
+import SeatLogo from "../../public/images/seat-logo.png";
+import Container from "../../components/container";
 
 const CarCarousel = () => (
   <section className="car-carousel">

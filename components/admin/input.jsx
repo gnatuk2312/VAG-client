@@ -1,7 +1,7 @@
 import { useState } from "react";
 import cn from "classnames";
 
-import { formatPhoneNumber } from "../../helpers/formatPhoneNumber";
+import { formatPhoneNumber } from "../../helpers/format-phone-number";
 
 const AdminInput = (props) => {
   const { className, label, value, onChange, dropdown, isPhoneNumber } = props;

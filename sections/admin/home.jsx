@@ -4,7 +4,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
 
-import { isWeekday } from "../../constants/date-picker";
+import { isWeekday } from "../../constants/common";
 import LocalDate from "../../components/admin/local-date";
 import Appointment from "../../components/admin/appointment";
 import Notes from "../../components/admin/notes";

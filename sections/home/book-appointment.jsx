@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import Container from "../components/container";
-import Logo from "../components/logo";
-import Calendar from "../components/calendar";
-import Form from "../components/form";
-import SuccessBookingModal from "../components/success-booking-modal";
-import { useInput } from "../hooks/useInput";
+import Container from "../../components/container";
+import Logo from "../../components/home/logo";
+import Calendar from "../../components/home/calendar";
+import Form from "../../components/home/form";
+import SuccessBookingModal from "../../components/home/success-booking-modal";
+import { useInput } from "../../hooks/useInput";
 
 const BookAppointment = () => {
   const [date, setDate] = useState(null);

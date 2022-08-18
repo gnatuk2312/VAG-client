@@ -1,5 +1,5 @@
-import Container from "../components/container";
-import Logo from "../components/logo";
+import Container from "../../components/container";
+import Logo from "../../components/home/logo";
 
 const AboutCompany = () => (
   <section className="about-company" id="about-company">

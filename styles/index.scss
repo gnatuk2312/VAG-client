@@ -10,15 +10,15 @@
 
 /* components */
 @import "./components/container";
-@import "./components/button";
-@import "./components/navigation";
-@import "./components/logo";
-@import "./components/drawer";
-@import "./components/calendar";
-@import "./components/form";
 @import "./components/toaster";
-@import "./components/tomtom-map";
-@import "./components/success-booking-modal";
+@import "./components/home/button";
+@import "./components/home/navigation";
+@import "./components/home/logo";
+@import "./components/home/drawer";
+@import "./components/home/calendar";
+@import "./components/home/form";
+@import "./components/home/tomtom-map";
+@import "./components/home/success-booking-modal";
 @import "./components/admin/admin-navigation";
 @import "./components/admin/admin-drawer";
 @import "./components/admin/local-date";
@@ -33,14 +33,14 @@
 @import "./components/admin/clients/client-visit-modal";
 
 /* sections */
-@import "./sections/header";
-@import "./sections/about-company";
-@import "./sections/services";
-@import "./sections/car-carousel";
-@import "./sections/book-appointment";
-@import "./sections/text-carousel";
-@import "./sections/contacts";
-@import "./sections/footer";
+@import "./sections/home/header";
+@import "./sections/home/about-company";
+@import "./sections/home/services";
+@import "./sections/home/car-carousel";
+@import "./sections/home/book-appointment";
+@import "./sections/home/text-carousel";
+@import "./sections/home/contacts";
+@import "./sections/home/footer";
 @import "./sections/not-found";
 @import "./sections/admin/home";
 @import "./sections/admin/book-appointment";

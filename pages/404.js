@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import Navigation from "../components/navigation";
+import Navigation from "../components/home/navigation";
 import Container from "../components/container";
 import NotFoundImage from "../public/images/not-found.png";
 

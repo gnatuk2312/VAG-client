@@ -23,6 +23,11 @@ export const searchClientsDropDownConfig = [
 	"Номерний знак",
 ];
 
+export const isWeekday = (date) => {
+	const day = date.getDay();
+	return day !== 0 && day !== 6;
+};
+
 export const clients = [
 	{
 		_id: "1",

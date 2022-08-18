@@ -1,5 +1,5 @@
-import Button from "../components/button";
-import Container from "../components/container";
+import Button from "../../components/home/button";
+import Container from "../../components/container";
 
 const Header = () => (
   <header className="header" id="header">

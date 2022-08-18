@@ -1,14 +1,14 @@
 import { Toaster } from "react-hot-toast";
 
-import Navigation from "../components/navigation";
-import Header from "../sections/header";
-import AboutCompany from "../sections/about-company";
-import Services from "../sections/services";
-import CarCarousel from "../sections/car-carousel";
-import BookAppointment from "../sections/book-appointment";
-import TextCarousel from "../sections/text-carousel";
-import Contacts from "../sections/contacts";
-import Footer from "../sections/footer";
+import Navigation from "../components/home/navigation";
+import Header from "../sections/home/header";
+import AboutCompany from "../sections/home/about-company";
+import Services from "../sections/home/services";
+import CarCarousel from "../sections/home/car-carousel";
+import BookAppointment from "../sections/home/book-appointment";
+import TextCarousel from "../sections/home/text-carousel";
+import Contacts from "../sections/home/contacts";
+import Footer from "../sections/home/footer";
 
 const Home = () => (
 	<>

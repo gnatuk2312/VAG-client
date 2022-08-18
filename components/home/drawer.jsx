@@ -2,7 +2,7 @@ import cn from "classnames";
 import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 
-import Container from "./container";
+import Container from "../container";
 
 const Drawer = (props) => {
   const { isOpen, variant, onClose } = props;

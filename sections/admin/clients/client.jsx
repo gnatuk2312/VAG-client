@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import AdminTitle from "../../../components/admin/admin-title";
 import AdminClientVisitModal from "../../../components/admin/clients/client-visit-modal";
 import { clients } from "../../../constants/common";
-import { formatPhoneNumber } from "../../../helpers/formatPhoneNumber";
+import { formatPhoneNumber } from "../../../helpers/format-phone-number";
 import getScrollBarWidth from "../../../helpers/get-scrollbar-width";
 import AddBigIcon from "../../../public/icons/add-big-icon.svg";
 import AddBigIconLight from "../../../public/icons/add-big-icon-light.svg";

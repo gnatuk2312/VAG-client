@@ -5,9 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
 import toast from "react-hot-toast";
 
-import { isWeekday } from "../../constants/date-picker";
-import { adminHours } from "../../constants/common";
-import Form from "../../components/form";
+import { isWeekday, adminHours } from "../../constants/common";
+import Form from "../../components/home/form";
 import LocalDate from "../../components/admin/local-date";
 import AdminTitle from "../../components/admin/admin-title";
 import { useInput } from "../../hooks/useInput";

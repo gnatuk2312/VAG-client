@@ -1,8 +1,8 @@
 import cn from "classnames";
 import Image from "next/image";
 
-import CloseIcon from "../public/icons/close-icon.svg";
-import DoneIcon from "../public/images/done.png";
+import CloseIcon from "../../public/icons/close-icon.svg";
+import DoneIcon from "../../public/images/done.png";
 
 const SuccessBookingModal = (props) => {
   const { isOpen, onClose, name, date, hour } = props;

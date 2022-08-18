@@ -3,10 +3,10 @@ import cn from "classnames";
 import { Link as ScrollLink } from "react-scroll";
 import Link from "next/link";
 
-import Container from "./container";
+import Container from "../container";
 import Logo from "./logo";
 import Drawer from "./drawer";
-import useVerticalScrollProps from "../hooks/useVerticalScrollProps";
+import useVerticalScrollProps from "../../hooks/useVerticalScrollProps";
 
 const Navigation = (props) => {
   const { variant } = props;

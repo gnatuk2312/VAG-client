@@ -1,11 +1,11 @@
-import Container from "../components/container";
-import Logo from "../components/logo";
-import Button from "../components/button";
-import TomtomMap from "../components/tomtom-map";
-import FacebookIcon from "../public/icons/facebook-icon.svg";
-import InstagramIcon from "../public/icons/instagram-icon.svg";
-import YouTubeIcon from "../public/icons/youtube-icon.svg";
-import TikTokIcon from "../public/icons/tiktok-icon.svg";
+import Container from "../../components/container";
+import Logo from "../../components/home/logo";
+import Button from "../../components/home/button";
+import TomtomMap from "../../components/home/tomtom-map";
+import FacebookIcon from "../../public/icons/facebook-icon.svg";
+import InstagramIcon from "../../public/icons/instagram-icon.svg";
+import YouTubeIcon from "../../public/icons/youtube-icon.svg";
+import TikTokIcon from "../../public/icons/tiktok-icon.svg";
 
 const Contacts = () => (
   <section className="contacts" id="contacts">

@@ -1,4 +1,4 @@
-import Container from "../components/container";
+import Container from "../../components/container";
 
 const TextCarousel = () => (
   <section className="text-carousel">
