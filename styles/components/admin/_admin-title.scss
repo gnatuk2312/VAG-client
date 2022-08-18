@@ -1,10 +1,12 @@
 .admin-title {
 	position: relative;
+	display: inline-flex;
+	align-items: center;
 	padding-left: 16px;
 	color: $text-light;
 	font-size: rem(19);
 	font-weight: 300;
-	line-height: 1.1em;
+	line-height: 1em;
 	text-transform: uppercase;
 
 	&::before {

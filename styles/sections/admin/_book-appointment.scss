@@ -157,9 +157,13 @@
 			border: none;
 		}
 
+		.form__input {
+			width: 190px;
+		}
+
 		.form__form-label-text {
 			@include screen-md {
-				max-width: 70px;
+				width: 70px;
 			}
 		}
 

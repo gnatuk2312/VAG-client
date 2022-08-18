@@ -31,3 +31,22 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br, textar
 		background-color: $background-green;
 	}
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(69, 73, 70, 0.8);
+	border-radius: 22px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9; 
+  border-radius: 22px;
+
+	&:hover {
+		background: #bebebe; 
+	}
+}
+

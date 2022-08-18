@@ -114,8 +114,6 @@
 
 	&__edit-client-wrapper {
 		position: relative;
-		width: 12px;
-		height: 12px;
 		margin-right: 36px;
 
 		button {
@@ -130,11 +128,40 @@
 		background-color: transparent;
 	}
 
+	&__submit-buttons {
+		display: flex;
+		align-items: center;
+		margin-right: 24px;
+	}
+
 	&__submit {
-		background-color: $light;
-		width: 13px;
-		height: 13px;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 14px;
+		height: 14px;
+		margin-right: 12px;
 		border-radius: 50px;
+		background-color: $light;
+		cursor: pointer;
+
+		svg {
+			width: 14px;
+			height: 14px;
+		}
+	}
+
+	&__cancel {
+		width: 14px;
+		height: 14px;
+		background-color: $red;
+		border-radius: 50px;
+		cursor: pointer;
+
+		svg {
+			width: 14px;
+			height: 14px;
+		}
 	}
 
 	&__favorite {

@@ -168,7 +168,11 @@
 		span {
 			position: absolute;
 			right: -6px;
-			padding: 3px 6px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			width: 22px;
+			height: 22px;
 			border-radius: 50%;
 			background-color: $background-green;
 			color: $text-light;

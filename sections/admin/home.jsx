@@ -36,6 +36,12 @@ const AdminHome = () => {
               <span>+2</span>
               <p>Нові записи онлайн</p>
             </div>
+            <Link href="/admin/clients/new-client" passHref>
+              <a className="admin-button admin-home__button-new-client" href="replace">
+                <AddBigIcon />
+                Створити клієнта
+              </a>
+            </Link>
           </div>
         </div>
         <div className="admin-home__right-content">

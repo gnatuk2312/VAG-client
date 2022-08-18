@@ -9,10 +9,12 @@ const TableItem = (props) => {
   const { _id, name, phone, email, carBrand, carModel, licensePlate, favorite } = client;
   return (
     <div className="table-item">
-      <div className="table-item__client">
-        <span className="table-item__avatar">{name.slice(0, 1)}</span>
-        <p className="table-item__name">{name}</p>
-      </div>
+      <Link href={`/admin/clients/${_id}`} passHref>
+        <a className="table-item__client" href="replace">
+          <span className="table-item__avatar">{name.slice(0, 1)}</span>
+          <p className="table-item__name">{name}</p>
+        </a>
+      </Link>
       <a href={`tel:${phone}`} className="table-item__phone-number">
         {phone}
       </a>

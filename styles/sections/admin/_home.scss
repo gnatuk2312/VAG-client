@@ -1,7 +1,8 @@
 .admin-home {
 	padding: 130px 16px 20px;
 	background-color: $background-dark;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	@include screen-sm {
 		margin-left: 166px;
@@ -81,7 +82,7 @@
 	&__new-appointments-hint {
 		display: flex;
 		align-items: center;
-		margin: 16px auto 0;
+		margin: 16px auto;
 		padding: 14px 44px 14px 14px;
 		background-color: #d9d9d9;
 		border-radius: 16px;
@@ -115,6 +116,24 @@
 			span {
 				margin-right: 38px;
 			}
+		}
+	}
+
+	&__button-new-client {
+		width: 284px;
+			
+		@include screen-md {
+			width: 100%;
+			padding: 9px 14px 9px 12px;
+			font-size: rem(15);
+
+			svg {
+				margin-right: 14px;
+			}
+		}
+
+		@include screen-lg {
+			font-size: rem(24);
 		}
 	}
 
@@ -162,11 +181,15 @@
 	}
 
 	&__appointments-wrapper {
-		max-height: calc(100vh - 74px);
+		max-height: 80vh;
 		overflow-y: auto;
 
 		@include screen-md {
-			max-height: calc(100vh - 114px);
+			max-height: 580px
+		}
+
+		@include screen-lg {
+			max-height: 760px
 		}
 	}
 
@@ -175,6 +198,7 @@
 		top: 20px;
 		right: 12px;
 		background-color: transparent;
+		cursor: pointer;
 
 		svg {
 			width: 16px;
