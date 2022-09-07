@@ -1,0 +1,36 @@
+.admin-login {
+	height: 100vh;
+	padding: 48px 0;
+	background-color: $background-dark;
+
+	&__input {
+		&:not(:last-child) {
+			margin-bottom: 12px;
+		}
+
+		@include screen-sm {
+			input {
+				width: 400px;
+				font-size: rem(18);
+			}
+		}
+	}
+
+	&__form {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin-top: 24px;
+	}
+
+	&__submit {
+		width: 100%;
+		margin-top: 12px;
+		padding: 8px;
+
+		@include screen-sm {
+			font-size: rem(16);
+		}
+	}
+}

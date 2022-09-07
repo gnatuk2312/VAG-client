@@ -12,7 +12,7 @@
 	transition: all 0.2s ease;
 
 	@include hover-supported {
-		&:hover {
+		&:hover, &:focus {
 			box-shadow: 2px 3px 10px $shadow-green;
 		}
 	}
