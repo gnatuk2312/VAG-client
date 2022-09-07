@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import cn from "classnames";
 import Link from "next/link";
+import Router from "next/router";
 
 import { GlobalContext } from "../../context/state";
 import HomeIcon from "../../public/icons/home-icon.svg";
@@ -13,7 +14,10 @@ const AdminDrawer = (props) => {
 
   const { setAdminLoggedOut } = useContext(GlobalContext);
 
-  const handleAdminLogOut = () => setAdminLoggedOut();
+  const handleAdminLogOut = () => {
+    Router.push("/admin");
+    setAdminLoggedOut();
+  };
 
   return (
     <section className={cn("admin-drawer", { "admin-drawer_is-open": isOpen })}>

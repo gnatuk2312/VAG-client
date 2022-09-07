@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import cn from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 import { GlobalContext } from "../../context/state";
 import useVerticalScrollProps from "../../hooks/useVerticalScrollProps";
@@ -20,7 +20,10 @@ const AdminNavigation = () => {
 
   const handleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const handleDrawerClose = () => setIsDrawerOpen(false);
-  const handleAdminLogOut = () => setAdminLoggedOut();
+  const handleAdminLogOut = () => {
+    Router.push("/admin");
+    setAdminLoggedOut();
+  };
 
   return (
     <>

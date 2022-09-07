@@ -16,7 +16,7 @@
 
 body {
 	font-family: 'HelveticaNeueCyr', sans-serif;
-	background-color: rgb(83, 87, 84);
+	background-color: #282828;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br, textarea {
@@ -39,7 +39,6 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, address, input, img, br, textar
 
 ::-webkit-scrollbar-track {
   background: rgb(83, 87, 84);
-	border-radius: 22px;
 }
 
 ::-webkit-scrollbar-thumb {
