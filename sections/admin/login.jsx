@@ -46,7 +46,7 @@ const AdminLogin = () => {
           </button>
         </form>
       </Container>
-      {loading && <Loading className="admin-login__loading" />}
+      <Loading className="admin-login__loading" isVisible={loading} />
     </section>
   );
 };
