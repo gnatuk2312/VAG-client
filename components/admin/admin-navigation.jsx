@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import cn from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import AdminDrawer from "./admin-drawer";
+import { GlobalContext } from "../../context/state";
 import useVerticalScrollProps from "../../hooks/useVerticalScrollProps";
+import AdminDrawer from "./admin-drawer";
 import HomeIcon from "../../public/icons/home-icon.svg";
 import AddIcon from "../../public/icons/add-icon.svg";
 import ClientsIcon from "../../public/icons/clients-icon.svg";
@@ -13,11 +14,13 @@ import ExitIcon from "../../public/icons/exit-icon.svg";
 const AdminNavigation = () => {
   const { asPath } = useRouter();
   const { isScrollUp, isScrolled } = useVerticalScrollProps();
+  const { setAdminLoggedOut } = useContext(GlobalContext);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const handleDrawerClose = () => setIsDrawerOpen(false);
+  const handleAdminLogOut = () => setAdminLoggedOut();
 
   return (
     <>
@@ -88,7 +91,7 @@ const AdminNavigation = () => {
                 </Link>
               </li>
             </ul>
-            <button type="button" className="admin-navigation__exit">
+            <button type="button" onClick={handleAdminLogOut} className="admin-navigation__exit">
               <ExitIcon />
               Вийти
             </button>

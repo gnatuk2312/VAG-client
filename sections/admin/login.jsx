@@ -4,18 +4,23 @@ import { GlobalContext } from "../../context/state";
 import AdminInput from "../../components/admin/input";
 import Container from "../../components/container";
 import AdminTitle from "../../components/admin/admin-title";
+import Loading from "../../components/admin/loading";
 
 const AdminLogin = () => {
   const { setAdminLoggedIn } = useContext(GlobalContext);
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setLoading(true);
     setTimeout(() => {
       setAdminLoggedIn("TOKEN");
+    }, 1000);
+    setTimeout(() => {
+      setLoading(false);
     }, 1000);
   };
 
@@ -41,6 +46,7 @@ const AdminLogin = () => {
           </button>
         </form>
       </Container>
+      {loading && <Loading className="admin-login__loading" />}
     </section>
   );
 };
