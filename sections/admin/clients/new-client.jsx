@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 import AdminTitle from "../../../components/admin/admin-title";
 import AdminInput from "../../../components/admin/input";
+import { createClient } from "../../../api/clients";
 
 const AdminNewClient = () => {
   const [name, setName] = useState("");
@@ -16,8 +17,33 @@ const AdminNewClient = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    toast.success("Успішно");
-    setTimeout(() => Router.push("/admin/clients"), 500);
+    const dataNewClient = { name, carBrand, phoneNumber, carModel, email, licensePlate };
+
+    const pattern = /^[a-z]+\s[a-z]+$/i;
+
+    if (pattern.test(name)) {
+      createClient(dataNewClient)
+        .then((resp) => {
+          if (resp.status === 201) {
+            toast.success("Клієнт успішно створений!");
+            setTimeout(() => Router.push("/admin/clients"), 500);
+            return;
+          }
+          return toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+          );
+        })
+        .catch((err) => {
+          if (err.code === 400)
+            return toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+          toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`,
+          );
+        });
+      return;
+    }
+
+    toast.error('Поле "Імʼя та Фамілія" є обовʼязкові! Будь-ласка, заповніть їх.');
   };
 
   return (
