@@ -1,23 +1,61 @@
 import { useState } from "react";
-import Router from "next/router";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
 import AdminTitle from "../../../components/admin/admin-title";
 import AdminInput from "../../../components/admin/input";
+import { createClient } from "../../../api/clients";
 
 const AdminNewClient = () => {
   const [name, setName] = useState("");
   const [carBrand, setCarBrand] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("380");
+  const [phone, setPhone] = useState("380");
   const [carModel, setCarModel] = useState("");
   const [email, setEmail] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
 
+  const clearForm = () => {
+    setName("");
+    setPhone("380");
+    setCarModel("");
+    setCarBrand("");
+    setEmail("");
+    setLicensePlate("");
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    toast.success("Успішно");
-    setTimeout(() => Router.push("/admin/clients"), 500);
+    const dataNewClient = { name, carBrand, phone, carModel, email, licensePlate };
+
+    if (name.trim() !== "") {
+      const requestBody = {};
+
+      for (const property in dataNewClient) {
+        if (dataNewClient[property]) requestBody[property] = dataNewClient[property];
+      }
+
+      createClient(requestBody)
+        .then((resp) => {
+          if (resp.status === 201) {
+            toast.success("Клієнт успішно створений!");
+            clearForm();
+            return;
+          }
+          return toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+          );
+        })
+        .catch((err) => {
+          if (err.code === 400)
+            return toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+          toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`,
+          );
+        });
+      return;
+    }
+
+    toast.error('Поле "Імʼя та Прізвище" є обовʼязкові! Будь-ласка, заповніть їх.');
   };
 
   return (
@@ -40,12 +78,7 @@ const AdminNewClient = () => {
               onChange={setCarBrand}
               dropdown={["Skoda", "Audi", "Wolksvagen", "Seat"]}
             />
-            <AdminInput
-              label="Телефон"
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              isPhoneNumber
-            />
+            <AdminInput label="Телефон" value={phone} onChange={setPhone} isPhoneNumber />
             <AdminInput label="Модель" value={carModel} onChange={setCarModel} />
             <AdminInput label="Email" value={email} onChange={setEmail} />
             <AdminInput label="Номерний знак" value={licensePlate} onChange={setLicensePlate} />
