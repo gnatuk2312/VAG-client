@@ -1,10 +1,8 @@
 import axios from "./axios-instance";
 
-const createClient = async (dataNewClient) => {
+const createClient = async (requestBody) => {
 	try {
-		const { name, phoneNumber: phone, carBrand, carModel, licensePlate, email } = dataNewClient;
-		const reqBody = { name, phone, carBrand, carModel, licensePlate, email };
-		const response = await axios.post("/clients", reqBody);
+		const response = await axios.post("/clients", requestBody);
 		return response;
 	} catch (err) {
 		const error = new Error(err?.response?.data);

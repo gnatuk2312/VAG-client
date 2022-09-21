@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Router from "next/router";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -10,23 +9,36 @@ import { createClient } from "../../../api/clients";
 const AdminNewClient = () => {
   const [name, setName] = useState("");
   const [carBrand, setCarBrand] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("380");
+  const [phone, setPhone] = useState("380");
   const [carModel, setCarModel] = useState("");
   const [email, setEmail] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
 
+  const clearForm = () => {
+    setName("");
+    setPhone("380");
+    setCarModel("");
+    setCarBrand("");
+    setEmail("");
+    setLicensePlate("");
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const dataNewClient = { name, carBrand, phoneNumber, carModel, email, licensePlate };
+    const dataNewClient = { name, carBrand, phone, carModel, email, licensePlate };
 
-    const pattern = /^[a-z]+\s[a-z]+$/i;
+    if (name.trim() !== "") {
+      const requestBody = {};
 
-    if (pattern.test(name)) {
-      createClient(dataNewClient)
+      for (const property in dataNewClient) {
+        if (dataNewClient[property]) requestBody[property] = dataNewClient[property];
+      }
+
+      createClient(requestBody)
         .then((resp) => {
           if (resp.status === 201) {
             toast.success("Клієнт успішно створений!");
-            setTimeout(() => Router.push("/admin/clients"), 500);
+            clearForm();
             return;
           }
           return toast.error(
@@ -43,7 +55,7 @@ const AdminNewClient = () => {
       return;
     }
 
-    toast.error('Поле "Імʼя та Фамілія" є обовʼязкові! Будь-ласка, заповніть їх.');
+    toast.error('Поле "Імʼя та Прізвище" є обовʼязкові! Будь-ласка, заповніть їх.');
   };
 
   return (
@@ -66,12 +78,7 @@ const AdminNewClient = () => {
               onChange={setCarBrand}
               dropdown={["Skoda", "Audi", "Wolksvagen", "Seat"]}
             />
-            <AdminInput
-              label="Телефон"
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-              isPhoneNumber
-            />
+            <AdminInput label="Телефон" value={phone} onChange={setPhone} isPhoneNumber />
             <AdminInput label="Модель" value={carModel} onChange={setCarModel} />
             <AdminInput label="Email" value={email} onChange={setEmail} />
             <AdminInput label="Номерний знак" value={licensePlate} onChange={setLicensePlate} />
