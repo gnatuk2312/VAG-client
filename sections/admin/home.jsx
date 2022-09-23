@@ -3,6 +3,9 @@ import Link from "next/link";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
+import toast from "react-hot-toast";
+import moment from "moment";
+import "moment/locale/uk";
 
 import { isWeekday } from "../../constants/common";
 import LocalDate from "../../components/admin/local-date";
@@ -10,15 +13,53 @@ import Appointment from "../../components/admin/appointment";
 import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
+import { getAllAppointments /* , getAppointmentsByDate */ } from "../../api/appointments";
 
 registerLocale("uk", uk);
+moment.locale("uk");
+
+/*
+ * TODO: Write code for making request after:
+ * 1. Change date (byDate).
+ * 2. Refresh date/Loaded page (all).
+ * 3. Pagination just for all.
+ */
 
 const AdminHome = () => {
   const [datePickerDate, setDatePickerDate] = useState(new Date());
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    setDatePickerDate(new Date());
+    getAllAppointments(1, 10)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setAppointments(resp.data.appointments);
+          return;
+        }
+        return toast.error(
+          `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+        );
+      })
+      .catch((err) => {
+        toast.error(`У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`);
+      });
   }, []);
+
+  // useEffect(() => {
+  // getAppointments(1, 10)
+  //   .then((resp) => {
+  //     if (resp.status === 200) {
+  //       setAppointments(resp.data.appointments);
+  //       return;
+  //     }
+  //     return toast.error(
+  //       `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+  //     );
+  //   })
+  //   .catch((err) => {
+  //     toast.error(`У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`);
+  //   });
+  // }, [datePickerDate]);
 
   return (
     <section className="admin-home">
@@ -50,19 +91,16 @@ const AdminHome = () => {
               <RefreshIcon />
             </button>
             <div className="admin-home__appointments-wrapper">
-              <p className="admin-home__appointments-date">6 вересня 2022</p>
-              <Appointment state="new" />
-              <Appointment state="old" />
-              <Appointment state="now" />
-              <Appointment state="new" />
-              <Appointment state="old" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
+              {appointments.map(({ appointments, _id: date }) => (
+                <div key={date}>
+                  <p className="admin-home__appointments-date">
+                    {moment(date).format("Do MMMM YYYY")}
+                  </p>
+                  {appointments.map(({ hour, name, phone, _id: id }) => (
+                    <Appointment hour={hour} name={name} phone={phone} state="new" key={id} />
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
           <div>
