@@ -33,4 +33,15 @@ const updateClientByID = async (id, requestBody) => {
 	}
 };
 
-export { createClient, getClientByID, updateClientByID };
+const deleteClientByID = async (id) => {
+	try {
+		const response = await axios.delete(`/clients/${id}`);
+		return response;
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
+export { createClient, getClientByID, updateClientByID, deleteClientByID };
