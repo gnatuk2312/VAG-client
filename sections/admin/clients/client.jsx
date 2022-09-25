@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import cn from "classnames";
 import Link from "next/link";
+import Router from "next/router";
 import toast from "react-hot-toast";
 
 import AdminTitle from "../../../components/admin/admin-title";
@@ -13,7 +14,7 @@ import AddBigIconLight from "../../../public/icons/add-big-icon-light.svg";
 import EditIcon from "../../../public/icons/edit-icon.svg";
 import DoneIconGreen from "../../../public/icons/done-icon-green.svg";
 import CancelIcon from "../../../public/icons/close-icon.svg";
-import { getClientByID, updateClientByID } from "../../../api/clients";
+import { deleteClientByID, getClientByID, updateClientByID } from "../../../api/clients";
 import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
 
 const AdminClient = (props) => {
@@ -26,6 +27,7 @@ const AdminClient = (props) => {
   const [clientDisableEditing, setClientDisableEditing] = useState(true);
   const [isVisitModalOpen, setVisitModalOpen] = useState(false);
   const [visitModalOptions, setVisitModalOptions] = useState({});
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [pending, setPending] = useState(false);
 
@@ -42,7 +44,7 @@ const AdminClient = (props) => {
     setClientDisableEditing(false);
     toast.success("Ви перейшли в режим РЕДАГУВАННЯ");
   };
-  const handleSubmit = (event) => {
+  const handleSubmitUpdate = (event) => {
     event.preventDefault();
 
     const requestBody = { ...client };
@@ -70,7 +72,26 @@ const AdminClient = (props) => {
     setClientDisableEditing(true);
   };
 
-  const handleCancel = () => {
+  const handleSubmitDelete = () => {
+    setPending(true);
+    deleteClientByID(clientID)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setPending(false);
+          toast.success("Клієнта успішно видалено");
+          setTimeout(() => Router.push("/admin/clients"), 300);
+          return;
+        }
+        setPending(false);
+        return toast.error(`Помилка при видаленні клієнта. ${resp?.message}`);
+      })
+      .catch((err) => {
+        setPending(false);
+        toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+      });
+  };
+
+  const handleCancelUpdate = () => {
     setClient(initialClient);
     setClientDisableEditing(true);
     toast.error("Відміна редагування");
@@ -86,6 +107,8 @@ const AdminClient = (props) => {
     setVisitModalOptions({ variant: "add", clientId: client._id, visit: null });
     setVisitModalOpen(true);
   };
+  const handleOpenDeleteModal = () => setIsDeleteModalOpen(true);
+  const handleCloseDeleteModal = () => setIsDeleteModalOpen(false);
 
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
 
@@ -114,6 +137,31 @@ const AdminClient = (props) => {
     <>
       <section className="admin-client">
         <div className="admin-client__container">
+          <div
+            className={cn("admin-client__delete-modal modal", {
+              "modal_is-open": isDeleteModalOpen,
+            })}
+          >
+            <div className="modal__body">
+              <p className="modal__title">Ви впевнені, що хочете видалити клієнта?</p>
+              <div className="modal__buttons">
+                <button
+                  onClick={handleSubmitDelete}
+                  type="button"
+                  className="modal__button modal__button_submit"
+                >
+                  Видалити
+                </button>
+                <button
+                  onClick={handleCloseDeleteModal}
+                  type="button"
+                  className="modal__button modal__button_cancel"
+                >
+                  Скасувати
+                </button>
+              </div>
+            </div>
+          </div>
           <Loading isVisible={pending} />
           <div className="admin-client__header">
             <AdminTitle title="Клієнт" />
@@ -131,6 +179,13 @@ const AdminClient = (props) => {
               >
                 <AddBigIcon />
                 Додати новий запис
+              </button>
+              <button
+                onClick={handleOpenDeleteModal}
+                type="button"
+                className="admin-button admin-client__delete-client"
+              >
+                Видалити клієнта
               </button>
             </div>
           </div>
@@ -203,10 +258,18 @@ const AdminClient = (props) => {
                 )}
                 {!clientDisableEditing && (
                   <div className="admin-client__submit-buttons">
-                    <button onClick={handleSubmit} type="submit" className="admin-client__submit">
+                    <button
+                      onClick={handleSubmitUpdate}
+                      type="submit"
+                      className="admin-client__submit"
+                    >
                       <DoneIconGreen />
                     </button>
-                    <button onClick={handleCancel} type="button" className="admin-client__cancel">
+                    <button
+                      onClick={handleCancelUpdate}
+                      type="button"
+                      className="admin-client__cancel"
+                    >
                       <CancelIcon />
                     </button>
                   </div>
