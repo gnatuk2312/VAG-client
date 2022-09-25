@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import AdminTitle from "../../../components/admin/admin-title";
 import AdminInput from "../../../components/admin/input";
 import { createClient } from "../../../api/clients";
+import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
 
 const AdminNewClient = () => {
   const [name, setName] = useState("");
@@ -28,11 +29,7 @@ const AdminNewClient = () => {
     const dataNewClient = { name, carBrand, phone, carModel, email, licensePlate };
 
     if (name.trim() !== "") {
-      const requestBody = {};
-
-      for (const property in dataNewClient) {
-        if (dataNewClient[property]) requestBody[property] = dataNewClient[property];
-      }
+      const requestBody = removeEmptyKeysInObject(dataNewClient);
 
       createClient(requestBody)
         .then((resp) => {

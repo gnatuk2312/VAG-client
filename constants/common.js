@@ -30,7 +30,7 @@ export const isWeekday = (date) => {
 
 export const clients = [
 	{
-		_id: "1",
+		_id: "63221566aec9d1f34e515393",
 		name: "Вячеслав Грабовський",
 		phone: "+38 097 157 50 12",
 		email: "Vjcic 2000@gmail.com",
@@ -40,7 +40,7 @@ export const clients = [
 		favorite: true,
 	},
 	{
-		_id: "2",
+		_id: "63308deb7fa4c15e2cf6834d",
 		name: "Вячеслав Грабовський",
 		phone: "+38 097 157 50 12",
 		email: "Vjcic 20fgfdggdfdgdfg00@gmail.com",

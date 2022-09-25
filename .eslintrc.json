@@ -49,6 +49,7 @@
 		"no-underscore-dangle": "off",
 		"no-useless-catch": "off",
 		"prefer-const": "off",
-		"react/jsx-no-constructed-context-values": "off"
+		"react/jsx-no-constructed-context-values": "off",
+		"no-param-reassign": "off"
 	}
 }
