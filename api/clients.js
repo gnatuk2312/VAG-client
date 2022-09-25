@@ -22,4 +22,15 @@ const getClientByID = async (id) => {
 	}
 };
 
-export { createClient, getClientByID };
+const updateClientByID = async (id, requestBody) => {
+	try {
+		const response = await axios.put(`/clients/${id}`, requestBody);
+		return response;
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
+export { createClient, getClientByID, updateClientByID };

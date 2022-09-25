@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 import AdminTitle from "../../../components/admin/admin-title";
 import AdminClientVisitModal from "../../../components/admin/clients/client-visit-modal";
-import { clients } from "../../../constants/common";
+import Loading from "../../../components/admin/loading";
 import { formatPhoneNumber } from "../../../helpers/format-phone-number";
 import getScrollBarWidth from "../../../helpers/get-scrollbar-width";
 import AddBigIcon from "../../../public/icons/add-big-icon.svg";
@@ -13,34 +13,21 @@ import AddBigIconLight from "../../../public/icons/add-big-icon-light.svg";
 import EditIcon from "../../../public/icons/edit-icon.svg";
 import DoneIconGreen from "../../../public/icons/done-icon-green.svg";
 import CancelIcon from "../../../public/icons/close-icon.svg";
-import { getClientByID } from "../../../api/clients";
+import { getClientByID, updateClientByID } from "../../../api/clients";
+import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
 
 const AdminClient = (props) => {
   const { clientID } = props;
 
-  const clientData = clients[0];
   const [initialClient, setInitialClient] = useState(null);
 
   const [client, setClient] = useState(null);
 
-  useEffect(() => {
-    getClientByID(clientID)
-      .then((resp) => {
-        if (resp.status === 200) {
-          setInitialClient(resp.data.client);
-          setClient(resp.data.client);
-          return;
-        }
-        return toast.error(`Помилка у завантаженні даних про клієнта. ${resp?.message}`);
-      })
-      .catch((err) => {
-        toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
-      });
-  }, []);
-
   const [clientDisableEditing, setClientDisableEditing] = useState(true);
   const [isVisitModalOpen, setVisitModalOpen] = useState(false);
   const [visitModalOptions, setVisitModalOptions] = useState({});
+
+  const [pending, setPending] = useState(false);
 
   const handleClientInputs = (event) => {
     setClient({ ...client, [event.target.name]: event.target.value });
@@ -57,9 +44,30 @@ const AdminClient = (props) => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // update client
+
+    const requestBody = { ...client };
+    delete requestBody.createdAt;
+    delete requestBody.updatedAt;
+    delete requestBody._id;
+    const requestBodyNoEmptyValues = removeEmptyKeysInObject(requestBody);
+    setPending(true);
+    updateClientByID(clientID, requestBodyNoEmptyValues)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setInitialClient(resp.data.client);
+          setClient(resp.data.client);
+          setPending(false);
+          toast.success("Успішно редаговано");
+          return;
+        }
+        setPending(false);
+        return toast.error(`Помилка при редагуванні клієнта. ${resp?.message}`);
+      })
+      .catch((err) => {
+        setPending(false);
+        toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+      });
     setClientDisableEditing(true);
-    toast.success("Успішно редаговано");
   };
 
   const handleCancel = () => {
@@ -83,14 +91,30 @@ const AdminClient = (props) => {
 
   useEffect(() => {
     setScrollbarWidth(getScrollBarWidth());
-    setInitialClient(clientData);
-    setClient(clientData);
+
+    setPending(true);
+    getClientByID(clientID)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setInitialClient(resp.data.client);
+          setClient(resp.data.client);
+          setPending(false);
+          return;
+        }
+        setPending(false);
+        return toast.error(`Помилка у завантаженні даних про клієнта. ${resp?.message}`);
+      })
+      .catch((err) => {
+        setPending(false);
+        toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+      });
   }, []);
 
   return (
     <>
       <section className="admin-client">
         <div className="admin-client__container">
+          <Loading isVisible={pending} />
           <div className="admin-client__header">
             <AdminTitle title="Клієнт" />
             <div className="admin-client__header-buttons">
