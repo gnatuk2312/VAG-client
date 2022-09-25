@@ -13,12 +13,30 @@ import AddBigIconLight from "../../../public/icons/add-big-icon-light.svg";
 import EditIcon from "../../../public/icons/edit-icon.svg";
 import DoneIconGreen from "../../../public/icons/done-icon-green.svg";
 import CancelIcon from "../../../public/icons/close-icon.svg";
+import { getClientByID } from "../../../api/clients";
 
-const AdminClient = () => {
+const AdminClient = (props) => {
+  const { clientID } = props;
+
   const clientData = clients[0];
   const [initialClient, setInitialClient] = useState(null);
 
   const [client, setClient] = useState(null);
+
+  useEffect(() => {
+    getClientByID(clientID)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setInitialClient(resp.data.client);
+          setClient(resp.data.client);
+          return;
+        }
+        return toast.error(`Помилка у завантаженні даних про клієнта. ${resp?.message}`);
+      })
+      .catch((err) => {
+        toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+      });
+  }, []);
 
   const [clientDisableEditing, setClientDisableEditing] = useState(true);
   const [isVisitModalOpen, setVisitModalOpen] = useState(false);
