@@ -16,107 +16,14 @@ export const adminHours = [
 ];
 
 export const searchClientsDropDownConfig = [
-	"Ім'я",
-	"Телефон",
-	"Вибране",
-	"Марка авто",
-	"Номерний знак",
+	{ displayName: "Ім'я", field: "name" },
+	{ displayName: "Телефон", field: "phone" },
+	{ displayName: "Марка авто", field: "carBrand" },
+	{ displayName: "Модель авто", field: "carModel" },
+	{ displayName: "Номерний знак", field: "licensePlate" },
 ];
 
 export const isWeekday = (date) => {
 	const day = date.getDay();
 	return day !== 0 && day !== 6;
 };
-
-export const clients = [
-	{
-		_id: "63221566aec9d1f34e515393",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: true,
-	},
-	{
-		_id: "63308deb7fa4c15e2cf6834d",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 20fgfdggdfdgdfg00@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: true,
-	},
-	{
-		_id: "3",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Aufgfdgdfgdi",
-		carModel: "A43536",
-		licensePlate: "BO 0967 CC",
-		favorite: true,
-	},
-	{
-		_id: "4",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: false,
-	},
-	{
-		_id: "5",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: false,
-	},
-	{
-		_id: "6",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: true,
-	},
-	{
-		_id: "7",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: true,
-	},
-	{
-		_id: "8",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: false,
-	},
-	{
-		_id: "9",
-		name: "Вячеслав Грабовський",
-		phone: "+38 097 157 50 12",
-		email: "Vjcic 2000@gmail.com",
-		carBrand: "Audi",
-		carModel: "A6",
-		licensePlate: "BO 0967 CC",
-		favorite: true,
-	},
-];
