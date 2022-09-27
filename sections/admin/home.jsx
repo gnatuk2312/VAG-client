@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import moment from "moment";
 import "moment/locale/uk";
 import { useInView } from "react-intersection-observer";
+import { getAllAppointments, getAppointmentsByDate } from "../../api/appointments";
 
 import { isWeekday } from "../../constants/common";
 import LocalDate from "../../components/admin/local-date";
@@ -14,7 +15,7 @@ import Appointment from "../../components/admin/appointment";
 import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
-import { getAllAppointments, getAppointmentsByDate } from "../../api/appointments";
+import Loading from "../../components/admin/loading";
 
 registerLocale("uk", uk);
 moment.locale("uk");
@@ -28,6 +29,26 @@ const AdminHome = () => {
   const [requestedBy, setRequestedBy] = useState("refresh");
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+
+  const stateOfTheAppointment = (appointmentDate, createdAt) => {
+    const lastDate = Number(JSON.parse(localStorage.getItem("admin-last-time")));
+    const appointmentDateUNIX = new Date(appointmentDate).getTime();
+    const createdAtUNIX = new Date(createdAt).getTime();
+
+    if (appointmentDateUNIX > Date.now() && createdAtUNIX < lastDate) {
+      return "now";
+    }
+    if (createdAtUNIX > lastDate) {
+      return "new";
+    }
+    return "old";
+  };
+
+  useEffect(() => {
+    setInterval(() => {
+      localStorage.setItem("admin-last-time", JSON.stringify(Date.now()));
+    }, 60000);
+  }, []);
 
   useEffect(() => {
     if (entry?.isIntersecting) setPage((currPage) => currPage + 1);
@@ -75,7 +96,7 @@ const AdminHome = () => {
           );
         });
     }
-  }, [selectedDate, page]);
+  }, [page, requestedBy, selectedDate]);
 
   return (
     <section className="admin-home">
@@ -122,8 +143,14 @@ const AdminHome = () => {
                     <p className="admin-home__appointments-date">
                       {moment(date).format("Do MMMM YYYY")}
                     </p>
-                    {appointments.map(({ hour, name, phone, _id: id }) => (
-                      <Appointment hour={hour} name={name} phone={phone} state="new" key={id} />
+                    {appointments.map(({ date, createdAt, hour, name, phone, _id: id }) => (
+                      <Appointment
+                        hour={hour}
+                        name={name}
+                        phone={phone}
+                        state={stateOfTheAppointment(date, createdAt)}
+                        key={id}
+                      />
                     ))}
                   </div>
                 ))
@@ -132,13 +159,21 @@ const AdminHome = () => {
                   <p className="admin-home__appointments-date">
                     {moment(selectedDate).format("Do MMMM YYYY")}
                   </p>
-                  {appointmentsByDate.map(({ hour, name, phone, _id: id }) => (
-                    <Appointment hour={hour} name={name} phone={phone} state="new" key={id} />
+                  {appointmentsByDate.map(({ date, createdAt, hour, name, phone, _id: id }) => (
+                    <Appointment
+                      hour={hour}
+                      name={name}
+                      phone={phone}
+                      state={stateOfTheAppointment(date, createdAt)}
+                      key={id}
+                    />
                   ))}
                 </>
               )}
-              {appointments.length > 0 && <div ref={ref} />}
-              {isLoading && <h1>Loading...</h1>}
+              {appointments.length > 0 && (
+                <div style={{ width: "30px", height: "30px" }} ref={ref} />
+              )}
+              <Loading isVisible={isLoading} />
             </div>
           </div>
           <div>
@@ -148,6 +183,7 @@ const AdminHome = () => {
                 onChange={(newDate) => {
                   setSelectedDate(newDate);
                   setRequestedBy("calendar");
+                  setPage(1);
                 }}
                 inline
                 locale="uk"
