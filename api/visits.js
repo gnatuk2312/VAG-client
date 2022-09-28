@@ -22,4 +22,15 @@ const getVisitByID = async (id) => {
 	}
 };
 
-export { createVisit, getVisitByID };
+const deleteVisitByID = async (id) => {
+	try {
+		const response = await axios.delete(`/visits/${id}`);
+		return response;
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
+export { createVisit, getVisitByID, deleteVisitByID };
