@@ -3,6 +3,11 @@ import Link from "next/link";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
+import toast from "react-hot-toast";
+import moment from "moment";
+import "moment/locale/uk";
+import { useInView } from "react-intersection-observer";
+import { getAllAppointments, getAppointmentsByDate } from "../../api/appointments";
 
 import { isWeekday } from "../../constants/common";
 import LocalDate from "../../components/admin/local-date";
@@ -10,15 +15,88 @@ import Appointment from "../../components/admin/appointment";
 import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
+import Loading from "../../components/admin/loading";
 
 registerLocale("uk", uk);
+moment.locale("uk");
 
 const AdminHome = () => {
-  const [datePickerDate, setDatePickerDate] = useState(new Date());
+  const { ref, inView, entry } = useInView({ triggerOnce: true });
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [appointments, setAppointments] = useState([]);
+  const [appointmentsByDate, setAppointmentsByDate] = useState([]);
+  const [requestedBy, setRequestedBy] = useState("refresh");
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const stateOfTheAppointment = (appointmentDate, createdAt) => {
+    const lastDate = Number(JSON.parse(localStorage.getItem("admin-last-time")));
+    const appointmentDateUNIX = new Date(appointmentDate).getTime();
+    const createdAtUNIX = new Date(createdAt).getTime();
+
+    if (appointmentDateUNIX > Date.now() && createdAtUNIX < lastDate) {
+      return "now";
+    }
+    if (createdAtUNIX > lastDate) {
+      return "new";
+    }
+    return "old";
+  };
 
   useEffect(() => {
-    setDatePickerDate(new Date());
+    setInterval(() => {
+      localStorage.setItem("admin-last-time", JSON.stringify(Date.now()));
+    }, 60000);
   }, []);
+
+  useEffect(() => {
+    if (entry?.isIntersecting) setPage((currPage) => currPage + 1);
+  }, [inView]);
+
+  useEffect(() => {
+    if (requestedBy === "refresh") {
+      setIsLoading(true);
+      getAllAppointments(page, 10)
+        .then((resp) => {
+          setIsLoading(false);
+          if (resp.status === 200) {
+            setAppointmentsByDate([]);
+            setAppointments((currAppointments) => [...currAppointments, ...resp.data.appointments]);
+            return;
+          }
+          return toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+          );
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`,
+          );
+        });
+    } else if (requestedBy === "calendar") {
+      setIsLoading(true);
+      getAppointmentsByDate(moment(selectedDate).format("YYYY-MM-DD"))
+        .then((resp) => {
+          setIsLoading(false);
+          if (resp.status === 200) {
+            setAppointments([]);
+            setAppointmentsByDate(resp.data.appointments);
+            return;
+          }
+          return toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+          );
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`,
+          );
+        });
+    }
+  }, [page, requestedBy, selectedDate]);
 
   return (
     <section className="admin-home">
@@ -46,30 +124,67 @@ const AdminHome = () => {
         </div>
         <div className="admin-home__right-content">
           <div className="admin-home__appointments">
-            <button type="button" className="admin-home__appointments-refresh">
+            <button
+              type="button"
+              className="admin-home__appointments-refresh"
+              onClick={() => {
+                setSelectedDate(new Date());
+                setRequestedBy("refresh");
+                setAppointments([]);
+                setPage(1);
+              }}
+            >
               <RefreshIcon />
             </button>
             <div className="admin-home__appointments-wrapper">
-              <p className="admin-home__appointments-date">6 вересня 2022</p>
-              <Appointment state="new" />
-              <Appointment state="old" />
-              <Appointment state="now" />
-              <Appointment state="new" />
-              <Appointment state="old" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
-              <Appointment state="now" />
+              {appointments.length > 0 ? (
+                appointments.map(({ appointments, _id: date }) => (
+                  <div key={date}>
+                    <p className="admin-home__appointments-date">
+                      {moment(date).format("Do MMMM YYYY")}
+                    </p>
+                    {appointments.map(({ date, createdAt, hour, name, phone, _id: id }) => (
+                      <Appointment
+                        hour={hour}
+                        name={name}
+                        phone={phone}
+                        state={stateOfTheAppointment(date, createdAt)}
+                        key={id}
+                      />
+                    ))}
+                  </div>
+                ))
+              ) : (
+                <>
+                  <p className="admin-home__appointments-date">
+                    {moment(selectedDate).format("Do MMMM YYYY")}
+                  </p>
+                  {appointmentsByDate.map(({ date, createdAt, hour, name, phone, _id: id }) => (
+                    <Appointment
+                      hour={hour}
+                      name={name}
+                      phone={phone}
+                      state={stateOfTheAppointment(date, createdAt)}
+                      key={id}
+                    />
+                  ))}
+                </>
+              )}
+              {appointments.length > 0 && (
+                <div style={{ width: "30px", height: "30px" }} ref={ref} />
+              )}
+              <Loading isVisible={isLoading} />
             </div>
           </div>
           <div>
             <div className="admin-home__calendar admin-calendar">
               <DatePicker
-                selected={datePickerDate}
-                onChange={(newDate) => setDatePickerDate(newDate)}
+                selected={selectedDate}
+                onChange={(newDate) => {
+                  setSelectedDate(newDate);
+                  setRequestedBy("calendar");
+                  setPage(1);
+                }}
                 inline
                 locale="uk"
                 filterDate={isWeekday}
