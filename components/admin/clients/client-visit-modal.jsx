@@ -8,7 +8,7 @@ import AdminInput from "../input";
 import Loading from "../loading";
 import CloseIcon from "../../../public/icons/close-icon.svg";
 import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
-import { createVisit, getVisitByID, deleteVisitByID } from "../../../api/visits";
+import { createVisit, getVisitByID, deleteVisitByID, updateVisitByID } from "../../../api/visits";
 
 const AdminClientVisitModal = (props) => {
   const { options, isOpen, onCloseVisitModal } = props;
@@ -90,7 +90,26 @@ const AdminClientVisitModal = (props) => {
   };
   const handleSubmitEdit = (event) => {
     event.preventDefault();
-    toast.success("Візит успішно редаговано");
+    setPending(true);
+    const requestBody = { ...clientVisit };
+    delete requestBody.createdAt;
+    delete requestBody.updatedAt;
+    delete requestBody._id;
+    updateVisitByID(id, removeEmptyKeysInObject(requestBody))
+      .then((resp) => {
+        if (resp.status === 200) {
+          setClientVisit(resp.data.visit);
+          toast.success("Успішно редаговано");
+          return;
+        }
+        return toast.error(
+          `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+        );
+      })
+      .catch((err) => {
+        toast.error(`У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`);
+      })
+      .finally(() => setPending(false));
   };
   const handleDeleteVisit = () => {
     setPending(true);
