@@ -320,7 +320,7 @@ const AdminClient = (props) => {
                 <p className="client-visits__text client-visits__text_price">499</p>
                 <p className="client-visits__text client-visits__text_status">Виконано</p>
                 <button
-                  onClick={() => handleEditVisit("id")}
+                  onClick={() => handleEditVisit("63346805f66561770efaaed7")}
                   type="button"
                   className="client-visits__edit-visit"
                 >

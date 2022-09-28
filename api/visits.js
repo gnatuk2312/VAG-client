@@ -11,4 +11,15 @@ const createVisit = async (requestBody) => {
 	}
 };
 
-export { createVisit };
+const getVisitByID = async (id) => {
+	try {
+		const response = await axios.get(`/visits/${id}`);
+		return response;
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
+export { createVisit, getVisitByID };
