@@ -8,11 +8,11 @@ import AdminInput from "../input";
 import Loading from "../loading";
 import CloseIcon from "../../../public/icons/close-icon.svg";
 import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
-import { createVisit } from "../../../api/visits";
+import { createVisit, getVisitByID } from "../../../api/visits";
 
 const AdminClientVisitModal = (props) => {
   const { options, isOpen, onCloseVisitModal } = props;
-  const { variant, clientId } = options;
+  const { variant, clientId, id } = options;
 
   const [clientVisit, setClientVisit] = useState({
     date: "",
@@ -47,6 +47,24 @@ const AdminClientVisitModal = (props) => {
   useEffect(() => {
     if (variant === "add" && clientId) {
       clearForm();
+    } else if (isOpen === true && variant === "edit" && id) {
+      setPending(true);
+      getVisitByID(id)
+        .then((resp) => {
+          if (resp.status === 200) {
+            setClientVisit(resp.data.visit);
+            return;
+          }
+          return toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+          );
+        })
+        .catch((err) => {
+          toast.error(
+            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`,
+          );
+        })
+        .finally(() => setPending(false));
     }
   }, [isOpen]);
 
