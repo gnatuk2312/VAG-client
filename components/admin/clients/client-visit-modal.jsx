@@ -8,7 +8,7 @@ import AdminInput from "../input";
 import Loading from "../loading";
 import CloseIcon from "../../../public/icons/close-icon.svg";
 import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
-import { createVisit, getVisitByID } from "../../../api/visits";
+import { createVisit, getVisitByID, deleteVisitByID } from "../../../api/visits";
 
 const AdminClientVisitModal = (props) => {
   const { options, isOpen, onCloseVisitModal } = props;
@@ -48,6 +48,7 @@ const AdminClientVisitModal = (props) => {
     if (variant === "add" && clientId) {
       clearForm();
     } else if (isOpen === true && variant === "edit" && id) {
+      clearForm();
       setPending(true);
       getVisitByID(id)
         .then((resp) => {
@@ -91,6 +92,24 @@ const AdminClientVisitModal = (props) => {
     event.preventDefault();
     toast.success("Візит успішно редаговано");
   };
+  const handleDeleteVisit = () => {
+    setPending(true);
+    deleteVisitByID(id)
+      .then((resp) => {
+        if (resp.status === 200) {
+          toast.success("Візит успішно видалено!");
+          onCloseVisitModal();
+          return;
+        }
+        return toast.error(
+          `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+        );
+      })
+      .catch((err) => {
+        toast.error(`У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`);
+      })
+      .finally(() => setPending(false));
+  };
 
   return (
     <div className={cn("client-visit-modal", { "client-visit-modal_is-open": isOpen })}>
@@ -99,7 +118,11 @@ const AdminClientVisitModal = (props) => {
         <AdminTitle title="Oпис виконаних робіт" />
         <div className="client-visit-modal__actions">
           {variant === "edit" && (
-            <button type="button" className="client-visit-modal__delete">
+            <button
+              type="button"
+              onClick={handleDeleteVisit}
+              className="client-visit-modal__delete"
+            >
               Видалити
             </button>
           )}
