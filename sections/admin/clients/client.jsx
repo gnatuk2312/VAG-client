@@ -99,12 +99,12 @@ const AdminClient = (props) => {
 
   const handleCloseVisitModal = () => setVisitModalOpen(false);
 
-  const handleEditVisit = () => {
-    setVisitModalOptions({ variant: "edit", clientId: client._id, visit: {} });
+  const handleEditVisit = (id) => {
+    setVisitModalOptions({ variant: "edit", clientId: null, id });
     setVisitModalOpen(true);
   };
   const handleAddNewVisit = () => {
-    setVisitModalOptions({ variant: "add", clientId: client._id, visit: null });
+    setVisitModalOptions({ variant: "add", clientId: client._id, id: null });
     setVisitModalOpen(true);
   };
   const handleOpenDeleteModal = () => setIsDeleteModalOpen(true);
@@ -320,7 +320,7 @@ const AdminClient = (props) => {
                 <p className="client-visits__text client-visits__text_price">499</p>
                 <p className="client-visits__text client-visits__text_status">Виконано</p>
                 <button
-                  onClick={handleEditVisit}
+                  onClick={() => handleEditVisit("id")}
                   type="button"
                   className="client-visits__edit-visit"
                 >

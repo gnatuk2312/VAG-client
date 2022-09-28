@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cn from "classnames";
 import { toast } from "react-hot-toast";
+import moment from "moment";
 
 import AdminTitle from "../admin-title";
 import AdminInput from "../input";
+import Loading from "../loading";
 import CloseIcon from "../../../public/icons/close-icon.svg";
+import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
+import { createVisit } from "../../../api/visits";
 
 const AdminClientVisitModal = (props) => {
   const { options, isOpen, onCloseVisitModal } = props;
-  // , clientId, visit
-  const { variant } = options;
+  const { variant, clientId } = options;
+
   const [clientVisit, setClientVisit] = useState({
     date: "",
     price: "",
@@ -18,11 +22,9 @@ const AdminClientVisitModal = (props) => {
     description: "",
   });
 
-  // if (variant === "edit") {
-  //   setClientVisit(visit);
-  // }
-
   const { date, price, type, status, description } = clientVisit;
+
+  const [pending, setPending] = useState(false);
 
   const handleInputDate = (value) => setClientVisit({ ...clientVisit, date: value });
   const handleInputPrice = (value) => setClientVisit({ ...clientVisit, price: value });
@@ -31,17 +33,50 @@ const AdminClientVisitModal = (props) => {
   const handleInputDescription = (event) =>
     setClientVisit({ ...clientVisit, description: event.target.value });
 
-  const handleSubmitEdit = (event) => {
-    event.preventDefault();
-    toast.success("Успішно редаговано");
+  const clearForm = () => {
+    setClientVisit({
+      date: moment(new Date()).format("DD MMMM YYYY"),
+      price: "",
+      type: "",
+      status: "",
+      description: "",
+      clientId,
+    });
   };
+
+  useEffect(() => {
+    if (variant === "add" && clientId) {
+      clearForm();
+    }
+  }, [isOpen]);
+
   const handleSubmitAdd = (event) => {
     event.preventDefault();
-    toast.success("Успішно додано");
+    setPending(true);
+    createVisit(removeEmptyKeysInObject(clientVisit))
+      .then((resp) => {
+        if (resp.status === 201) {
+          toast.success("Візит успішно створено!");
+          clearForm();
+          return;
+        }
+        return toast.error(
+          `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
+        );
+      })
+      .catch((err) => {
+        toast.error(`У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`);
+      })
+      .finally(() => setPending(false));
+  };
+  const handleSubmitEdit = (event) => {
+    event.preventDefault();
+    toast.success("Візит успішно редаговано");
   };
 
   return (
     <div className={cn("client-visit-modal", { "client-visit-modal_is-open": isOpen })}>
+      <Loading isVisible={pending} />
       <div className="client-visit-modal__header">
         <AdminTitle title="Oпис виконаних робіт" />
         <div className="client-visit-modal__actions">
