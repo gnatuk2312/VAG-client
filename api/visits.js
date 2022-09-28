@@ -33,4 +33,15 @@ const deleteVisitByID = async (id) => {
 	}
 };
 
-export { createVisit, getVisitByID, deleteVisitByID };
+const updateVisitByID = async (id, requestBody) => {
+	try {
+		const response = await axios.put(`/visits/${id}`, requestBody);
+		return response;
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
+export { createVisit, getVisitByID, deleteVisitByID, updateVisitByID };
