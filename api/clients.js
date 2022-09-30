@@ -57,4 +57,22 @@ const getAllClients = async (limit, page, field, value) => {
 	}
 };
 
-export { createClient, getClientByID, updateClientByID, deleteClientByID, getAllClients };
+const getAllClientVisits = async (clientID, limit, page = 1) => {
+	try {
+		const response = await axios.get(`/clients/${clientID}/visits/?limit=${limit}&page=${page}`);
+		return response;
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
+export {
+	createClient,
+	getClientByID,
+	updateClientByID,
+	deleteClientByID,
+	getAllClients,
+	getAllClientVisits,
+};
