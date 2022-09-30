@@ -9,13 +9,19 @@ import AdminClientVisitModal from "../../../components/admin/clients/client-visi
 import Loading from "../../../components/admin/loading";
 import { formatPhoneNumber } from "../../../helpers/format-phone-number";
 import getScrollBarWidth from "../../../helpers/get-scrollbar-width";
+import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
+import useInfinityScroll from "../../../hooks/useInfinityScroll";
 import AddBigIcon from "../../../public/icons/add-big-icon.svg";
 import AddBigIconLight from "../../../public/icons/add-big-icon-light.svg";
 import EditIcon from "../../../public/icons/edit-icon.svg";
 import DoneIconGreen from "../../../public/icons/done-icon-green.svg";
 import CancelIcon from "../../../public/icons/close-icon.svg";
-import { deleteClientByID, getClientByID, updateClientByID } from "../../../api/clients";
-import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
+import {
+  deleteClientByID,
+  getClientByID,
+  updateClientByID,
+  getAllClientVisits,
+} from "../../../api/clients";
 
 const AdminClient = (props) => {
   const { clientID } = props;
@@ -30,6 +36,12 @@ const AdminClient = (props) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [pending, setPending] = useState(false);
+  const [fetching, setFetching] = useState(true);
+  const [allDataIsFetched, setAllDataIsFetched] = useState(false);
+
+  const [visits, setVisits] = useState([]);
+  const [visitsPage, setVisitsPage] = useState(1);
+  const VISITS_LIMIT = 30;
 
   const handleClientInputs = (event) => {
     setClient({ ...client, [event.target.name]: event.target.value });
@@ -121,17 +133,51 @@ const AdminClient = (props) => {
         if (resp.status === 200) {
           setInitialClient(resp.data.client);
           setClient(resp.data.client);
-          setPending(false);
           return;
         }
-        setPending(false);
         return toast.error(`Помилка у завантаженні даних про клієнта. ${resp?.message}`);
       })
       .catch((err) => {
-        setPending(false);
         toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
-      });
+      })
+      .finally(() => setPending(false));
   }, []);
+
+  useEffect(() => {
+    if (isVisitModalOpen === false) {
+      setVisitsPage(1);
+      setFetching(true);
+    }
+  }, [isVisitModalOpen]);
+
+  useEffect(() => {
+    if (fetching) {
+      setPending(true);
+      getAllClientVisits(clientID, VISITS_LIMIT, visitsPage)
+        .then((resp) => {
+          if (resp.status === 200) {
+            if (visitsPage === 1) {
+              setVisits(resp.data.visits);
+            } else {
+              setVisits((prev) => [...prev, ...resp.data.visits]);
+            }
+            if (resp.data.visits.length === 0) {
+              setAllDataIsFetched(true);
+            }
+            setVisitsPage((prev) => prev + 1);
+            return;
+          }
+          return toast.error(`Помилка при завантаженні візитів. ${resp?.message}`);
+        })
+        .catch((err) => {
+          toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+        })
+        .finally(() => {
+          setFetching(false);
+          setPending(false);
+        });
+    }
+  }, [fetching]);
 
   return (
     <>
@@ -308,277 +354,33 @@ const AdminClient = (props) => {
                 Статус
               </p>
             </div>
-            <div className="client-visits__container">
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button
-                  onClick={() => handleEditVisit("63346c8af66561770efaaee6")}
-                  type="button"
-                  className="client-visits__edit-visit"
-                >
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
-              <div className="client-visits__table-item">
-                <p className="client-visits__text client-visits__text_date">06.09.2022</p>
-                <p className="client-visits__text client-visits__text_type">
-                  Комп’ютерна діагностика
-                </p>
-                <p className="client-visits__text client-visits__text_description">
-                  Несправний датчик температури повітря салону, помилка 2738, записати на ремонт.
-                </p>
-                <p className="client-visits__text client-visits__text_price">499</p>
-                <p className="client-visits__text client-visits__text_status">Виконано</p>
-                <button type="button" className="client-visits__edit-visit">
-                  <EditIcon />
-                </button>
-              </div>
+            <div
+              className="client-visits__container"
+              onScroll={(event) => useInfinityScroll(event, allDataIsFetched, setFetching)}
+            >
+              {!!visits.length &&
+                visits.map((visit) => {
+                  const { _id, date, type, description, price, status } = visit;
+
+                  return (
+                    <div key={_id} className="client-visits__table-item">
+                      <p className="client-visits__text client-visits__text_date">{date}</p>
+                      <p className="client-visits__text client-visits__text_type">{type}</p>
+                      <p className="client-visits__text client-visits__text_description">
+                        {description}
+                      </p>
+                      <p className="client-visits__text client-visits__text_price">{price} ₴</p>
+                      <p className="client-visits__text client-visits__text_status">{status}</p>
+                      <button
+                        onClick={() => handleEditVisit(_id)}
+                        type="button"
+                        className="client-visits__edit-visit"
+                      >
+                        <EditIcon />
+                      </button>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         )}
