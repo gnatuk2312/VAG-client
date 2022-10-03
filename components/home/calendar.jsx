@@ -1,23 +1,18 @@
-import { useEffect, useState } from "react";
 import cn from "classnames";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
 
+import { useState } from "react";
 import { isWeekday } from "../../constants/common";
-import { availableHours } from "../../constants/date-picker";
 
 registerLocale("uk", uk);
 
 const Calendar = (props) => {
-  const { date, setDate, selectedHour, setSelectedHour } = props;
+  const { date, setDate, selectedHour, setSelectedHour, freeHours } = props;
 
-  const [minDate, setMinDate] = useState(null);
-
-  useEffect(() => {
-    setDate(new Date());
-    setMinDate(new Date());
-  }, []);
+  const [minDate, ,] = useState(new Date());
+  const [maxDate, ,] = useState(new Date().setMonth(new Date().getMonth() + 2));
 
   return (
     <div className="calendar">
@@ -29,11 +24,11 @@ const Calendar = (props) => {
           inline
           locale="uk"
           minDate={minDate}
-          maxDate={new Date().setMonth(new Date().getMonth() + 2)}
+          maxDate={maxDate}
           filterDate={isWeekday}
         />
         <ul className="calendar__hours-list">
-          {availableHours.map((hour) => (
+          {freeHours.map((hour) => (
             <li className="calendar__hours-item" key={hour}>
               <button
                 type="button"
@@ -52,7 +47,7 @@ const Calendar = (props) => {
               </button>
             </li>
           ))}
-          {availableHours.length === 0 && (
+          {freeHours.length === 0 && (
             <p className="calendar__no-hours">На цю дату вільних годин немає</p>
           )}
           {selectedHour === null && <p className="calendar__error">*виберіть годину прийому</p>}
