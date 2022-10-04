@@ -68,6 +68,16 @@ const getAllClientVisits = async (clientID, limit, page = 1) => {
 	}
 };
 
+const deleteAllClientVisits = async (clientID) => {
+	try {
+		await axios.delete(`/clients/${clientID}/visits`);
+	} catch (err) {
+		const error = new Error(err?.response?.data);
+		error.code = err?.response?.status;
+		throw error;
+	}
+};
+
 export {
 	createClient,
 	getClientByID,
@@ -75,4 +85,5 @@ export {
 	deleteClientByID,
 	getAllClients,
 	getAllClientVisits,
+	deleteAllClientVisits,
 };

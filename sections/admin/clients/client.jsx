@@ -21,6 +21,7 @@ import {
   getClientByID,
   updateClientByID,
   getAllClientVisits,
+  deleteAllClientVisits,
 } from "../../../api/clients";
 
 const AdminClient = (props) => {
@@ -85,22 +86,25 @@ const AdminClient = (props) => {
   };
 
   const handleSubmitDelete = () => {
+    const clientId = clientID;
     setPending(true);
-    deleteClientByID(clientID)
+    deleteClientByID(clientId)
       .then((resp) => {
         if (resp.status === 200) {
-          setPending(false);
-          toast.success("Клієнта успішно видалено");
-          setTimeout(() => Router.push("/admin/clients"), 300);
-          return;
+          deleteAllClientVisits(clientId)
+            .then(() => {
+              toast.success("Клієнта успішно видалено");
+              setTimeout(() => Router.push("/admin/clients"), 300);
+            })
+            .catch((err) => toast.error(`Помилка при видаленні клієнта. ${err.message}`));
+        } else {
+          return toast.error(`Помилка при видаленні клієнта. ${resp?.message}`);
         }
-        setPending(false);
-        return toast.error(`Помилка при видаленні клієнта. ${resp?.message}`);
       })
       .catch((err) => {
-        setPending(false);
         toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
-      });
+      })
+      .finally(() => setPending(false));
   };
 
   const handleCancelUpdate = () => {
