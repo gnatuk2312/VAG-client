@@ -12,14 +12,17 @@ import { getAppointmentsByDate, createAppointment } from "../../api/appointments
 import { availableHours } from "../../constants/date-picker";
 
 const BookAppointment = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState("");
   const [freeHours, setFreeHours] = useState([...availableHours]);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
   const name = useInput("", { isEmpty: true });
   const phone = useInput("+380", { isEmpty: true, isPhoneError: true });
   const email = useInput("", { isEmailError: true });
 
-  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
 
   useEffect(() => {
     setSelectedHour("");
@@ -93,6 +96,7 @@ const BookAppointment = () => {
     setSuccessModalOpen(false);
     setDate(new Date());
     setSelectedHour("");
+    setFreeHours([...availableHours]);
     name.setValue("");
     name.setDirty(false);
     phone.setValue("");
