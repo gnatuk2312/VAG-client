@@ -26,8 +26,11 @@
 	}
 
 	&__book-appointment {
+		margin-right: 16px;
 		background-color: $background-dark;
 		color: #d9d9d9;
+		border: 2px solid transparent;
+		transition: border 0.2s ease;
 
 		svg {
 			margin-right: 16px;
@@ -35,6 +38,7 @@
 
 		&:hover {
 			box-shadow: none;
+			border: 2px solid #d9d9d9;
 		}
 	}
 
@@ -89,7 +93,7 @@
 
 		&_name {
 			overflow: hidden;
-			width: 92px;
+			width: 160px;
 			resize: horizontal;
 		}
 
@@ -98,19 +102,20 @@
 		}
 
 		&_carBrand {
-			width: 70px;
+			width: 100px;
 		}
 
 		&_carModel {
-			width: 70px;
+			width: 100px;
+			margin-left: 14px;
 		}
 
 		&_license-plate {
-			width: 70px;
+			width: 74px;
 		}
 
 		&_email {
-			width: 104px;
+			width: 144px;
 		}
 	}
 

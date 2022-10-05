@@ -31,37 +31,51 @@
 
 	&__avatar {
 		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 26px;
+		height: 26px;
 		padding: 6px;
-		border-radius: 50px;
+		border-radius: 50%;
 		background-color: $background-green;
 		font-size: rem(17);
 	}
+
 	&__name {
 		max-width: 100px;
 		margin-left: 36px;
 	}
+
 	&__phone-number {
 		position: absolute;
-		left: prc(184, 856);
+		left: prc(186, 856);
 		color: $light;
 	}
+
 	&__car {
 		position: absolute;
 		left: prc(356, 856);
 	}
+
 	&__license-plate {
 		position: absolute;
-		left: prc(510, 856);
+		left: prc(516, 856);
 	}
+
 	&__email {
 		position: absolute;
 		left: prc(640, 856);
 		color: $light;
 	}
+	
 	&__action {
 		position: absolute;
 		right: 22px;
 	}
+
 	&__edit {
 		margin-right: 34px;
 		cursor: pointer;

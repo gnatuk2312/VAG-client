@@ -45,7 +45,11 @@ const AdminClient = (props) => {
   const VISITS_LIMIT = 30;
 
   const handleClientInputs = (event) => {
-    setClient({ ...client, [event.target.name]: event.target.value });
+    if (event.target.name === "licensePlate") {
+      setClient({ ...client, [event.target.name]: event.target.value.toUpperCase() });
+    } else {
+      setClient({ ...client, [event.target.name]: event.target.value });
+    }
   };
   const handlePhoneInput = (event) => {
     setClient({ ...client, phone: formatPhoneNumber(event.target.value) });
@@ -242,8 +246,8 @@ const AdminClient = (props) => {
           {client && (
             <form className="admin-client__form">
               <div className="admin-client__client-name-wrapper">
-                <span className="admin-client__avatar">{client.name.slice(0, 1)}</span>
-                <textarea
+                <span className="admin-client__avatar">{client?.name?.slice(0, 1)}</span>
+                <input
                   value={client.name}
                   onChange={handleClientInputs}
                   disabled={clientDisableEditing}

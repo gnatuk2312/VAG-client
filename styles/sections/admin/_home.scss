@@ -64,6 +64,8 @@
 	}
 
 	&__button-book {
+		margin-bottom: 16px;
+
 		@include screen-md {
 			width: 100%;
 			padding: 9px 14px 9px 10px;
@@ -76,46 +78,6 @@
 
 		@include screen-lg {
 			font-size: rem(24);
-		}
-	}
-
-	&__new-appointments-hint {
-		display: flex;
-		align-items: center;
-		margin: 16px auto;
-		padding: 14px 44px 14px 14px;
-		background-color: #d9d9d9;
-		border-radius: 16px;
-		color: $text-dark;
-		font-size: rem(18);
-		transition: box-shadow 0.3s ease;
-
-		span {
-			margin-right: 40px;
-			color: $text-green;
-		}
-
-		&:hover {
-			box-shadow: 1px 3px 12px $shadow-light;
-		}
-
-		@include screen-md {
-			width: 100%;
-			padding: 14px 14px 14px 10px;
-			font-size: rem(15);
-
-			span {
-				margin-right: 26px;
-			}
-		}
-
-		@include screen-lg {
-			padding: 18px 14px 18px 10px;
-			font-size: rem(24);
-
-			span {
-				margin-right: 38px;
-			}
 		}
 	}
 
@@ -199,15 +161,21 @@
 		right: 12px;
 		background-color: transparent;
 		cursor: pointer;
+		transform-origin: 52% 41%;
 
 		svg {
 			width: 16px;
 			height: 16px;
 		}
 
+		&_is-loading {
+			animation: spin-refresh 0.3s linear infinite;
+		}
+
 		@include screen-md {
 			top: 12px;
 			right: 32px;
+			transform-origin: 51% 45%;
 
 			svg {
 				width: unset;
@@ -267,5 +235,15 @@
 		@include screen-md {
 			display: block;
 		}
+	}
+}
+
+@keyframes spin-refresh {
+	0% {
+		transform: rotateZ(0);
+	}
+
+	100% {
+		transform: rotateZ(360deg);
 	}
 }

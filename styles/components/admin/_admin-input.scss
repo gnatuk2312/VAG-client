@@ -21,11 +21,14 @@
 
 	&__open-dropdown {
 		position: absolute;
-		top: 28px;
-		right: 14px;
-		width: 8px;
-		height: 8px;
+		top: 18px;
+		right: 0;
+		width: 30px;
+		height: 30px;
 		background-color: transparent;
+		transform-origin: 50% 50%;
+		transform: rotate(0);
+		transition: transform 0.2s ease;
 		cursor: pointer;
 
 		div {
@@ -35,15 +38,11 @@
 			border-style: solid;
 			border-color: $light;
 			border-width: 0px 2px 2px 0px;
-			transform-origin: 60% 60%;
-			transform: rotate(45deg);
-			transition: transform 0.2s ease;
+			transform: rotate(45deg) translate(80%, -110%);
 		}
 
 		&_is-dropdown-open {
-			div {
-				transform: rotate(-135deg);
-			}
+			transform: rotate(-180deg);
 		}
 	}
 

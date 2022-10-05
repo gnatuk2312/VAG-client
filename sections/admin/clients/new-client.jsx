@@ -26,7 +26,14 @@ const AdminNewClient = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const dataNewClient = { name, carBrand, phone, carModel, email, licensePlate };
+    const dataNewClient = {
+      name,
+      carBrand,
+      phone,
+      carModel,
+      email,
+      licensePlate: licensePlate.toUpperCase(),
+    };
 
     if (name.trim() !== "") {
       const requestBody = removeEmptyKeysInObject(dataNewClient);
