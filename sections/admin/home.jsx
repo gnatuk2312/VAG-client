@@ -21,9 +21,9 @@ registerLocale("uk", uk);
 moment.locale("uk");
 
 const AdminHome = () => {
-  const { ref, inView, entry } = useInView({ triggerOnce: true });
+  const { ref, inView, entry } = useInView();
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [appointmentsByDate, setAppointmentsByDate] = useState([]);
   const [requestedBy, setRequestedBy] = useState("refresh");
@@ -45,6 +45,7 @@ const AdminHome = () => {
   };
 
   useEffect(() => {
+    setSelectedDate(new Date());
     setInterval(() => {
       localStorage.setItem("admin-last-time", JSON.stringify(Date.now()));
     }, 60000);
