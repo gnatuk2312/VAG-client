@@ -77,7 +77,6 @@ const AdminNavigation = () => {
                   <a className="admin-navigation__link" href="replace">
                     <AddIcon />
                     Записати
-                    <span>2</span>
                   </a>
                 </Link>
               </li>

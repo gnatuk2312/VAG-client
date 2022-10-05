@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import cn from "classnames";
 import { toast } from "react-hot-toast";
 import moment from "moment";
+import "moment/locale/uk";
 
 import AdminTitle from "../admin-title";
 import AdminInput from "../input";
@@ -9,6 +10,8 @@ import Loading from "../loading";
 import CloseIcon from "../../../public/icons/close-icon.svg";
 import removeEmptyKeysInObject from "../../../helpers/remove-empty-keys-in-object";
 import { createVisit, getVisitByID, deleteVisitByID, updateVisitByID } from "../../../api/visits";
+
+moment.locale("uk");
 
 const AdminClientVisitModal = (props) => {
   const { options, isOpen, onCloseVisitModal } = props;

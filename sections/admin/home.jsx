@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import cn from "classnames";
 import Link from "next/link";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,7 +8,6 @@ import toast from "react-hot-toast";
 import moment from "moment";
 import "moment/locale/uk";
 import { useInView } from "react-intersection-observer";
-import { getAllAppointments, getAppointmentsByDate } from "../../api/appointments";
 
 import { isWeekday } from "../../constants/common";
 import LocalDate from "../../components/admin/local-date";
@@ -15,7 +15,7 @@ import Appointment from "../../components/admin/appointment";
 import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
-import Loading from "../../components/admin/loading";
+import { getAllAppointments, getAppointmentsByDate } from "../../api/appointments";
 
 registerLocale("uk", uk);
 moment.locale("uk");
@@ -110,10 +110,6 @@ const AdminHome = () => {
                 Записати на прийом
               </a>
             </Link>
-            <div className="admin-home__new-appointments-hint">
-              <span>+2</span>
-              <p>Нові записи онлайн</p>
-            </div>
             <Link href="/admin/clients/new-client" passHref>
               <a className="admin-button admin-home__button-new-client" href="replace">
                 <AddBigIcon />
@@ -126,7 +122,9 @@ const AdminHome = () => {
           <div className="admin-home__appointments">
             <button
               type="button"
-              className="admin-home__appointments-refresh"
+              className={cn("admin-home__appointments-refresh", {
+                "admin-home__appointments-refresh_is-loading": isLoading,
+              })}
               onClick={() => {
                 setSelectedDate(new Date());
                 setRequestedBy("refresh");
@@ -173,7 +171,6 @@ const AdminHome = () => {
               {appointments.length > 0 && (
                 <div style={{ width: "30px", height: "30px" }} ref={ref} />
               )}
-              <Loading isVisible={isLoading} />
             </div>
           </div>
           <div>
