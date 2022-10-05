@@ -1,10 +1,16 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import Router from "next/router";
 import { Toaster } from "react-hot-toast";
 
 import { GlobalContext } from "../../context/state";
-import AdminNavigation from "../../components/admin/admin-navigation";
-import AdminBookAppointment from "../../sections/admin/book-appointment";
+
+const DynamicNavigation = dynamic(() => import("../../components/admin/admin-navigation"), {
+	suspense: true,
+});
+const DynamicAdminBookAppointment = dynamic(() => import("../../sections/admin/book-appointment"), {
+	suspense: true,
+});
 
 const BookAppointment = () => {
 	const { adminLoggedIn } = useContext(GlobalContext);
@@ -17,11 +23,11 @@ const BookAppointment = () => {
 
 	if (adminLoggedIn) {
 		return (
-			<>
-				<AdminNavigation />
-				<AdminBookAppointment />
+			<Suspense fallback="Loading...">
+				<DynamicNavigation />
+				<DynamicAdminBookAppointment />
 				<Toaster position="top-center" />
-			</>
+			</Suspense>
 		);
 	}
 

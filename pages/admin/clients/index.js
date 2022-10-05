@@ -1,9 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import Router from "next/router";
 
 import { GlobalContext } from "../../../context/state";
-import AdminNavigation from "../../../components/admin/admin-navigation";
-import AdminClients from "../../../sections/admin/clients/clients";
+
+const DynamicNavigation = dynamic(() => import("../../../components/admin/admin-navigation"), {
+	suspense: true,
+});
+const DynamicAdminClients = dynamic(() => import("../../../sections/admin/clients/clients"), {
+	suspense: true,
+});
 
 const Clients = () => {
 	const { adminLoggedIn } = useContext(GlobalContext);
@@ -16,10 +22,10 @@ const Clients = () => {
 
 	if (adminLoggedIn) {
 		return (
-			<>
-				<AdminNavigation />
-				<AdminClients />
-			</>
+			<Suspense fallback="Loading...">
+				<DynamicNavigation />
+				<DynamicAdminClients />
+			</Suspense>
 		);
 	}
 

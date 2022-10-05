@@ -1,10 +1,16 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import Router, { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 
 import { GlobalContext } from "../../../context/state";
-import AdminNavigation from "../../../components/admin/admin-navigation";
-import AdminClient from "../../../sections/admin/clients/client";
+
+const DynamicNavigation = dynamic(() => import("../../../components/admin/admin-navigation"), {
+	suspense: true,
+});
+const DynamicAdminClient = dynamic(() => import("../../../sections/admin/clients/client"), {
+	suspense: true,
+});
 
 const Client = () => {
 	const router = useRouter();
@@ -20,11 +26,11 @@ const Client = () => {
 
 	if (adminLoggedIn) {
 		return (
-			<>
-				<AdminNavigation />
-				<AdminClient clientID={id} />
+			<Suspense fallback="Loading...">
+				<DynamicNavigation />
+				<DynamicAdminClient clientID={id} />
 				<Toaster position="top-center" toastOptions={{ duration: 4000 }} />
-			</>
+			</Suspense>
 		);
 	}
 

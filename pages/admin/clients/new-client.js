@@ -1,10 +1,16 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, Suspense } from "react";
+import dynamic from "next/dynamic";
 import Router from "next/router";
 import { Toaster } from "react-hot-toast";
 
 import { GlobalContext } from "../../../context/state";
-import AdminNavigation from "../../../components/admin/admin-navigation";
-import AdminNewClient from "../../../sections/admin/clients/new-client";
+
+const DynamicNavigation = dynamic(() => import("../../../components/admin/admin-navigation"), {
+	suspense: true,
+});
+const DynamicNewClient = dynamic(() => import("../../../sections/admin/clients/new-client"), {
+	suspense: true,
+});
 
 const NewClient = () => {
 	const { adminLoggedIn } = useContext(GlobalContext);
@@ -17,11 +23,11 @@ const NewClient = () => {
 
 	if (adminLoggedIn) {
 		return (
-			<>
-				<AdminNavigation />
-				<AdminNewClient />
+			<Suspense fallback="Loading...">
+				<DynamicNavigation />
+				<DynamicNewClient />
 				<Toaster position="top-center" />
-			</>
+			</Suspense>
 		);
 	}
 
