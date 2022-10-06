@@ -3,7 +3,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isWeekday } from "../../constants/common";
 
 registerLocale("uk", uk);
@@ -11,8 +11,13 @@ registerLocale("uk", uk);
 const Calendar = (props) => {
   const { date, setDate, selectedHour, setSelectedHour, freeHours } = props;
 
-  const [minDate, ,] = useState(new Date());
-  const [maxDate, ,] = useState(new Date().setMonth(new Date().getMonth() + 2));
+  const [minDate, setMinDate] = useState(null);
+  const [maxDate, setMaxDate] = useState(null);
+
+  useEffect(() => {
+    setMinDate(new Date());
+    setMaxDate(new Date().setMonth(new Date().getMonth() + 2));
+  }, []);
 
   return (
     <div className="calendar">
