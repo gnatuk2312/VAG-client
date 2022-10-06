@@ -3,112 +3,28 @@ import cn from "classnames";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
-import toast from "react-hot-toast";
 
-import moment from "moment";
-import { isWeekday, adminHours } from "../../constants/common";
+import { isWeekday } from "../../constants/common";
 import Form from "../../components/home/form";
 import LocalDate from "../../components/admin/local-date";
 import AdminTitle from "../../components/admin/admin-title";
 import { useInput } from "../../hooks/useInput";
-import { getAppointmentsByDate, createAppointment } from "../../api/appointments";
+import useBookAppointment from "../../hooks/useBookAppointment";
 
 registerLocale("uk", uk);
 
 const AdminBookAppointment = () => {
-  const [datePickerDate, setDatePickerDate] = useState(null);
   const [minDate, setMinDate] = useState(null);
-  const [selectedHour, setSelectedHour] = useState("");
-  const [freeHours, setFreeHours] = useState([...adminHours]);
   const name = useInput("", { isEmpty: true });
   const phone = useInput("+380", { isEmpty: true, isPhoneError: true });
   const email = useInput("", { isEmailError: true });
 
   useEffect(() => {
-    setDatePickerDate(new Date());
     setMinDate(new Date());
   }, []);
 
-  useEffect(() => {
-    setSelectedHour("");
-
-    if (datePickerDate) {
-      getAppointmentsByDate(moment(datePickerDate).format("YYYY-MM-DD"))
-        .then((resp) => {
-          if (resp.status === 200) {
-            const { data } = resp;
-            const { appointments } = data;
-            const newFreeHours = [...adminHours];
-
-            appointments.forEach(({ hour }) => {
-              for (let index = 0; index < newFreeHours.length; index += 1) {
-                if (newFreeHours[index] === hour) {
-                  newFreeHours.splice(index, 1);
-                }
-              }
-            });
-
-            setFreeHours(newFreeHours);
-            return;
-          }
-
-          return toast.error(
-            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
-          );
-        })
-        .catch((err) => {
-          toast.error(
-            `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`,
-          );
-        });
-    }
-  }, [datePickerDate]);
-
-  const afterSuccessSubmit = () => {
-    setDatePickerDate(new Date());
-    setSelectedHour("");
-    setFreeHours([...adminHours]);
-    name.setValue("");
-    name.setDirty(false);
-    phone.setValue("");
-    phone.setDirty(false);
-    email.setValue("");
-    email.setDirty(false);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (selectedHour === "" || selectedHour === null) {
-      setSelectedHour(null);
-      return;
-    }
-
-    const newAppointment = {
-      name: name.value,
-      phone: phone.value,
-      hour: selectedHour,
-      date: moment(datePickerDate).format("YYYY-MM-DD"),
-    };
-
-    if (email.value) newAppointment.email = email.value;
-
-    createAppointment(newAppointment)
-      .then((resp) => {
-        if (resp.status === 201) {
-          toast.success("Успішно!");
-          afterSuccessSubmit();
-          return;
-        }
-
-        return toast.error(
-          `У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${resp?.message}`,
-        );
-      })
-      .catch((err) => {
-        toast.error(`У нас невідома помилка, спробуйте будь-ласка пізніше. Деталі: ${err.message}`);
-      });
-  };
+  const { date, setDate, freeHours, setSelectedHour, selectedHour, handleSubmit } =
+    useBookAppointment({ name, phone, email }, true);
 
   return (
     <section className="admin-book-appointment">
@@ -121,9 +37,9 @@ const AdminBookAppointment = () => {
           <div className="admin-book-appointment__calendar-wrapper">
             <div className="admin-calendar">
               <DatePicker
-                selected={datePickerDate}
+                selected={date}
                 minDate={minDate}
-                onChange={(newDate) => setDatePickerDate(newDate)}
+                onChange={(newDate) => setDate(newDate)}
                 inline
                 locale="uk"
                 filterDate={isWeekday}
@@ -150,7 +66,7 @@ const AdminBookAppointment = () => {
                 </button>
               </li>
             ))}
-            {adminHours.length === 0 && (
+            {freeHours.length === 0 && (
               <p className="admin-book-appointment__no-hours">На цю дату вільних годин немає</p>
             )}
             {selectedHour === null && (
