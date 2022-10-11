@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import cn from "classnames";
 import Link from "next/link";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -44,6 +44,9 @@ const AdminHome = () => {
     return "old";
   };
 
+  const appList = useRef();
+  const isFirst = useRef(true);
+
   useEffect(() => {
     setSelectedDate(new Date());
     setInterval(() => {
@@ -56,6 +59,10 @@ const AdminHome = () => {
   }, [inView]);
 
   useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
     if (requestedBy === "refresh") {
       setIsLoading(true);
       getAllAppointments(page, 10)
@@ -63,7 +70,22 @@ const AdminHome = () => {
           setIsLoading(false);
           if (resp.status === 200) {
             setAppointmentsByDate([]);
-            setAppointments((currAppointments) => [...currAppointments, ...resp.data.appointments]);
+            setAppointments((currAppointments) => {
+              const appointmetsForUpdating = [...currAppointments];
+
+              const lastDateGroupCurr = appointmetsForUpdating[appointmetsForUpdating.length - 1];
+              const lastDateGroupNew = resp.data.appointments[0];
+
+              if (lastDateGroupCurr?._id === lastDateGroupNew?._id) {
+                appointmetsForUpdating[appointmetsForUpdating.length - 1].appointments = [
+                  ...appointmetsForUpdating[appointmetsForUpdating.length - 1].appointments,
+                  ...resp.data.appointments[0].appointments,
+                ];
+                resp.data.appointments.splice(0, 1);
+              }
+
+              return [...appointmetsForUpdating, ...resp.data.appointments];
+            });
             return;
           }
           return toast.error(
@@ -131,18 +153,39 @@ const AdminHome = () => {
                 setRequestedBy("refresh");
                 setAppointments([]);
                 setPage(1);
+                appList.current.scrollTo({
+                  top: 0,
+                  left: 0,
+                });
               }}
             >
               <RefreshIcon />
             </button>
-            <div className="admin-home__appointments-wrapper">
-              {appointments.length > 0 ? (
-                appointments.map(({ appointments, _id: date }) => (
-                  <div key={date}>
+            {(appointments.length > 0 || appointmentsByDate.length) > 0 && (
+              <div ref={appList} className="admin-home__appointments-wrapper">
+                {appointments.length > 0 ? (
+                  appointments.map(({ appointments, _id: date }) => (
+                    <div key={date}>
+                      <p className="admin-home__appointments-date">
+                        {moment(date).format("Do MMMM YYYY")}
+                      </p>
+                      {appointments.map(({ date, createdAt, hour, name, phone, _id: id }) => (
+                        <Appointment
+                          hour={hour}
+                          name={name}
+                          phone={phone}
+                          state={stateOfTheAppointment(date, createdAt)}
+                          key={id}
+                        />
+                      ))}
+                    </div>
+                  ))
+                ) : (
+                  <>
                     <p className="admin-home__appointments-date">
-                      {moment(date).format("Do MMMM YYYY")}
+                      {moment(selectedDate).format("Do MMMM YYYY")}
                     </p>
-                    {appointments.map(({ date, createdAt, hour, name, phone, _id: id }) => (
+                    {appointmentsByDate.map(({ date, createdAt, hour, name, phone, _id: id }) => (
                       <Appointment
                         hour={hour}
                         name={name}
@@ -151,28 +194,13 @@ const AdminHome = () => {
                         key={id}
                       />
                     ))}
-                  </div>
-                ))
-              ) : (
-                <>
-                  <p className="admin-home__appointments-date">
-                    {moment(selectedDate).format("Do MMMM YYYY")}
-                  </p>
-                  {appointmentsByDate.map(({ date, createdAt, hour, name, phone, _id: id }) => (
-                    <Appointment
-                      hour={hour}
-                      name={name}
-                      phone={phone}
-                      state={stateOfTheAppointment(date, createdAt)}
-                      key={id}
-                    />
-                  ))}
-                </>
-              )}
-              {appointments.length > 0 && (
-                <div style={{ width: "30px", height: "30px" }} ref={ref} />
-              )}
-            </div>
+                  </>
+                )}
+                {appointments.length > 0 && (
+                  <div style={{ width: "30px", height: "30px" }} ref={ref} />
+                )}
+              </div>
+            )}
           </div>
           <div>
             <div className="admin-home__calendar admin-calendar">
@@ -182,6 +210,10 @@ const AdminHome = () => {
                   setSelectedDate(newDate);
                   setRequestedBy("calendar");
                   setPage(1);
+                  appList.current.scrollTo({
+                    top: 0,
+                    left: 0,
+                  });
                 }}
                 inline
                 locale="uk"
