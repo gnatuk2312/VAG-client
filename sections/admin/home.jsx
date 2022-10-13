@@ -153,7 +153,7 @@ const AdminHome = () => {
                 setRequestedBy("refresh");
                 setAppointments([]);
                 setPage(1);
-                appList.current.scrollTo({
+                appList?.current?.scrollTo({
                   top: 0,
                   left: 0,
                 });
@@ -161,7 +161,7 @@ const AdminHome = () => {
             >
               <RefreshIcon />
             </button>
-            {(appointments.length > 0 || appointmentsByDate.length) > 0 && (
+            {(appointments.length > 0 || appointmentsByDate.length > 0) && (
               <div ref={appList} className="admin-home__appointments-wrapper">
                 {appointments.length > 0 ? (
                   appointments.map(({ appointments, _id: date }) => (
@@ -210,7 +210,7 @@ const AdminHome = () => {
                   setSelectedDate(newDate);
                   setRequestedBy("calendar");
                   setPage(1);
-                  appList.current.scrollTo({
+                  appList?.current?.scrollTo({
                     top: 0,
                     left: 0,
                   });
