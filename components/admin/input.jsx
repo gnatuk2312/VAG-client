@@ -4,7 +4,7 @@ import cn from "classnames";
 import { formatPhoneNumber } from "../../helpers/format-phone-number";
 
 const AdminInput = (props) => {
-  const { className, label, value, onChange, dropdown, isPhoneNumber } = props;
+  const { className, label, value, onChange, dropdown, isPhoneNumber, type = "text" } = props;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const handleDropdown = () => setIsDropdownOpen((prev) => !prev);
   const handleDropdownClick = (value) => {
@@ -22,7 +22,7 @@ const AdminInput = (props) => {
   return (
     <div className={cn("admin-input", className)}>
       <span>{label}</span>
-      <input type="text" autoComplete="off" onChange={handleChangeInput} value={value} />
+      <input type={type} autoComplete="off" onChange={handleChangeInput} value={value} />
       {dropdown && (
         <button
           onClick={handleDropdown}

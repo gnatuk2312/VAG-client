@@ -1,8 +1,10 @@
-import axios from "./axios-instance";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
+const axiosPrivate = useAxiosPrivate();
 
 const createVisit = async (requestBody) => {
 	try {
-		const response = await axios.post("/visits", requestBody);
+		const response = await axiosPrivate.post("/visits", requestBody);
 		return response;
 	} catch (err) {
 		const error = new Error(err?.response?.data);
@@ -13,7 +15,7 @@ const createVisit = async (requestBody) => {
 
 const getVisitByID = async (id) => {
 	try {
-		const response = await axios.get(`/visits/${id}`);
+		const response = await axiosPrivate.get(`/visits/${id}`);
 		return response;
 	} catch (err) {
 		const error = new Error(err?.response?.data);
@@ -24,7 +26,7 @@ const getVisitByID = async (id) => {
 
 const deleteVisitByID = async (id) => {
 	try {
-		const response = await axios.delete(`/visits/${id}`);
+		const response = await axiosPrivate.delete(`/visits/${id}`);
 		return response;
 	} catch (err) {
 		const error = new Error(err?.response?.data);
@@ -35,7 +37,7 @@ const deleteVisitByID = async (id) => {
 
 const updateVisitByID = async (id, requestBody) => {
 	try {
-		const response = await axios.put(`/visits/${id}`, requestBody);
+		const response = await axiosPrivate.put(`/visits/${id}`, requestBody);
 		return response;
 	} catch (err) {
 		const error = new Error(err?.response?.data);

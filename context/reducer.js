@@ -7,14 +7,12 @@ export default (state, action) => {
 			return {
 				...state,
 				adminLoggedIn: true,
-				adminToken: action.payload,
 			};
 
 		case "SET_ADMIN_LOGGED_OUT":
 			return {
 				...state,
 				adminLoggedIn: false,
-				adminToken: "",
 			};
 
 		default:
