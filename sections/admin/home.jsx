@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import cn from "classnames";
 import Link from "next/link";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import moment from "moment";
 import "moment/locale/uk";
 import { useInView } from "react-intersection-observer";
+import Cookies from "js-cookie";
 
 import { isWeekday } from "../../constants/common";
 import LocalDate from "../../components/admin/local-date";
@@ -16,12 +17,15 @@ import Notes from "../../components/admin/notes";
 import AddBigIcon from "../../public/icons/add-big-icon.svg";
 import RefreshIcon from "../../public/icons/refresh-icon.svg";
 import { getAllAppointments, getAppointmentsByDate } from "../../api/appointments";
+import { GlobalContext } from "../../context/state";
 
 registerLocale("uk", uk);
 moment.locale("uk");
 
 const AdminHome = () => {
   const { ref, inView, entry } = useInView();
+
+  const { setAdminLoggedOut } = useContext(GlobalContext);
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [appointments, setAppointments] = useState([]);
@@ -43,6 +47,11 @@ const AdminHome = () => {
     }
     return "old";
   };
+
+  if (!Cookies.get("refreshToken")) {
+    setAdminLoggedOut();
+    toast("Спробуйте увійти заново", { icon: "⚠️" });
+  }
 
   const appList = useRef();
   const isFirst = useRef(true);

@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
+import Cookies from "js-cookie";
 import cn from "classnames";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 import { GlobalContext } from "../../context/state";
 import useVerticalScrollProps from "../../hooks/useVerticalScrollProps";
@@ -10,6 +12,7 @@ import HomeIcon from "../../public/icons/home-icon.svg";
 import AddIcon from "../../public/icons/add-icon.svg";
 import ClientsIcon from "../../public/icons/clients-icon.svg";
 import ExitIcon from "../../public/icons/exit-icon.svg";
+import { logoutAdmin } from "../../api/admin";
 
 const AdminNavigation = () => {
   const { asPath } = useRouter();
@@ -21,8 +24,21 @@ const AdminNavigation = () => {
   const handleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const handleDrawerClose = () => setIsDrawerOpen(false);
   const handleAdminLogOut = () => {
-    Router.push("/admin");
-    setAdminLoggedOut();
+    logoutAdmin()
+      .then((resp) => {
+        if (resp.status === 204) {
+          toast.success("Ви успішно вийшли");
+        }
+      })
+      .catch((err) => {
+        toast.error(`Сталась помилка ${err?.message}`);
+      })
+      .finally(() => {
+        setAdminLoggedOut();
+        Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
+        Router.push("/admin");
+      });
   };
 
   return (
