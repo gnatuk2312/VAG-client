@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import Cookies from "js-cookie";
 
@@ -11,44 +11,54 @@ import Loading from "../../components/admin/loading";
 import { getAdminStatus, signinAdmin } from "../../api/admin";
 
 const AdminLogin = () => {
+  const router = useRouter();
   const { setAdminLoggedIn } = useContext(GlobalContext);
 
-  const [login, setLogin] = useState("VagAdministrator");
-  const [password, setPassword] = useState("ternKsae139!");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(true);
   const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
-    getAdminStatus()
-      .then((resp) => {
-        if (resp.status === 204) {
-          setAdminLoggedIn();
-          Router.back();
-        } else {
-          setLoading(false);
-        }
-      })
-      .catch(() => setLoading(false));
+    if (Cookies.get("refreshToken")) {
+      getAdminStatus()
+        .then((resp) => {
+          if (resp.status === 204) {
+            setAdminLoggedIn();
+            router.push("/admin");
+          } else {
+            setLoading(false);
+          }
+        })
+        .catch(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsPending(true);
-    signinAdmin(login, password)
-      .then((resp) => {
-        if (resp.status === 200) {
-          setAdminLoggedIn();
-          Cookies.set("refreshToken", resp.data.refreshToken);
-          Cookies.set("accessToken", resp.data.accessToken);
-        } else toast.error(`Щось не так з вашим запитом. Деталі: ${resp?.message}`);
-      })
-      .catch((err) => {
-        if (err?.code === 401) {
-          return toast.error("Невірний логін або пароль");
-        }
-        toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
-      })
-      .finally(() => setIsPending(false));
+
+    if (login.trim() !== "" && password.trim() !== "") {
+      setIsPending(true);
+      signinAdmin(login, password)
+        .then((resp) => {
+          if (resp.status === 200) {
+            setAdminLoggedIn();
+            Cookies.set("refreshToken", resp.data.refreshToken);
+            Cookies.set("accessToken", resp.data.accessToken);
+          } else toast.error(`Щось не так з вашим запитом. Деталі: ${resp?.message}`);
+        })
+        .catch((err) => {
+          if (err?.code === 401) {
+            return toast.error("Невірний логін або пароль");
+          }
+          toast.error(`Щось не так з вашим запитом. Деталі: ${err.message}`);
+        })
+        .finally(() => setIsPending(false));
+    } else {
+      toast("Введіть логін і пароль", { icon: "⚠️" });
+    }
   };
 
   if (loading) {

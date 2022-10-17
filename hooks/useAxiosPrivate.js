@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import Router from "next/router";
 
 import axios from "../api/axios-instance";
 import useRefreshToken from "./useRefreshToken";
@@ -9,8 +8,10 @@ const useAxiosPrivate = () => {
 
 	axios.interceptors.request.use(
 		(config) => {
-			if (!config.headers.authorization && Cookies.get("accessToken")) {
-				config.headers.authorization = `Bearer ${Cookies.get("accessToken")}`;
+			const accessToken = Cookies.get("accessToken");
+
+			if (!config.headers.authorization && accessToken) {
+				config.headers.authorization = `Bearer ${accessToken}`;
 			}
 			return config;
 		},
@@ -30,7 +31,6 @@ const useAxiosPrivate = () => {
 			}
 			Cookies.remove("refreshToken");
 			Cookies.remove("accessToken");
-			Router.push("/admin");
 			return Promise.reject(error);
 		},
 	);
