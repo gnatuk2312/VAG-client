@@ -187,6 +187,11 @@ const AdminClient = (props) => {
     }
   }, [fetching]);
 
+  const handleBookAppointmentClick = () => {
+    localStorage.setItem("clientName", client.name);
+    localStorage.setItem("clientPhone", client.phone);
+  };
+
   return (
     <>
       <section className="admin-client">
@@ -221,7 +226,11 @@ const AdminClient = (props) => {
             <AdminTitle title="Клієнт" />
             <div className="admin-client__header-buttons">
               <Link href="/admin/book-appointment" passHref>
-                <a className="admin-button admin-client__book-appointment" href="replace">
+                <a
+                  onClick={handleBookAppointmentClick}
+                  className="admin-button admin-client__book-appointment"
+                  href="replace"
+                >
                   <AddBigIconLight />
                   Записати на прийом
                 </a>

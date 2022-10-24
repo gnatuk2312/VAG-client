@@ -21,6 +21,10 @@ const AdminBookAppointment = () => {
 
   useEffect(() => {
     setMinDate(new Date());
+    name.setValue(localStorage.getItem("clientName") || "");
+    phone.setValue(localStorage.getItem("clientPhone") || "");
+    localStorage.removeItem("clientName");
+    localStorage.removeItem("clientPhone");
   }, []);
 
   const { date, setDate, freeHours, setSelectedHour, selectedHour, handleSubmit } =
