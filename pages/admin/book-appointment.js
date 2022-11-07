@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import Head from "next/head";
 import Router from "next/router";
 import { Toaster } from "react-hot-toast";
 
@@ -18,6 +19,12 @@ const BookAppointment = () => {
 	if (adminLoggedIn) {
 		return (
 			<>
+				<Head>
+					<title>Онлайн Запис</title>
+					<meta name="robots" content="noindex, nofollow" />
+					<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+					<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+				</Head>
 				<AdminNavigation />
 				<AdminBookAppointment />
 				<Toaster position="top-center" />
