@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 
 import Navigation from "../components/home/navigation";
@@ -9,9 +10,56 @@ import BookAppointment from "../sections/home/book-appointment";
 import TextCarousel from "../sections/home/text-carousel";
 import Contacts from "../sections/home/contacts";
 import Footer from "../sections/home/footer";
+import Favicon from "../public/favicon.ico";
 
-const Home = () => (
+export const getServerSideProps = async (context) => ({
+	props: { host: context.req.headers.host || null },
+});
+
+const Home = ({ host }) => (
 	<>
+		<Head>
+			<title>VAG автоелектрик Тернопіль</title>
+			<meta name="robots" content="index, follow" />
+			<link rel="canonical" href={`https://${host}`} />
+			<meta
+				name="description"
+				content="Комп'ютерна діагностика та ремонт Volkswagen, Škoda, Audi, SEAT у Тернополі. Ремонт несправностей електричної сиситеми, ремонт електроелементів автомобіля. Виїзд до клієнта. Бродівська 59"
+			/>
+			<meta name="copyright" content="Copyright © 2022 VAG автоелектрик Тернопіль" />
+			<meta name="author" content="VAG автоелектрик Тернопіль" />
+			<meta property="og:type" content="website" />
+			<meta name="og:site_name" content="VAG автоелектрик Тернопіль" />
+			<meta name="twitter:site" content="VAG автоелектрик Тернопіль" />
+			<meta property="og:locale" content="uk_UA" />
+			<meta property="og:url" content={`https://${host}`} />
+			<meta
+				property="og:title"
+				content="Автоелектрик Тернопіль. Комп'ютерна діагностика та ремонт автоелектрики VAG групи"
+			/>
+			<meta
+				name="twitter:title"
+				content="Автоелектрик Тернопіль. Комп'ютерна діагностика та ремонт автоелектрики VAG групи"
+			/>
+			<meta
+				property="og:description"
+				content="Комп'ютерна діагностика та ремонт Volkswagen, Škoda, Audi, SEAT у Тернополі. Ремонт несправностей електричної сиситеми, ремонт електроелементів автомобіля. Виїзд до клієнта. Бродівська 59"
+			/>
+			<meta
+				property="twitter:description"
+				content="Комп'ютерна діагностика та ремонт Volkswagen, Škoda, Audi, SEAT у Тернополі. Ремонт несправностей електричної сиситеми, ремонт електроелементів автомобіля. Виїзд до клієнта. Бродівська 59"
+			/>
+			<meta property="og:image" content={`https://${host}/images/og_image.jpg`} />
+			<meta property="twitter:image" content={`https://${host}/images/og_image.jpg`} />
+			<meta property="og:image:width" content="1200" />
+			<meta property="og:image:height" content="630" />
+			<meta
+				property="og:image:alt"
+				content="Автоелектрик Тернопіль. Комп'ютерна діагностика та ремонт автоелектрики VAG групи"
+			/>
+			<meta name="twitter:card" content="summary_large_image" />
+			<link rel="shortcut icon" href={Favicon.src} />
+		</Head>
 		<Navigation variant="home" />
 		<Header />
 		<AboutCompany />
