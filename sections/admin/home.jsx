@@ -87,8 +87,8 @@ const AdminHome = () => {
 
               if (lastDateGroupCurr?._id === lastDateGroupNew?._id) {
                 appointmetsForUpdating[appointmetsForUpdating.length - 1].appointments = [
-                  ...appointmetsForUpdating[appointmetsForUpdating.length - 1].appointments,
-                  ...resp.data.appointments[0].appointments,
+                  ...appointmetsForUpdating[appointmetsForUpdating.length - 1]?.appointments,
+                  ...resp.data.appointments[0]?.appointments,
                 ];
                 resp.data.appointments.splice(0, 1);
               }
